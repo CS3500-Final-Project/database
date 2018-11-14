@@ -1,9 +1,9 @@
 <?php
 include 'layout.html';
 require('../vendor/autoload.php');
-echo "Hey there big man";
 $app = new Silex\Application();
-$app['debug'] = true;
+//$app['debug'] = true;
+$app['debug'] = false;
 
 // Register the monolog logging service
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
@@ -13,16 +13,16 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
 //connect to pgsl db
 $dbopts = parse_url(getenv('DATABASE_URL'));
 $app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider('pdo'),
-  array(
-    'pdo.server' => array(
-      'driver' => 'pgsl',
-      'user' => $dbopts["user"],
-      'password' => $dbopts["pass"],
-      'host' => $dbopts["host"],
-      'port' => $dbopts["port"],
-      'dbname' => ltrim($dbopts["path"],'/')
-    )
-  )
+               array(
+                'pdo.server' => array(
+                   'driver'   => 'pgsql',
+                   'user' => $dbopts["user"],
+                   'password' => $dbopts["pass"],
+                   'host' => $dbopts["host"],
+                   'port' => $dbopts["port"],
+                   'dbname' => ltrim($dbopts["path"],'/')
+                   )
+               )
 );
 
 //test query
