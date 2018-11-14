@@ -27,23 +27,22 @@ $app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider
 
 //test query
 $app->get('/db/', function() use($app) {
-  $st = $app['pdo']->prepare('SELECT * FROM imgRepo');
+  $st = $app['pdo']->prepare('SELECT filePath FROM imgRepo');
   $st->execute();
 
   $names = array();
   while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
-    $app['monolog']->addDebug('Row ' . $row['name']);
+    $app['monolog']->addDebug('Row ' . $row['filePath']);
     $names[] = $row;
-    echo $row . "<br>";
   }
 
-  //return $app['twig']->render('database.twig', array(
-  //  'names' => $names
-  //));
+  return $app['twig']->render('database.twig', array(
+    'names' => $names
+  ));
 });
 
 //Register view rendering
-/*$app->register(new Silex\Provider\TwigServiceProvider(), array(
+$app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/views',
 ));
 
@@ -51,7 +50,7 @@ $app->get('/db/', function() use($app) {
 
 $app->get('/', function() use($app) {
   $app['monolog']->addDebug('logging output.');
-  return $app['twig']->render('index.twig');
-});*/
+  return $app['twig']->render('layout.twig'); //changed from index.twig
+});
 
 $app->run();
