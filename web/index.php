@@ -27,12 +27,12 @@ $app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider
 
 //test query
 $app->get('/db/', function() use($app) {
-  $st = $app['pdo']->prepare('SELECT filePath FROM imgRepo');
+  $st = $app['pdo']->prepare('SELECT name FROM test_table');
   $st->execute();
 
   $names = array();
   while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
-    $app['monolog']->addDebug('Row ' . $row['filePath']);
+    $app['monolog']->addDebug('Row ' . $row['name']);
     $names[] = $row;
   }
 
