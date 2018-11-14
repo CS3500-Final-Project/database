@@ -50,7 +50,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 
 $app->get('/', function() use($app) {
   $app['monolog']->addDebug('logging output.');
-  return $app['twig']->render('layout.twig'); //changed from index.twig
+  return $app['twig']->render('index.twig'); //changed from index.twig
 });
 
 $app->run();
