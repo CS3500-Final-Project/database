@@ -1,5 +1,5 @@
 <?php
-
+include 'layout.html';
 require('../vendor/autoload.php');
 echo "Hey there big man";
 $app = new Silex\Application();
@@ -48,9 +48,9 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 
 // Our web handlers
 
-$app->get('/', function() use($app) {
-  $app['monolog']->addDebug('logging output.');
-  return $app['twig']->render('layout.twig'); //changed from index.twig
-});
+//$app->get('/', function() use($app) {
+//  $app['monolog']->addDebug('logging output.');
+//  return $app['twig']->render('layout.twig'); //changed from index.twig
+//});
 
 $app->run();
