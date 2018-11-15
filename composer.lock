@@ -4,8 +4,60 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9171132844cfb885c773bf667172c531",
+    "content-hash": "1868d0c6f53d27d02809812ca88b7a69",
     "packages": [
+        {
+            "name": "cloudinary/cloudinary_php",
+            "version": "1.12.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cloudinary/cloudinary_php.git",
+                "reference": "d7db89b53e7ddbfdcd7a0946b963b7878e7ca9c7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cloudinary/cloudinary_php/zipball/d7db89b53e7ddbfdcd7a0946b963b7878e7ca9c7",
+                "reference": "d7db89b53e7ddbfdcd7a0946b963b7878e7ca9c7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.8.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src"
+                ],
+                "files": [
+                    "src/Helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cloudinary",
+                    "homepage": "https://github.com/cloudinary/cloudinary_php/graphs/contributors"
+                }
+            ],
+            "description": "Cloudinary PHP SDK",
+            "homepage": "https://github.com/cloudinary/cloudinary_php",
+            "keywords": [
+                "cdn",
+                "cloud",
+                "cloudinary",
+                "image management",
+                "sdk"
+            ],
+            "time": "2018-10-11T13:21:48+00:00"
+        },
         {
             "name": "csanquer/pdo-service-provider",
             "version": "dev-master",
@@ -489,16 +541,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.1.7",
+            "version": "v1.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "803c49664ddc7cbc4be02f41491766be32c90a7f"
+                "reference": "955774ecf07b10230bb5b44e150ba078b45f68fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/803c49664ddc7cbc4be02f41491766be32c90a7f",
-                "reference": "803c49664ddc7cbc4be02f41491766be32c90a7f",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/955774ecf07b10230bb5b44e150ba078b45f68fa",
+                "reference": "955774ecf07b10230bb5b44e150ba078b45f68fa",
                 "shasum": ""
             },
             "require": {
@@ -532,7 +584,7 @@
                 }
             ],
             "description": "Composer plugin for Symfony",
-            "time": "2018-11-12T12:25:13+00:00"
+            "time": "2018-11-15T06:11:38+00:00"
         },
         {
             "name": "symfony/http-foundation",

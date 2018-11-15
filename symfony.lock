@@ -1,4 +1,7 @@
 {
+    "cloudinary/cloudinary_php": {
+        "version": "1.12.0"
+    },
     "symfony/flex": {
         "version": "1.0",
         "recipe": {
