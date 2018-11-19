@@ -10,6 +10,25 @@
     <p>Try An Unsigned Upload</p>
   </div>
 </div>
+<div>
+  <a href="#" id="upload_widget_opener">Upload multiple images</a>
 
+  <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
 
+  <script type="text/javascript">
+  var myUploadWidget;
+  document.getElementById("upload_widget_opener").addEventListener("click", function() {
+    myUploadWidget = cloudinary.openUploadWidget({
+      cloudName: 'demo', uploadPreset: 'preset1'}, (error, result) => { });
+      }, false);
+      </script>
+</div>
+<div>
+  <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+  <script type="text/javascript">  
+    cloudinary.applyUploadWidget('#upload_widget_opener',{
+      cloudName: 'demo', uploadPreset: 'preset1',
+      cropping: true, folder: 'widgetdocs' }, (error, result) => { });
+    </script>
+</div>
 {% endblock %}
