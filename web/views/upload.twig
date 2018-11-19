@@ -21,7 +21,7 @@
   document.getElementById("upload_widget_opener").addEventListener("click", function() {
     myUploadWidget = cloudinary.openUploadWidget({
       //try changing cloudName
-      cloudName: getenv('CLOUDINARY_URL'), uploadPreset: 'rywvoxo2'}, (error, result) => { });
+      cloudName: 'hws6kskjw', uploadPreset: 'rywvoxo2'}, (error, result) => { });
       }, false);
       </script>
 </div>
@@ -30,7 +30,7 @@
   <script type="text/javascript">
     cloudinary.applyUploadWidget('#upload_widget_opener',{
       //try chaning cloudName
-      cloudName: getenv('CLOUDINARY_URL'), uploadPreset: 'rywvoxo2',
+      cloudName: 'hws6kskjw', uploadPreset: 'rywvoxo2',
       cropping: true, folder: 'widgetdocs' }, (error, result) => { });
     </script>
 </div>
