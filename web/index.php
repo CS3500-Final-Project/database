@@ -42,7 +42,10 @@ $app->get('/db/', function() use($app) {
 });
 
 //try upload?
-
+$app->get('/up', function() use($app) {
+  $app['monolog']->addDebug('logging output.');
+  return $app['twig']->render('upload.twig'); //changed from index.twig
+});
 
 //Register view rendering
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
@@ -57,7 +60,3 @@ $app->get('/', function() use($app) {
 });
 
 $app->run();
-?>
-<html>
-<p> fuck me, ya know?</p>
-</html>
