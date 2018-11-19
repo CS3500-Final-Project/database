@@ -41,7 +41,10 @@ $app->get('/db/', function() use($app) {
   ));
 });
 
-//
+//try upload?
+$app->('/cup/', function() use($app) {
+  return $app['twig']->render('upload.twig');
+});
 
 //Register view rendering
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
