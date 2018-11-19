@@ -41,6 +41,8 @@ $app->get('/db/', function() use($app) {
   ));
 });
 
+//
+
 //Register view rendering
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/views',
@@ -52,5 +54,5 @@ $app->get('/', function() use($app) {
   $app['monolog']->addDebug('logging output.');
   return $app['twig']->render('index.twig'); //changed from index.twig
 });
-echo getenv('CLOUDINARY_URL');
+
 $app->run();
