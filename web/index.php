@@ -52,5 +52,5 @@ $app->get('/', function() use($app) {
   $app['monolog']->addDebug('logging output.');
   return $app['twig']->render('index.twig'); //changed from index.twig
 });
-
+echo getenv('CLOUDINARY_URL');
 $app->run();
