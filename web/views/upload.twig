@@ -28,10 +28,7 @@
           cloudName: 'hws6kskjw',
           uploadPreset: 'rywvoxo2'
         },
-        ( error, result ) => {
-          console.log( JSON.stringify( error ) );
-          console.log( JSON.stringify( result ) );
-        }, false
+        ( error, result ) => {        }, false
       );
     }
   ); // addEventListener
@@ -42,7 +39,10 @@
   <script type="text/javascript">
     cloudinary.applyUploadWidget('#upload_widget_opener',{
       cloudName: 'hws6kskjw', uploadPreset: 'rywvoxo2',
-      cropping: true, folder: 'user_images' }, (error, result) => {    });
+      cropping: true, folder: 'user_images' }, (error, result) => {
+        console.log( JSON.stringify( error ) );
+        console.log( JSON.stringify( result ) );
+         });
     </script>
 </div>
 {% endblock %}
