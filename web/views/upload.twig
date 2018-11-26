@@ -33,7 +33,12 @@
   <script type="text/javascript">
     cloudinary.applyUploadWidget('#upload_widget_opener',{
       cloudName: 'hws6kskjw', uploadPreset: 'rywvoxo2',
-      cropping: true, folder: 'user_images' }, (error, result) => { });
+      cropping: true, folder: 'user_images' }, (error, result) => {
+        if (result && result.event === "success") {
+        //if upload successful, try to add image url to db
+          <?php echo 'tarts';?>
+      });
+    });
     </script>
 </div>
 {% endblock %}
