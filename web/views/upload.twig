@@ -20,12 +20,14 @@
   var myUploadWidget;
   document.getElementById("upload_widget_opener").addEventListener("click", function() {
     myUploadWidget = cloudinary.openUploadWidget({
-      //try changing cloudName
       cloudName: 'hws6kskjw', uploadPreset: 'rywvoxo2'}, (error, result) => { });
       }, false);
       </script>
 </div>
-<div>
+<?php
+
+?>
+<!-- <div>
   <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
   <script type="text/javascript">
     cloudinary.applyUploadWidget('#upload_widget_opener',{
@@ -33,5 +35,5 @@
       cloudName: 'hws6kskjw', uploadPreset: 'rywvoxo2',
       cropping: true, folder: 'widgetdocs' }, (error, result) => { });
     </script>
-</div>
+</div> -->
 {% endblock %}
