@@ -23,19 +23,18 @@
     "click",
     function() {
       console.log('farts');
+      myUploadWidget = cloudinary.openUploadWidget(
+        {
+          cloudName: 'hws6kskjw',
+          uploadPreset: 'rywvoxo2'
+        },
+        ( error, result ) => {
+          console.log( JSON.stringify( error ) );
+          console.log( JSON.stringify( result ) );
+        }, false
+      );
     }
   ); // addEventListener
-
-    myUploadWidget = cloudinary.openUploadWidget(
-      {
-        cloudName: 'hws6kskjw',
-        uploadPreset: 'rywvoxo2'
-      },
-      ( error, result ) => {
-        console.log( JSON.stringify( error ) );
-        console.log( JSON.stringify( result ) );
-      }, false
-    );
       </script>
 </div>
 <div>
