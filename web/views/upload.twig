@@ -22,7 +22,6 @@
   .addEventListener(
     "click",
     function() {
-      console.log('farts');
       myUploadWidget = cloudinary.openUploadWidget(
         {
           cloudName: 'hws6kskjw',
@@ -32,16 +31,15 @@
       );
     }
   ); // addEventListener
-      </script>
-</div>
-<div>
-  <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
-  <script type="text/javascript">
+
     cloudinary.applyUploadWidget('#upload_widget_opener',{
       cloudName: 'hws6kskjw', uploadPreset: 'rywvoxo2',
       cropping: true, folder: 'user_images' }, (error, result) => {
-        console.log( JSON.stringify( error ) );
+        //console.log( JSON.stringify( error ) );
         console.log( JSON.stringify( result ) );
+        if (result && result.event === "success") {
+          console.log('farts');
+      }
          });
     </script>
 </div>
