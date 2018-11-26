@@ -20,20 +20,20 @@
   var myUploadWidget;
   document.getElementById("upload_widget_opener").addEventListener("click", function() {
     myUploadWidget = cloudinary.openUploadWidget({
-      cloudName: 'hws6kskjw', uploadPreset: 'rywvoxo2'}, (error, result) => { });
+      cloudName: 'hws6kskjw', uploadPreset: 'rywvoxo2'}, (error, result) => {
+        if (result && result.event === "success") {
+        //if upload successful, try to add image url to db
+          <?php echo 'farts';?>
+      });
       }, false);
       </script>
 </div>
-<?php
-
-?>
-<!-- <div>
+<div>
   <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
   <script type="text/javascript">
     cloudinary.applyUploadWidget('#upload_widget_opener',{
-      //try chaning cloudName
       cloudName: 'hws6kskjw', uploadPreset: 'rywvoxo2',
-      cropping: true, folder: 'widgetdocs' }, (error, result) => { });
+      cropping: true, folder: 'user_images' }, (error, result) => { });
     </script>
-</div> -->
+</div>
 {% endblock %}
