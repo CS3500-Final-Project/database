@@ -5,13 +5,9 @@
 
 <ul>
 {% for n in url %}
-  <li> {{ n.id }} </li>
   <li> {{ n.url }} </li>
-  <li> {{ n.username }} </li>
-  <li> {{ n.uploaddate }} </li>
-  <hr>
 {% else %}
-  <li>No value!</li>
+  <li>Nameless!</li>
 {% endfor %}
 </ul>
 
