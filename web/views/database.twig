@@ -4,8 +4,8 @@
 <p>Got these rows from the database:</p>
 
 <ul>
-{% for n in url %}
-  <li> {{ n.url }} </li>
+{% for n in names %}
+  <li> {{ n.name }} </li>
 {% else %}
   <li>Nameless!</li>
 {% endfor %}
