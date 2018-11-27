@@ -1,6 +1,7 @@
 <?php
 //include 'layout.html';
 require('../vendor/autoload.php');
+require('dbfuncs.php');
 $app = new Silex\Application();
 $app['debug'] = true;
 //$app['debug'] = false;
@@ -11,19 +12,7 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
 ));
 
 //connect to pgsl db
-$dbopts = parse_url(getenv('DATABASE_URL'));
-$app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider('pdo'),
-               array(
-                'pdo.server' => array(
-                   'driver'   => 'pgsql',
-                   'user' => $dbopts["user"],
-                   'password' => $dbopts["pass"],
-                   'host' => $dbopts["host"],
-                   'port' => $dbopts["port"],
-                   'dbname' => ltrim($dbopts["path"],'/')
-                   )
-               )
-);
+dbconnect();
 
 //test query
 /* $app->get('/db/', function() use($app) {
@@ -59,9 +48,6 @@ $app->get('/db/', function() use($app) {
 //try upload?
 $app->get('/up', function() use($app) {
   $app['monolog']->addDebug('logging output.');
-  echo 'free farts';
-  print_r(json_decode($json));
-  echo json_decode($json);
   return $app['twig']->render('upload.twig'); //changed from index.twig
 });
 
