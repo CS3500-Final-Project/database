@@ -30,14 +30,14 @@ $app->get('/db/', function() use($app) {
   $st = $app['pdo']->prepare('SELECT url FROM uploadinfo');
   $st->execute();
 
-  $names = array();
+  $urls = array();
   while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
-    $app['monolog']->addDebug('Row ' . $row['name']);
-    $names[] = $row;
+    $app['monolog']->addDebug('Row ' . $row['url']);
+    $urls[] = $row;
   }
 
   return $app['twig']->render('database.twig', array(
-    'names' => $names
+    'urls' => $urls
   ));
 });
 
