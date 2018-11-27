@@ -59,6 +59,9 @@ $app->get('/db/', function() use($app) {
 //try upload?
 $app->get('/up', function() use($app) {
   $app['monolog']->addDebug('logging output.');
+  echo 'free farts';
+  print_r(json_decode($json));
+  echo json_decode($json);
   return $app['twig']->render('upload.twig'); //changed from index.twig
 });
 
