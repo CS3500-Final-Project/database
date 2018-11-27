@@ -41,6 +41,21 @@ $app->get('/db/', function() use($app) {
   ));
 });
 
+//admin data view
+$app->get('/admin/', function() use($app) {
+  $st = $app['pdo']->prepare('SELECT * FROM uploadinfo');
+  $st->execute();
+
+  $images = array();
+  while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
+    $app['monolog']->addDebug('Row ' . $row['id']);
+    $images[] = $row;
+  }
+  return $app['twig']->render('admindata.twig', array(
+    'images' => $images
+  ));
+});
+
 //try upload?
 $app->get('/up', function() use($app) {
   $app['monolog']->addDebug('logging output.');
