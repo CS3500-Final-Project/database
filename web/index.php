@@ -26,7 +26,7 @@ $app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider
 );
 
 //test query
-$app->get('/db/', function() use($app) {
+/* $app->get('/db/', function() use($app) {
   $st = $app['pdo']->prepare('SELECT name FROM test_table');
   $st->execute();
 
@@ -39,10 +39,10 @@ $app->get('/db/', function() use($app) {
   return $app['twig']->render('database.twig', array(
     'names' => $names
   ));
-});
+}); */
 
 //admin data view
-$app->get('/admin/', function() use($app) {
+$app->get('/db/', function() use($app) {
   $st = $app['pdo']->prepare('SELECT * FROM uploadinfo');
   $st->execute();
 
