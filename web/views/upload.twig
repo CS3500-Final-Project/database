@@ -15,7 +15,66 @@
   <a href="#" id="upload_widget_opener">Upload multiple images</a>
 
   <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+<!--server com request func from josh -->
+<script>
+    function postStuffToServer(
+       payload
+     ) {
+       let promise = new Promise(
+         function(
+           resolve,
+           reject
+         ) {
+           var request = new XMLHttpRequest();
 
+           request.open(
+             "POST",
+             'dbfuncs.php'
+           );
+
+           request.setRequestHeader(
+             'Content-Type',
+             'application/json'
+           );
+
+           request.onload = function() {
+             let status = this.status;
+
+             if (
+               status >= 200
+               && status < 300
+             ) {
+               resolve(
+                 this.response
+               );
+             }
+             else {
+               reject(
+                 this.statusText
+               );
+             }
+           }; // onload callback
+
+           // not sure if stringification needed.
+           // try other method first and switch
+           // to this one if there are issues
+           // sending an object
+             /*
+           let requestBody = JSON.stringify(
+             payload
+           );
+
+           request.send(
+             requestBody
+           );
+           */
+           request.send( payload );
+         } // executor
+       ); // promise
+
+       return promise;
+   } // postStuffToServer
+</script>
   <script type="text/javascript">
   var myUploadWidget;
   document.getElementById("upload_widget_opener")
@@ -38,8 +97,25 @@
         //console.log( JSON.stringify( error ) );
         console.log( JSON.stringify( result ) );
         if (result && result.event === "success") {
-          console.log('Did you get that thing i sent ya?');
-          console.log( JSON.stringify( result => url ) );
+          //console.log('Did you get that thing i sent ya?');
+          //console.log( JSON.stringify( result => url ) );
+          //try making server request
+          postStuffToServer(
+            result
+          )
+          .then(
+            ( response ) => {
+              // response might be text (a JSON string)
+              // or it could be an object...
+              // I was getting JSON strings even with
+              // the headers set up to return JSON
+              console.log( 'received response from server' );
+
+              console.log(
+                response
+              );
+            } // response callback
+          );
       }
          });
     </script>

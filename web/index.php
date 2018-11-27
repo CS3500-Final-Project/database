@@ -1,7 +1,6 @@
 <?php
 //include 'layout.html';
 require('../vendor/autoload.php');
-require('dbfuncs.php');
 $app = new Silex\Application();
 $app['debug'] = true;
 //$app['debug'] = false;
@@ -24,7 +23,7 @@ $app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider
              'dbname' => ltrim($dbopts["path"],'/')
              )
          )
-  );
+);
 
 
 
