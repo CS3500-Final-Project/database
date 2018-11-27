@@ -4,10 +4,14 @@
 <p>Got these rows from the database:</p>
 
 <ul>
-{% for n in names %}
-  <li> {{ n.name }} </li>
+{% for n in url %}
+  <li> {{ n.id }} </li>
+  <li> {{ n.url }} </li>
+  <li> {{ n.username }} </li>
+  <li> {{ n.uploaddate }} </li>
+  <hr>
 {% else %}
-  <li>Nameless!</li>
+  <li>No value!</li>
 {% endfor %}
 </ul>
 

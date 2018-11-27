@@ -27,7 +27,7 @@ $app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider
 
 //test query
 $app->get('/db/', function() use($app) {
-  $st = $app['pdo']->prepare('SELECT name FROM test_table');
+  $st = $app['pdo']->prepare('SELECT * FROM uploadinfo');
   $st->execute();
 
   $names = array();
