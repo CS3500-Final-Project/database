@@ -1,5 +1,5 @@
 <?php
-include('index.php');
+//include('index.php');
 /*function dbconnect(){
   $dbopts = parse_url(getenv('DATABASE_URL'));
   $db  = new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider('pdo'),
@@ -29,6 +29,24 @@ $app->get('/db/', function() use($app) {
 });
 
 */
+if (
+  strcasecmp($_SERVER['REQUEST_METHOD'], "POST") != 0
+) {
+  throw new Exception("Request method must be POST");
+}
+
+// make sure that the content type of the request
+// has been seet to application/json
+$contentType = isset($_SERVER['CONTENT_TYPE'])
+  ? trim($_SERVER['CONTENT_TYPE'])
+  : ""
+;
+
+if (
+  strcasecmp($contentType, "application/json") != 0
+) {
+  throw new Exception("Content type must be application/json");
+}
 
 $content = trim(
   file_get_contents("php://input")
