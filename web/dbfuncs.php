@@ -28,13 +28,13 @@ $app->get('/db/', function() use($app) {
   ));
 });
 
-*/
+
 if (
   strcasecmp($_SERVER['REQUEST_METHOD'], "POST") != 0
 ) {
   throw new Exception("Request method must be POST");
 }
-
+*/
 // make sure that the content type of the request
 // has been seet to application/json
 $contentType = isset($_SERVER['CONTENT_TYPE'])
