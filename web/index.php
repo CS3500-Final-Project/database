@@ -66,7 +66,7 @@ $app->post(
   }
 );
 
-$app->post('/', function() use($app){
+$app->post('/fp/', function() use($app){
   $st = $app['pdo']->prepare('SELECT * FROM uploadinfo');
   $st->execute();
 
@@ -123,11 +123,11 @@ $app->get('/db/', function() use($app) {
 //));
 
 // Our web handlers
-
+*/
 $app->get('/', function() use($app) {
   //run query to grab most popular
   $app['monolog']->addDebug('logging output.');
   return $app['twig']->render('index.twig'); //changed from index.twig
 });
-*/
+
 $app->run();
