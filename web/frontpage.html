@@ -66,8 +66,17 @@ function makeGetRequest(
   } // makeGetRequest
 
   makeGetRequest('/fp/').then(
+    ( response ) => {
+      // response might be text (a JSON string)
+      // or it could be an object...
+      // I was getting JSON strings even with
+      // the headers set up to return JSON
       console.log( 'received response from server' );
-      console.log( response );
+
+      console.log(
+       response
+      );
+    } // response callback
   );
 
 </script>
