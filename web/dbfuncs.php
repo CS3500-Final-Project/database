@@ -55,7 +55,10 @@ $content = trim(
 // attempt to decode the RAW post data
 // from JSON into an associative array
 $requestBody = json_decode($content, true);
-
+$st = $app['pdo']->prepare('INSERT INTO uploadinfo (url, user) VALUES (:url , :user)');
+$st->bindParam(':url', $requestBody['url']);
+$st->bindParam(':user', 'dadminplatinumplus');
+$st->execute();
 echo 'got this far';
-print_r($requestBody);
+
  ?>

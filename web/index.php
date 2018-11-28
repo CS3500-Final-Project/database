@@ -72,6 +72,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 // Our web handlers
 
 $app->get('/', function() use($app) {
+  //run query to grab most popular
   $app['monolog']->addDebug('logging output.');
   return $app['twig']->render('index.twig'); //changed from index.twig
 });
