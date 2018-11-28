@@ -76,7 +76,7 @@ $app->get('/fp/', function() use($app){
     $images[] = $row;
   }
 
-  return $app->json($images, array('images' => $images));
+  return $app->json($images);
 });
 
 
