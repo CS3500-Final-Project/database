@@ -50,6 +50,7 @@ $app->post(
     // attempt to decode the RAW post data
     // from JSON into an associative array
     $requestBody = json_decode($content, true);
+
 /*
     if( is_null( $app ) ) {
       array_push($message, 'app is null');
@@ -76,8 +77,8 @@ $app->post(
       //$responseData( 'messages' => $messages );
 
 
-    return $app->json( $content );
-    //return $app->json( $requestBody );
+    //return $app->json( $content );
+    return $app->json( $requestBody );
     //return $app->json( array('Status' => 'Success') );
   }
 );
