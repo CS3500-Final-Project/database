@@ -50,20 +50,6 @@ $app->post(
     // attempt to decode the RAW post data
     // from JSON into an associative array
     $requestBody = json_decode($content, true);
-/*
-    if( is_null( $app ) ) {
-      array_push($message, 'app is null');
-      //echo 'app doesnt exist';
-    }
-    else if( isset( $app['pdo'] ) ) {
-      array_push($message, 'app pdo is set');
-      //echo 'pdo exists';
-    }
-    else
-      array_push($message, 'pdo is null');
-      //echo 'pdo doesnt exist!';
-    }
-*/
 
 
       $st = $app['pdo']->prepare( "INSERT INTO uploadinfo ( url, username ) VALUES ( :url , :user )" );
@@ -74,14 +60,25 @@ $app->post(
 
       $st->execute();
 
-      //$responseData( 'messages' => $messages );
-
-
-    return $requestBody['info']['url'];
+    return 'image uploaded, url: ' . $requestBody['info']['url'];
     //return $app->json( $requestBody );
     //return $app->json( array('Status' => 'Success') );
   }
 );
+
+$app->post('/fp/', function() use($app){
+  $st = $app['pdo']->prepare('SELECT * FROM uploadinfo');
+  $st->execute();
+
+  $images = array();
+  while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
+    $app['monolog']->addDebug('Row ' . $row['id']);
+    $images[] = $row;
+  }
+
+  return $images;
+});
+
 
 //test query
 /* $app->get('/db/', function() use($app) {
@@ -114,7 +111,7 @@ $app->get('/db/', function() use($app) {
     'images' => $images
   ));
 });
-*/
+
 //try upload?
 //$app->get('/up', function() use($app) {
 //  $app['monolog']->addDebug('logging output.');
@@ -128,10 +125,10 @@ $app->get('/db/', function() use($app) {
 
 // Our web handlers
 
-//$app->get('/', function() use($app) {
+$app->get('/', function() use($app) {
   //run query to grab most popular
-//  $app['monolog']->addDebug('logging output.');
-//  return $app['twig']->render('index.twig'); //changed from index.twig
-//});
-
+  $app['monolog']->addDebug('logging output.');
+  return $app['twig']->render('index.twig'); //changed from index.twig
+});
+*/
 $app->run();
