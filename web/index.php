@@ -26,6 +26,13 @@ $app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider
 );
 
 
+$app->post(
+  '/upload-image/',
+  function () use($app)
+  {
+    echo 'foo bar';
+  }
+);
 
 //test query
 /* $app->get('/db/', function() use($app) {

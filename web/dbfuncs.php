@@ -1,5 +1,6 @@
 <?php
 include('index.php');
+$var = 'hello satan';
 /*require('../vendor/autoload.php');
 $dbup = new Silex\Application();
 $dbup['debug'] = true;
