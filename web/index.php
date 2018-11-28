@@ -69,7 +69,7 @@ $app->post(
       $st = $app['pdo']->prepare( "INSERT INTO uploadinfo ( url, username ) VALUES ( :url , :user )" );
       $st->bindParam(':url', $url);
       $st->bindParam(':user', $user);
-      $url = $requestBody['info']->url;
+      $url = $requestBody['info']['url'];
       $user = 'admin';
 
       $st->execute();
