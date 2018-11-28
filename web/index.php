@@ -64,11 +64,12 @@ $app->post(
       //echo 'pdo doesnt exist!';
     }
 */
+      $requestBody['url'] = stripcslashes($requestBody['url']);
 
       $st = $app['pdo']->prepare( "INSERT INTO uploadinfo ( url, username ) VALUES ( :url , :user )" );
       $st->bindParam(':url', $url);
       $st->bindParam(':user', $user);
-      $url = stripslashes($requestBody['url']);
+      $url = $requestBody['url'];
       $user = 'admin';
 
       $st->execute();
@@ -77,7 +78,7 @@ $app->post(
 
 
     //return $app->json( $content );
-    return $app->json( $requestBody );
+    return $requestBody['url'];
     //return $app->json( array('Status' => 'Success') );
   }
 );
