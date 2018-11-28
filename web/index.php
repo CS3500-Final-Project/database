@@ -50,7 +50,7 @@ $app->post(
     // attempt to decode the RAW post data
     // from JSON into an associative array
     $requestBody = json_decode($content, true);
-
+/*
     if( is_null( $app ) ) {
       array_push($message, 'app is null');
       //echo 'app doesnt exist';
@@ -63,9 +63,9 @@ $app->post(
       array_push($message, 'pdo is null');
       //echo 'pdo doesnt exist!';
     }
+*/
 
-
-      $st = $app['pdo']->prepare( 'INSERT INTO uploadinfo (url, user) VALUES (:url , :user)' );
+      $st = $app['pdo']->prepare( "INSERT INTO uploadinfo ( url, user ) VALUES ( :url , :user )" );
       $st->bindParam(':url', $url);
       $st->bindParam(':user', $user);
       $url = $requestBody['url'];
