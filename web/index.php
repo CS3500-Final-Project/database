@@ -66,7 +66,7 @@ $app->post(
   }
 );
 
-$app->post('/fp/', function() use($app){
+$app->get('/fp/', function() use($app){
   $st = $app['pdo']->prepare('SELECT * FROM uploadinfo');
   $st->execute();
 
@@ -95,7 +95,7 @@ $app->post('/fp/', function() use($app){
     'names' => $names
   ));
 }); */
-
+/*
 //admin data view
 $app->get('/db/', function() use($app) {
   $st = $app['pdo']->prepare('SELECT * FROM uploadinfo');
@@ -110,7 +110,7 @@ $app->get('/db/', function() use($app) {
     'images' => $images
   ));
 });
-/*
+
 //try upload?
 //$app->get('/up', function() use($app) {
 //  $app['monolog']->addDebug('logging output.');
@@ -123,11 +123,11 @@ $app->get('/db/', function() use($app) {
 //));
 
 // Our web handlers
-*/
+
 $app->get('/', function() use($app) {
   //run query to grab most popular
   $app['monolog']->addDebug('logging output.');
   return $app['twig']->render('index.twig'); //changed from index.twig
 });
-
+*/
 $app->run();
