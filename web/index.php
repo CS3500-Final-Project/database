@@ -30,7 +30,7 @@ $app->post(
   '/upload-image/',
   function () use($app)
   {
-    echo 'foo bar';
+    return $app->json( array( 'foo' => 'bar' ) );
   }
 );
 
