@@ -1,40 +1,28 @@
 <?php
-include('index.php');
-/*function dbconnect(){
-  $dbopts = parse_url(getenv('DATABASE_URL'));
-  $db  = new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider('pdo'),
-                 array(
-                  'pdo.server' => array(
-                     'driver'   => 'pgsql',
-                     'user' => $dbopts["user"],
-                     'password' => $dbopts["pass"],
-                     'host' => $dbopts["host"],
-                     'port' => $dbopts["port"],
-                     'dbname' => ltrim($dbopts["path"],'/')
-                     )
-                 )
-}
-$app->get('/db/', function() use($app) {
-  $st = $app['pdo']->prepare('SELECT * FROM uploadinfo');
-  $st->execute();
+require('../vendor/autoload.php');
+$dbup = new Silex\Application();
+$dbup['debug'] = true;
+//$app['debug'] = false;
 
-  $images = array();
-  while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
-    $app['monolog']->addDebug('Row ' . $row['id']);
-    $images[] = $row;
-  }
-  return $app['twig']->render('admindata.twig', array(
-    'images' => $images
-  ));
-});
+// Register the monolog logging service
+$app->register(new Silex\Provider\MonologServiceProvider(), array(
+  'monolog.logfile' => 'php://stderr',
+));
 
-
-if (
-  strcasecmp($_SERVER['REQUEST_METHOD'], "POST") != 0
-) {
-  throw new Exception("Request method must be POST");
-}
-*/
+//connect to pgsl db
+$dbopts = parse_url(getenv('DATABASE_URL'));
+$app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider('pdo'),
+         array(
+          'pdo.server' => array(
+             'driver'   => 'pgsql',
+             'user' => $dbopts["user"],
+             'password' => $dbopts["pass"],
+             'host' => $dbopts["host"],
+             'port' => $dbopts["port"],
+             'dbname' => ltrim($dbopts["path"],'/')
+             )
+         )
+);
 
 // make sure that the content type of the request
 // has been seet to application/json
@@ -56,7 +44,7 @@ $content = trim(
 // attempt to decode the RAW post data
 // from JSON into an associative array
 $requestBody = json_decode($content, true);
-$st = $app['pdo']->prepare('INSERT INTO uploadinfo (url, user) VALUES (:url , :user)');
+$st = $dbup['pdo']->prepare('INSERT INTO uploadinfo (url, user) VALUES (:url , :user)');
 $st->bindParam(':url', $requestBody['url']);
 $st->bindParam(':user', 'dadminplatinumplus');
 $st->execute();
