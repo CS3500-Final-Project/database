@@ -45,10 +45,22 @@ $content = trim(
 // attempt to decode the RAW post data
 // from JSON into an associative array
 $requestBody = json_decode($content, true);
-$st = $app['pdo']->prepare('INSERT INTO uploadinfo (url, user) VALUES (:url , :user)');
-$st->bindParam(':url', $requestBody['url']);
-$st->bindParam(':user', 'dadminplatinumplus');
-$st->execute();
+if( is_null( $app ) ) {
+  echo "app is null"
+}
+else if( isset( $app['pdo'] ) ) {
+  echo "app pdo is set";
+}
+else{
+  echo "pdo is null";
+}
+
+  $st = $app['pdo']->prepare('INSERT INTO uploadinfo (url, user) VALUES (:url , :user)');
+  $st->bindParam(':url', $requestBody['url']);
+  $st->bindParam(':user', 'dadminplatinumplus');
+  $st->execute();
+
+
 echo 'got this far';
 
  ?>
