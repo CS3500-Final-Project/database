@@ -1,5 +1,6 @@
 <?php
-require('../vendor/autoload.php');
+include('index.php');
+/*require('../vendor/autoload.php');
 $dbup = new Silex\Application();
 $dbup['debug'] = true;
 //$app['debug'] = false;
@@ -23,7 +24,7 @@ $app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider
              )
          )
 );
-
+*/
 // make sure that the content type of the request
 // has been seet to application/json
 $contentType = isset($_SERVER['CONTENT_TYPE'])
@@ -44,7 +45,7 @@ $content = trim(
 // attempt to decode the RAW post data
 // from JSON into an associative array
 $requestBody = json_decode($content, true);
-$st = $dbup['pdo']->prepare('INSERT INTO uploadinfo (url, user) VALUES (:url , :user)');
+$st = $app['pdo']->prepare('INSERT INTO uploadinfo (url, user) VALUES (:url , :user)');
 $st->bindParam(':url', $requestBody['url']);
 $st->bindParam(':user', 'dadminplatinumplus');
 $st->execute();
