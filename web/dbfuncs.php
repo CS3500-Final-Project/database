@@ -1,5 +1,5 @@
 <?php
-include('index.php');
+//include('index.php');
 /*function dbconnect(){
   $dbopts = parse_url(getenv('DATABASE_URL'));
   $db  = new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider('pdo'),
@@ -35,6 +35,7 @@ if (
   throw new Exception("Request method must be POST");
 }
 */
+require('../vendor/autoload.php')
 // make sure that the content type of the request
 // has been seet to application/json
 $contentType = isset($_SERVER['CONTENT_TYPE'])
