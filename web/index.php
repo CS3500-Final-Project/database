@@ -75,7 +75,9 @@ $app->post(
 
       //$responseData( 'messages' => $messages );
 
-    return $app->json( $responseData );
+
+    return $app->json( $content );
+    //return $app->json( $requestBody );
     //return $app->json( array('Status' => 'Success') );
   }
 );
