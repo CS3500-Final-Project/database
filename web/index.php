@@ -50,7 +50,6 @@ $app->post(
     // attempt to decode the RAW post data
     // from JSON into an associative array
     $requestBody = json_decode($content, true);
-
 /*
     if( is_null( $app ) ) {
       array_push($message, 'app is null');
@@ -69,7 +68,7 @@ $app->post(
       $st = $app['pdo']->prepare( "INSERT INTO uploadinfo ( url, username ) VALUES ( :url , :user )" );
       $st->bindParam(':url', $url);
       $st->bindParam(':user', $user);
-      $url = $requestBody['url'];
+      $url = str_replace("\\" , "", $requestBody['url']);
       $user = 'admin';
 
       $st->execute();
