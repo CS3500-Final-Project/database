@@ -64,7 +64,7 @@ $app->post(
       //echo 'pdo doesnt exist!';
     }
 
-    $temp = 'admin';
+
       $st = $app['pdo']->prepare( 'INSERT INTO uploadinfo (url, user) VALUES (:url , :user)' );
       $st->bindParam(':url', $url);
       $st->bindParam(':user', $user);
