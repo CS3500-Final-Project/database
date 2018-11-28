@@ -1,5 +1,5 @@
 <?php
-//include('index.php');
+include('index.php');
 /*function dbconnect(){
   $dbopts = parse_url(getenv('DATABASE_URL'));
   $db  = new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider('pdo'),
