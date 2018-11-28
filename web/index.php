@@ -30,7 +30,44 @@ $app->post(
   '/upload-image/',
   function () use($app)
   {
-    return $app->json( array( 'foo' => 'bar' ) );
+    $responseData = array();
+    $messages = array();
+    $contentType = isset($_SERVER['CONTENT_TYPE'])
+      ? trim($_SERVER['CONTENT_TYPE'])
+      : ""
+    ;
+
+    if (
+      strcasecmp($contentType, "application/json") != 0
+    ) {
+      throw new Exception("Content type must be application/json");
+    }
+
+    $content = trim(
+      file_get_contents("php://input")
+    );
+
+    // attempt to decode the RAW post data
+    // from JSON into an associative array
+    $requestBody = json_decode($content, true);
+    if( is_null( $app ) ) {
+      array_push($message, 'app is null');
+    }
+    else if( isset( $app['pdo'] ) ) {
+      array_push($message, 'app pdo is set');
+    }
+    else
+      array_push($message, 'pdo is null');
+    }
+
+      $st = $app['pdo']->prepare('INSERT INTO uploadinfo (url, user) VALUES (:url , :user)');
+      $st->bindParam(':url', $requestBody['url']);
+      $st->bindParam(':user', 'dadminplatinumplus');
+      $st->execute();
+
+      $responseData( 'messages' => $messages );
+
+    return $app->json( $responseData );
   }
 );
 
