@@ -66,7 +66,7 @@ $app->post(
   }
 );
 
-$app->post('/fp/', function() use($app){
+$app->post('/', function() use($app){
   $st = $app['pdo']->prepare('SELECT * FROM uploadinfo');
   $st->execute();
 
@@ -97,7 +97,6 @@ $app->post('/fp/', function() use($app){
 }); */
 
 //admin data view
-/*
 $app->get('/db/', function() use($app) {
   $st = $app['pdo']->prepare('SELECT * FROM uploadinfo');
   $st->execute();
@@ -111,7 +110,7 @@ $app->get('/db/', function() use($app) {
     'images' => $images
   ));
 });
-
+/*
 //try upload?
 //$app->get('/up', function() use($app) {
 //  $app['monolog']->addDebug('logging output.');
