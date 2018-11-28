@@ -30,8 +30,8 @@ $app->post(
   '/upload-image/',
   function () use($app)
   {
-    //$responseData = array();
-    //$messages = array();
+    $responseData = array();
+    $messages = array();
     $contentType = isset($_SERVER['CONTENT_TYPE'])
       ? trim($_SERVER['CONTENT_TYPE'])
       : ""
@@ -50,7 +50,7 @@ $app->post(
     // attempt to decode the RAW post data
     // from JSON into an associative array
     $requestBody = json_decode($content, true);
-    /*
+
     if( is_null( $app ) ) {
       array_push($message, 'app is null');
     }
@@ -60,17 +60,17 @@ $app->post(
     else
       array_push($message, 'pdo is null');
     }
-    */
+
     $temp = 'admin';
-      $st = $app['pdo']->prepare('INSERT INTO uploadinfo (url, user) VALUES (:url , :user)');
+      $st = $app['pdo']->prepare('INSERT INTO uploadinfo (url, user) VALUES (:url ,:user)');
       $st->bindParam(':url', $requestBody['url']);
       $st->bindParam(':user', $temp);
       $st->execute();
 
-      //$responseData( 'messages' => $messages );
+      $responseData( 'messages' => $messages );
 
-    //return $app->json( $responseData );
-    return $app->json( array('Status' => 'Success') );
+    return $app->json( $responseData );
+  //  return $app->json( array('Status' => 'Success') );
   }
 );
 
