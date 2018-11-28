@@ -44,6 +44,7 @@ $app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider
 }); */
 
 //admin data view
+/*
 $app->get('/db/', function() use($app) {
   $st = $app['pdo']->prepare('SELECT * FROM uploadinfo');
   $st->execute();
@@ -57,24 +58,24 @@ $app->get('/db/', function() use($app) {
     'images' => $images
   ));
 });
-
+*/
 //try upload?
-$app->get('/up', function() use($app) {
-  $app['monolog']->addDebug('logging output.');
-  return $app['twig']->render('upload.twig'); //changed from index.twig
-});
+//$app->get('/up', function() use($app) {
+//  $app['monolog']->addDebug('logging output.');
+//  return $app['twig']->render('upload.twig'); //changed from index.twig
+//});
 
 //Register view rendering
-$app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => __DIR__.'/views',
-));
+//$app->register(new Silex\Provider\TwigServiceProvider(), array(
+//    'twig.path' => __DIR__.'/views',
+//));
 
 // Our web handlers
 
-$app->get('/', function() use($app) {
+//$app->get('/', function() use($app) {
   //run query to grab most popular
-  $app['monolog']->addDebug('logging output.');
-  return $app['twig']->render('index.twig'); //changed from index.twig
-});
+//  $app['monolog']->addDebug('logging output.');
+//  return $app['twig']->render('index.twig'); //changed from index.twig
+//});
 
 $app->run();
