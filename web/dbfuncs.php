@@ -46,7 +46,7 @@ $content = trim(
 // from JSON into an associative array
 $requestBody = json_decode($content, true);
 if( is_null( $app ) ) {
-  echo "app is null"
+  echo "app is null";
 }
 else if( isset( $app['pdo'] ) ) {
   echo "app pdo is set";
