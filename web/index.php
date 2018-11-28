@@ -30,8 +30,8 @@ $app->post(
   '/upload-image/',
   function () use($app)
   {
-    //$responseData = array();
-    //$messages = array();
+    $responseData = array();
+    $messages = array();
     $contentType = isset($_SERVER['CONTENT_TYPE'])
       ? trim($_SERVER['CONTENT_TYPE'])
       : ""
@@ -52,28 +52,31 @@ $app->post(
     $requestBody = json_decode($content, true);
 
     if( is_null( $app ) ) {
-      //array_push($message, 'app is null');
-      echo 'app doesnt exist';
+      array_push($message, 'app is null');
+      //echo 'app doesnt exist';
     }
     else if( isset( $app['pdo'] ) ) {
-      //array_push($message, 'app pdo is set');
-      echo 'pdo exists';
+      array_push($message, 'app pdo is set');
+      //echo 'pdo exists';
     }
     else
-      //array_push($message, 'pdo is null');
-      echo 'pdo doesnt exist!';
+      array_push($message, 'pdo is null');
+      //echo 'pdo doesnt exist!';
     }
 
     $temp = 'admin';
-      $st = $app['pdo']->prepare('INSERT INTO uploadinfo (url, user) VALUES (:url , :user)');
-      $st->bindParam(':url', $requestBody['url']);
-      $st->bindParam(':user', $temp);
+      $st = $app['pdo']->prepare( 'INSERT INTO uploadinfo (url, user) VALUES (:url , :user)' );
+      $st->bindParam(':url', $url);
+      $st->bindParam(':user', $user);
+      $url = $requestBody['url'];
+      $user = 'admin';
+
       $st->execute();
 
       //$responseData( 'messages' => $messages );
 
-    //return $app->json( $responseData );
-    return $app->json( array('Status' => 'Success') );
+    return $app->json( $responseData );
+    //return $app->json( array('Status' => 'Success') );
   }
 );
 
