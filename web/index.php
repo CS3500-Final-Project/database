@@ -76,7 +76,7 @@ $app->get('/fp/', function() use($app){
     $images[] = $row;
   }
 
-  return 'db call successful';
+  return $images;
 });
 
 

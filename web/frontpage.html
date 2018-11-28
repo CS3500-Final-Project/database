@@ -65,5 +65,9 @@ function makeGetRequest(
     return promise;
   } // makeGetRequest
 
-  makeGetRequest('/fp/');
+  makeGetRequest('/fp/').then(
+      console.log( 'received response from server' );
+      console.log( response );
+  );
+
 </script>
