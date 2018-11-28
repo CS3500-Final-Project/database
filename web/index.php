@@ -61,9 +61,10 @@ $app->post(
       array_push($message, 'pdo is null');
     }
     */
-      $st = $app['pdo']->prepare('INSERT INTO uploadinfo (url, user) VALUES (:url , 'admin')');
+    $temp = 'admin';
+      $st = $app['pdo']->prepare('INSERT INTO uploadinfo (url, user) VALUES (:url , :user)');
       $st->bindParam(':url', $requestBody['url']);
-      //$st->bindParam(':user', 'dadminplatinumplus');
+      $st->bindParam(':user', $temp);
       $st->execute();
 
       //$responseData( 'messages' => $messages );
