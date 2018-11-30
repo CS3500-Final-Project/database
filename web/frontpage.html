@@ -37,12 +37,12 @@
 
           <div id="image-previews"
             v-if="imagePreviews.length !== 0" >
-            <div v-for="imagePreviews in imagePreviews"
+            <div v-for="imagePreview in imagePreviews"
               class="image-preview" >
-              <img v-bind:src="image.thumbUrl" />
+              <img v-bind:src="imagePreview.thumbUrl" />
 
-              <a v-bind:href="'./image/' + image.secureUrl">
-                {{ image.title }}
+              <a v-bind:href="imagePreview.secureUrl">
+                {{ imagePreview.title }}
               </a>
             </div><!-- image-preview -->
           </div><!-- image-previews -->
@@ -102,9 +102,14 @@ function makeGetRequest(
       let tiles = document.getElementById('tiles');
       tiles.innerHTML = '<hr></br>';
       for(var i=0; i<fp_images.images.length; i++){
-      //  tiles.innerHTML += fp_images.images[i].url + '<br>';
-      //  tiles.innerHTML += fp_images.images[i].uploaddate + '<br><br>';
-      imagePreviews.push(fp_images.images[i]);
+        let imagePreview = fp_images.images[i];
+        //https://res.cloudinary.com/hws6kskjw/image/upload/v1543265795/qwh3dlfeqygdtitheijg.jpg
+        //https://res.cloudinary.com/hws6kskjw/image/upload/t_media_lib_thumb/v1543265795/qwh3dlfeqygdtitheijg.jpg
+        let urlParts = imagePreview.url.split( 'upload/' );
+        imagePreview.thumbUrl = urlParts.join( 'upload/t_media_lib_thumb/' );
+        //  tiles.innerHTML += fp_images.images[i].url + '<br>';
+        //  tiles.innerHTML += fp_images.images[i].uploaddate + '<br><br>';
+        imagePreviews.push( imagePreview );
       }
 
     } // response callback
