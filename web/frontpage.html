@@ -69,7 +69,7 @@ function makeGetRequest(
 
     return promise;
   } // makeGetRequest
-  let tiles = document.getElementById('tiles');
+
   makeGetRequest('/fp/').then(
     ( response ) => {
       // response might be text (a JSON string)
@@ -78,7 +78,7 @@ function makeGetRequest(
       // the headers set up to return JSON
       console.log( 'received response from server' );
       console.log(response);
-      tile.innerHTML = response;
+      document.getElementById('tiles').innerHTML = response;
     } // response callback
   );
 
