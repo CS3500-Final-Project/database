@@ -63,14 +63,13 @@ $app->post(
       $st = $app['pdo']->prepare( "INSERT INTO uploadinfo ( url, username ) VALUES ( :url , :user )" );
       $st->bindParam(':url', $url);
       $st->bindParam(':user', $user);
-      $url = $requestBody['info']['url'];
+      $url = $requestBody['info']['secure_url'];
       $user = 'admin';
 
       $st->execute();
 
-    return 'image uploaded, url: ' . $requestBody['info']['url'];
-    //return $app->json( $requestBody );
-    //return $app->json( array('Status' => 'Success') );
+    return 'image uploaded, url: ' . $requestBody['info']['secure_url'];
+
   }
 );
 
