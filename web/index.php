@@ -60,12 +60,21 @@ $app->post(
     $requestBody = json_decode($content, true);
     */
 
-      $st = $app['pdo']->prepare( "INSERT INTO uploadinfo ( url, username ) VALUES ( :url , :user )" );
+      $st = $app['pdo']->prepare( "INSERT INTO uploadinfo ( url, username, title ) VALUES ( :url , :user, :title )" );
       $st->bindParam(':url', $url);
       $st->bindParam(':user', $user);
+      $st->bindParam(':title', $title);
       $url = $requestBody['info']['secure_url'];
       $user = 'admin';
-
+      //title handler
+      if ( isset($requestBody['title']) ){
+        $title = $requestBody['title'];
+      }else if( isset($requestBody['info']['title']) ){
+        $title = 'Check your php matthew';
+      }
+      else{
+        $title = 'No Title';
+      }
       $st->execute();
 
     return 'image uploaded, url: ' . $requestBody['info']['secure_url'];
