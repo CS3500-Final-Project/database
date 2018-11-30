@@ -78,5 +78,8 @@ function makeGetRequest(
       );
     } // response callback
   );
-
+  var imagelist = JSON.parse(response);
+  for (var i=0; i<imagelist.length; i++){
+    document.write(imagelist.images[i].url);
+  }
 </script>

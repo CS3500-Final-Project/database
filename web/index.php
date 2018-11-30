@@ -10,6 +10,12 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
   'monolog.logfile' => 'php://stderr',
 ));
 
+//set homepage route
+$app->get('/', function() use($app){
+
+    return '/frontpage.html';
+});
+
 //connect to pgsl db
 $dbopts = parse_url(getenv('DATABASE_URL'));
 $app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider('pdo'),
@@ -75,7 +81,7 @@ $app->get('/fp/', function() use($app){
     $app['monolog']->addDebug('Row ' . $row['id']);
     $images[] = $row;
   }
-
+  //$app->json(array('images' => $images));
   return $app->json(array('images' => $images));
 });
 
