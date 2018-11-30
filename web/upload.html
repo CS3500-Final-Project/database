@@ -42,7 +42,7 @@
   </div>
   <div class="container">
     <h2>We're gonna need a bigger jumbotron...</h2>
-    <a href="#" id="upload_widget_opener">Upload multiple images</a>
+    <a href="#" id="upload_widget_opener">Upload Image</a>
 
     <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
   <!--server com request func from josh -->
@@ -106,7 +106,7 @@
   </script>
     <script type="text/javascript">
     var myUploadWidget;
-    document.getElementById("upload_widget_opener")
+/*    document.getElementById("upload_widget_opener")
     .addEventListener(
       "click",
       function() {
@@ -119,12 +119,11 @@
         );
       }
     ); // addEventListener
-
+*/
       cloudinary.applyUploadWidget('#upload_widget_opener',{
         cloudName: 'hws6kskjw', uploadPreset: 'rywvoxo2',
         cropping: true, folder: 'user_images' }, (error, result) => {
-          //console.log( JSON.stringify( error ) );
-          console.log( JSON.stringify( result ) );
+
           if (result && result.event === "success") {
             //console.log('Did you get that thing i sent ya?');
             //console.log( JSON.stringify( result => url ) );
@@ -140,9 +139,6 @@
                 // the headers set up to return JSON
                 console.log( 'received response from server' );
 
-                console.log(
-                 response
-                );
               } // response callback
             );
         }
