@@ -81,7 +81,7 @@ function makeGetRequest(
       console.log( 'received response from server' );
       console.log(response);
       let tiles = document.getElementById('tiles');
-      tiles.innerHTML = '';
+      tiles.innerHTML = '<hr></br>';
       for(var i=0; i<fp_images.length; i++){
         tiles.innerHTML += fp_images[i].url;
         tiles.innerHTML += fp_images[i].uploaddate;
