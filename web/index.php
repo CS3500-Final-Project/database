@@ -13,7 +13,7 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
 //set homepage route
 $app->get('/', function() use($app){
 
-    return '/frontpage.html';
+    return $app->render('/frontpage.html');
 });
 
 //connect to pgsl db
