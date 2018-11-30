@@ -24,8 +24,9 @@
     </ul>
   </div>
 </nav>
+<h1> Most Popular </h1>
 <div id="tiles">
-  <h1> Most Popular </h1>
+
 
 </div>
 
@@ -76,9 +77,16 @@ function makeGetRequest(
       // or it could be an object...
       // I was getting JSON strings even with
       // the headers set up to return JSON
+      let fp_images = JSON.parse(response);
       console.log( 'received response from server' );
       console.log(response);
-      document.getElementById('tiles').innerHTML = response;
+      let tiles = document.getElementById('tiles');
+      tiles.innerHTML = '';
+      for(var i=0; i<fp_images.length; i++){
+        tiles.innerHTML += fp_images[i].url;
+        tiles.innerHTML += fp_images[i].uploaddate;
+      }
+
     } // response callback
   );
 
