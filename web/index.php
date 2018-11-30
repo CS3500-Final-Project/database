@@ -1,6 +1,7 @@
 <?php
 //include 'layout.html';
 require('../vendor/autoload.php');
+use Symfony\Component\HttpFoundation\Request;
 $app = new Silex\Application();
 $app['debug'] = true;
 //$app['debug'] = false;
@@ -10,11 +11,6 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
   'monolog.logfile' => 'php://stderr',
 ));
 
-//set homepage route
-$app->get('/', function() use($app){
-
-    return $app->render('/frontpage.html');
-});
 
 //connect to pgsl db
 $dbopts = parse_url(getenv('DATABASE_URL'));
@@ -49,6 +45,12 @@ $app->post(
       throw new Exception("Content type must be application/json");
     }
 
+
+    $requestBody = json_decode(
+      $request->getContent(),
+      true
+    );
+    /*
     $content = trim(
       file_get_contents("php://input")
     );
@@ -56,7 +58,7 @@ $app->post(
     // attempt to decode the RAW post data
     // from JSON into an associative array
     $requestBody = json_decode($content, true);
-
+    */
 
       $st = $app['pdo']->prepare( "INSERT INTO uploadinfo ( url, username ) VALUES ( :url , :user )" );
       $st->bindParam(':url', $url);
@@ -84,6 +86,18 @@ $app->get('/fp/', function() use($app){
   //$app->json(array('images' => $images));
   return $app->json(array('images' => $images));
 });
+
+
+$app->get(
+  '/',
+  function() use($app) {
+    $app['monolog']->addDebug( 'request to /' );
+
+    return $app->redirect(
+      './frontpage.html'
+    );
+  }
+);
 
 
 //test query
