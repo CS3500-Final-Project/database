@@ -29,24 +29,25 @@
 <div id="tiles">
 </div>
 <!--Displaying top images -->
-<div class="image-preview-container" >
-        <p v-if="imagePreviews.length === 0" >
-          loading images...
-        </p>
+<div id="app-container">
+  <div class="image-preview-container" >
+          <p v-if="imagePreviews.length === 0" >
+            loading images...
+          </p>
 
-        <div id="image-previews"
-          v-if="imagePreviews.length !== 0" >
-          <div v-for="image in images"
-            class="image-preview" >
-            <img v-bind:src="image.thumbUrl" />
+          <div id="image-previews"
+            v-if="imagePreviews.length !== 0" >
+            <div v-for="image in images"
+              class="image-preview" >
+              <img v-bind:src="image.thumbUrl" />
 
-            <a v-bind:href="'./image/' + image.secureUrl">
-              {{ image.title }}
-            </a>
-          </div><!-- image-preview -->
-        </div><!-- image-previews -->
-      </div><!-- image-preview-container -->
-
+              <a v-bind:href="'./image/' + image.secureUrl">
+                {{ image.title }}
+              </a>
+            </div><!-- image-preview -->
+          </div><!-- image-previews -->
+        </div><!-- image-preview-container -->
+</div> <!-- app-container -->
 <script>
 function makeGetRequest(
     url
