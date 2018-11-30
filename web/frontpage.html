@@ -83,12 +83,8 @@ function makeGetRequest(
       let tiles = document.getElementById('tiles');
       tiles.innerHTML = '<hr></br>';
       for(var i=0; i<fp_images.images.length; i++){
-        console.log('image ' + i + ' a ')
-        console.log(fp_images.images[i].url)
-        console.log('image ' + i + ' b ')
-        console.log(fp_images.images.url[i])
-        tiles.innerHTML += fp_images.images[i].url;
-        tiles.innerHTML += fp_images.images[i].uploaddate;
+        tiles.innerHTML += fp_images.images[i].url + '<br>';
+        tiles.innerHTML += fp_images.images[i].uploaddate + '<br><br>';
       }
 
     } // response callback
