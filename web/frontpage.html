@@ -64,7 +64,7 @@ function makeGetRequest(
 
     return promise;
   } // makeGetRequest
-
+  var imagelist;
   makeGetRequest('/fp/').then(
     ( response ) => {
       // response might be text (a JSON string)
@@ -72,13 +72,13 @@ function makeGetRequest(
       // I was getting JSON strings even with
       // the headers set up to return JSON
       console.log( 'received response from server' );
-
+      imagelist = JSON.parse(response);
       console.log(
        response
       );
     } // response callback
   );
-  var imagelist = JSON.parse(response);
+
   for (var i=0; i<imagelist.length; i++){
     document.write(imagelist.images[i].url);
   }
