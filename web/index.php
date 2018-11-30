@@ -30,7 +30,7 @@ $app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider
 
 $app->post(
   '/upload-image/',
-  function () use($app)
+  function ( Request $request ) use($app)
   {
     $responseData = array();
     $messages = array();
