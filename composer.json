@@ -6,9 +6,16 @@
     "symfony/twig-bridge": "^3",
     "csanquer/pdo-service-provider": "~1.1dev",
     "symfony/flex": "^1.1",
-    "cloudinary/cloudinary_php": "^1.12"
+    "cloudinary/cloudinary_php": "^1.12",
+    "sensio/framework-extra-bundle": "^5.2"
   },
   "require-dev": {
     "heroku/heroku-buildpack-php": "*"
+  },
+  "scripts": {
+    "auto-scripts": {
+      "cache:clear": "symfony-cmd",
+      "assets:install %PUBLIC_DIR%": "symfony-cmd"
+    }
   }
 }

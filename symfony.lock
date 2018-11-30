@@ -2,6 +2,72 @@
     "cloudinary/cloudinary_php": {
         "version": "1.12.0"
     },
+    "doctrine/annotations": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "cb4152ebcadbe620ea2261da1a1c5a9b8cea7672"
+        }
+    },
+    "doctrine/cache": {
+        "version": "v1.8.0"
+    },
+    "doctrine/collections": {
+        "version": "v1.5.0"
+    },
+    "doctrine/common": {
+        "version": "v2.10.0"
+    },
+    "doctrine/event-manager": {
+        "version": "v1.0.0"
+    },
+    "doctrine/inflector": {
+        "version": "v1.3.0"
+    },
+    "doctrine/lexer": {
+        "version": "v1.0.1"
+    },
+    "doctrine/persistence": {
+        "version": "v1.1.0"
+    },
+    "doctrine/reflection": {
+        "version": "v1.0.0"
+    },
+    "psr/cache": {
+        "version": "1.0.1"
+    },
+    "psr/simple-cache": {
+        "version": "1.0.1"
+    },
+    "sensio/framework-extra-bundle": {
+        "version": "5.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.2",
+            "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
+        }
+    },
+    "symfony/cache": {
+        "version": "v4.2.0"
+    },
+    "symfony/config": {
+        "version": "v4.2.0"
+    },
+    "symfony/contracts": {
+        "version": "v1.0.0"
+    },
+    "symfony/dependency-injection": {
+        "version": "v4.2.0"
+    },
+    "symfony/filesystem": {
+        "version": "v4.2.0"
+    },
+    "symfony/finder": {
+        "version": "v4.2.0"
+    },
     "symfony/flex": {
         "version": "1.0",
         "recipe": {
@@ -10,5 +76,17 @@
             "version": "1.0",
             "ref": "b96338eb5155c5b97a80e7705abf30aa09c29167"
         }
+    },
+    "symfony/framework-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "fa24f6388ea987b615a2704dc2c9f3a358c8da11"
+        }
+    },
+    "symfony/var-exporter": {
+        "version": "v4.2.0"
     }
 }
