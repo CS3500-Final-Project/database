@@ -18,7 +18,7 @@ header {
   border: thin solid black;
   padding: 16px;
 }
-
+/*
 nav {
   display: flex;
   flex-direction: row;
@@ -37,7 +37,7 @@ nav a {
 
   font-size: 1.2em;
 }
-
+*/
 main {
   display: flex;
   flex-direction: row;
