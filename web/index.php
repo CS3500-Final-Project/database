@@ -32,7 +32,6 @@ $app->post(
   '/upload-image/',
   function ( Request $request ) use($app)
   {
-    
     $responseData = array();
     $messages = array();
     $contentType = isset($_SERVER['CONTENT_TYPE'])
@@ -103,8 +102,8 @@ $app->get('/fp/', function() use($app){
 //user registration
 //$app-> post();
 
-//user login
-$app->get( '/user-login/', function( Request $request ) use ($app){
+//user login NEEDS TO BE POST!!!
+$app->get( '/login/', function( Request $request ) use ($app){
   $loginValid = True;
 
   if($loginValid){
@@ -118,7 +117,16 @@ $app->get( '/user-login/', function( Request $request ) use ($app){
 
 
 });
+//direct to login or account details
+$app->get('/account/', function() use ($app){
+  //if no session go to login.php
+  if( is_null($_SESSION['username']) ){
+    return $app->redirect('./account/login.php');
+  }
 
+  return $app->redirect('./account/account-details.html');
+  //otherwise go to accountDetails
+});
 //fp redirect
 $app->get(
   '/',

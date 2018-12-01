@@ -1,12 +1,3 @@
-<?php
-
-//redirect to login if they are not logged in
-if( is_null($_SESSION['username']) ){
-  return $app->redirect('/account/login.php');
-}else{
-  echo $_SESSION['username'];
-}
-?>
 <!DOCTYPE html>
 <html>
 <head>
