@@ -121,9 +121,6 @@
       }
     ); // addEventListener
 */
-      //var uploadWidget = cloudinary.createUploadWidget();
-
-      //uploadWidget.open(
 
       var uploadWidget = cloudinary.applyUploadWidget(
         '#upload_widget_opener',
@@ -143,6 +140,9 @@
 
             return;
           }
+
+          // testing what happens when you return false in the callback
+          return false;
 
           if ( result && result.event ) {
             switch ( result.event ) {
