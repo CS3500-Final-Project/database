@@ -133,12 +133,11 @@ $app->get( '/login/', function( Request $request ) use ($app){
 $app->get('/account/', function() use ($app){
   //if no session go to login.php
   if( is_null($_SESSION['username']) ){
-    return $app->redirect('./account-pages/index.html');
+    return $app->redirect('../account-pages/index.html');
   }
-
-  return $app->redirect('./account-pages/account/details.html');
+  return $app->redirect('../account-pages/account/details.html');
   //otherwise go to accountDetails
-  
+
 });
 
 //upload redirect

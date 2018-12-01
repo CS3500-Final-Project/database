@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+  <head>
+    <title>
+      Login Or Create Account
+    </title>
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />
+    <nav class="navbar navbar-default navbar-static-top navbar-inverse">
+      <div class="container">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="/frontpage.html"><span class="glyphicon glyphicon-home"></span> Home</a>
+          </li>
+
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-hdd"></span>Raw Data</a>
+          </li>
+          <li>
+            <a href="/upload"><span class="glyphicon glyphicon-cloud-upload"></span>Upload</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="navbar-right">
+            <a href="/account"><span class="glyphicon glyphicon-user"></span>Account</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    
+    <link rel="stylesheet"
+      href="./styles.css" >
+
+    <script type="text/javascript" src="./vue-dev.js"></script>
+    </script>
+
+    <script src="./prototype.js"
+      defer="defer" >
+    </script>
+  </head>
+
+  <body>
+    <div id="app-container" >
+      <div class="account-widget" >
+        <div v-if="account.id === 0" >
+          <a href="./account/create.html" >
+            create account
+          </a>
+
+          <a href="./account/login.html" >
+            login
+          </a>
+        </div>
+
+        <div v-if="account.id !== 0">
+          <p>
+            welcome {{ account.accountInfo.displayName }}
+          </p>
+
+          <a href="./account/view.html" >
+            account
+          </a>
+
+          <button id="logout-button"
+            onclick="vueRoot.account = guestAccount" >
+            logout
+          </button>
+        </div>
+      </div><!-- account-widget -->
+
+      <!--
+      <account-widget v-bind:account="account" >
+      </account-widget>
+      -->
+      <div class="image-preview-container" >
+        <p v-if="imagePreviews.length === 0" >
+          loading images...
+        </p>
+
+        <div id="image-previews"
+          v-if="imagePreviews.length !== 0" >
+          <div v-for="image in images"
+            class="image-preview" >
+            <img v-bind:src="image.thumbUrl" />
+
+            <a v-bind:href="'./image/' + image.secureUrl">
+              {{ image.title }}
+            </a>
+          </div><!-- image-preview -->
+        </div><!-- image-previews -->
+      </div><!-- image-preview-container -->
+
+    </div>
+  </body>
+</html>

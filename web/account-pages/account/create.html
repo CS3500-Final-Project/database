@@ -1,0 +1,290 @@
+<!doctype html>
+<html>
+  <head>
+    <title>
+      Create Account
+    </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./vue-dev.js"></script>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />
+    <nav class="navbar navbar-default navbar-static-top navbar-inverse">
+      <div class="container">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="/frontpage.html"><span class="glyphicon glyphicon-home"></span> Home</a>
+          </li>
+
+          <li>
+            <a href="/db"><span class="glyphicon glyphicon-hdd"></span>Raw Data</a>
+          </li>
+          <li>
+            <a href="/upload"><span class="glyphicon glyphicon-cloud-upload"></span>Upload</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="navbar-right">
+            <a href="/account"><span class="glyphicon glyphicon-user"></span>Account</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <link rel="stylesheet"
+      href="../styles.css">
+
+    <script type="text/javascript" src="./vue-dev.js"></script>
+    </script>
+
+    <script src="./create.js"
+      defer="defer" >
+    </script>
+  </head>
+
+  <body>
+    <div id="app-container" >
+      <header>
+        <!--
+          todo: nav-bar component
+          (with show/hide button on mobile?)
+        -->
+        <nav>
+          <a href="../index.html" >
+            home
+          </a>
+
+          <a href="../about-site.html" >
+            about site
+          </a>
+
+          <a href="../about-us.html" >
+            about us
+          </a>
+        </nav>
+      </header>
+
+
+      <main>
+        <form id="create-form" >
+          <fieldset id="credentials-fields" >
+            <legend>
+              Credentials
+            </legend>
+
+            <div id="username-field"
+              v-bind:class="
+                ( usernameErrors.length )
+                ? 'form-field form-field-with-error'
+                : 'form-field'
+              " >
+              <label for="username" >
+                <span>
+                  Username:
+                </span>
+
+                <input id="username-control"
+                  type="text"
+                  name="username"
+                  v-model="username" />
+              </label><!-- username -->
+
+              <!-- output for field? (to list errors in) -->
+              <ul id="username-errors-display"
+                v-if="usernameErrors.length" >
+                <li v-for="error in usernameErrors" >
+                  <p>
+                    {{ error }}
+                  </p>
+                </li>
+              </ul>
+            </div><!-- username-field -->
+
+            <div id="password-field"
+              v-bind:class="
+                ( passwordErrors.length )
+                ? 'form-field form-field-with-error'
+                : 'form-field'
+              " >
+              <label for="password1" >
+                <span>
+                  Enter password:
+                </span>
+
+                <input id="password1-control"
+                  type="password"
+                  name="password1"
+                  v-model="password1" />
+                  <!-- note that vue example uses v-model -->
+              </label><!-- password1 -->
+
+              <label for="password2" >
+                <span>
+                  Confirm password:
+                </span>
+
+                <input id="password2-control"
+                  type="password"
+                  name="password2"
+                  v-model="password2" />
+                  <!-- note that vue example uses v-model -->
+              </label><!-- password2 -->
+
+              <!-- output for field? (to list errors in) -->
+              <ul id="password-errors-display"
+                v-if="passwordErrors.length" >
+                <li v-for="error in passwordErrors" >
+                  <p>
+                    {{ error }}
+                  </p>
+                </li>
+              </ul>
+            </div><!-- password-field -->
+          </fieldset><!-- credentials-fields -->
+
+          <fieldset id="account-details-fields" >
+            <legend>
+              Account Details
+            </legend>
+
+            <div id="display-name-field"
+              v-bind:class="
+                ( displayNameErrors.length )
+                ? 'form-field form-field-with-error'
+                : 'form-field'
+              " >
+              <label for="display-name" >
+                <span>
+                  Display Name:
+                </span>
+
+                <input id="display-name-control"
+                  type="text"
+                  name="display-name"
+                  v-model="displayName" />
+                  <!-- note that vue example uses v-model -->
+              </label>
+
+              <!-- output for field? (to list errors in) -->
+              <ul id="display-name-errors-display"
+                v-if="displayNameErrors.length" >
+                <li v-for="error in displayNameErrors" >
+                  <p>
+                    {{ error }}
+                  </p>
+                </li>
+              </ul>
+            </div><!-- display-name-field -->
+
+            <div id="bio-field"
+              v-bind:class="
+                ( bioErrors.length )
+                ? 'form-field form-field-with-error'
+                : 'form-field'
+              " >
+
+              <label for="bio" >
+                <span>
+                  Enter a short bio:
+                </span>
+
+                <input id="bio-control"
+                  name="bio"
+                  type="text"
+                  maxlength="250"
+                  v-model="bio" />
+              </label>
+
+
+              <!-- output for field? (to list errors in) -->
+              <ul id="bio-errors-display"
+                v-if="bioErrors.length" >
+                <li v-for="error in bioErrors" >
+                  <p>
+                    {{ error }}
+                  </p>
+                </li>
+              </ul>
+            </div><!-- bio-field -->
+          </fieldset><!-- account-details-fields -->
+
+          <div class="card-action-bar">
+            <button id="create-account-button"
+            onclick="return onCreateAccountButtonPressed( event );">
+              create account
+            </button>
+
+            <a href="./login.html">
+              or go to login
+            </a>
+          </div><!-- card-action-bar -->
+
+        </form>
+      </main>
+
+      <!--
+      <div id="info-box-container">
+        <h2>
+          info box
+        </h2>
+
+        <p id="info-display">
+          info goes here
+        </p>
+      </div>
+      -->
+
+
+      <modal v-if="isLoadingModalShown" >
+        <h2 slot="header" >
+          Loading
+        </h2>
+
+        <p slot="body" >
+          sending credentials to server
+        </p>
+
+        <p slot="footer" >
+          please wait
+        </p>
+      </modal>
+
+      <modal v-if="isFailResultModalShown" >
+        <h2 slot="header" >
+          Login Failed
+        </h2>
+
+        <p slot="body" >
+          credentials did not match any accounts
+        </p>
+
+        <div slot="footer" >
+          <button v-on:click="isFailResultModalShown = false;" >
+            Ok
+          </button>
+        </div>
+      </modal>
+
+      <modal v-if="isSuccessResultModalShown">
+        <h2 slot="header">
+          Login Successful
+        </h2>
+
+        <p slot="body">
+          welcome
+        </p>
+
+        <div slot="footer">
+          <a>
+            Continue to account
+          </a>
+
+          <a>
+            Go to home page
+          </a>
+        </div>
+      </modal>
+      <!--
+      -->
+    </div><!-- app-container -->
+  </body>
+</html>
