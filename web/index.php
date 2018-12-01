@@ -27,7 +27,7 @@ $app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider
          )
 );
 
-
+//upload image
 $app->post(
   '/upload-image/',
   function ( Request $request ) use($app)
@@ -85,6 +85,7 @@ $app->post(
   }
 );
 
+//front page
 $app->get('/fp/', function() use($app){
   $st = $app['pdo']->prepare('SELECT * FROM uploadinfo');
   $st->execute();
@@ -98,7 +99,26 @@ $app->get('/fp/', function() use($app){
   return $app->json(array('images' => $images));
 });
 
+//user registration
+$app-> post();
 
+//user login
+$app->post( '/user-login/', function( Request $request ) use ($app){
+  $loginValid = True;
+
+  if($loginValid){
+    //if login is successful
+    return $app->redirect('./account/account-details.html');
+  }else{
+    //return error if login is not successful
+    return 'Username Or Password Is Invalid';
+  }
+
+
+
+});
+
+//fp redirect
 $app->get(
   '/',
   function() use($app) {
