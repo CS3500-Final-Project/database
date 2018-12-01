@@ -1,7 +1,17 @@
 <?php
-//include 'layout.html';
+
 require('../vendor/autoload.php');
 use Symfony\Component\HttpFoundation\Request;
+
+//app and var decs
+  //check to see if user is logged in
+function loggedIn () {
+  if( is_null($_SESSION['username']) ){
+    return true;
+  }else{
+    return false;
+  }
+}
 $app = new Silex\Application();
 $app['debug'] = true;
 //$app['debug'] = false;
@@ -10,7 +20,6 @@ $app['debug'] = true;
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
   'monolog.logfile' => 'php://stderr',
 ));
-
 
 //connect to pgsl db
 $dbopts = parse_url(getenv('DATABASE_URL'));
@@ -27,7 +36,7 @@ $app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider
          )
 );
 
-
+//upload image
 $app->post(
   '/upload-image/',
   function ( Request $request ) use($app)
@@ -65,15 +74,19 @@ $app->post(
       $st->bindParam(':url', $url);
       $st->bindParam(':user', $user);
       $st->bindParam(':title', $title);
-      //$st->bindParam(':',$);
-      //$st->bindParam(':',$);
-      //$st->bindParam(':',$);
-      //$st->bindParam(':',$);
+      $st->bindParam(':description',$description);
+      $st->bindParam(':tag1',$tag1);
+      $st->bindParam(':tag2',$tag2);
+      $st->bindParam(':tag3',$tag3);
 
       $url = $requestBody['info']['secure_url'];
       //this needs to be set to current logged in user's username
       $user = 'admin';
-      $title = $requestBody['title'];
+      $title = $requestBody['imageDetails']['title'];
+      $description = $requestBody['imageDetails']['description'];
+      $tag1 = $requestBody['imageDetails']['tag1'];
+      $tag2 = $requestBody['imageDetails']['tag2'];
+      $tag3 = $requestBody['imageDetails']['tag3'];
       $st->execute();
 
     return 'image uploaded, url: ' . $requestBody['info']['secure_url'];
@@ -81,6 +94,7 @@ $app->post(
   }
 );
 
+//front page
 $app->get('/fp/', function() use($app){
   $st = $app['pdo']->prepare('SELECT * FROM uploadinfo');
   $st->execute();
@@ -94,7 +108,47 @@ $app->get('/fp/', function() use($app){
   return $app->json(array('images' => $images));
 });
 
+//user registration
+//$app-> post();
 
+//user login NEEDS TO BE POST!!!
+//THIS IS TrASH
+$app->get( '/login/', function( Request $request ) use ($app){
+  $loginValid = True;
+
+  if($loginValid){
+    //if login is successful
+    return $app->redirect('./account/account-details.html');
+  }else{
+    //return error if login is not successful
+    return 'Username Or Password Is Invalid';
+  }
+
+});
+
+
+//REDIRECTS
+
+//direct to login or account details
+$app->get('/account/', function() use ($app){
+  //if no session go to login.php
+  if( is_null($_SESSION['username']) ){
+    return $app->redirect('../account-pages/account/login.html');
+  }
+  return $app->redirect('../account-pages/account/details.html');
+  //otherwise go to accountDetails
+
+});
+
+//upload redirect
+/*
+$app->get('/upload/', function () use ($app){
+  if(loggedIn()){ return $app->redirect('./account-pages/html') }
+  return $app->redirect('./upload.html');
+});
+*/
+
+//fp redirect
 $app->get(
   '/',
   function() use($app) {
@@ -107,54 +161,5 @@ $app->get(
 );
 
 
-//test query
-/* $app->get('/db/', function() use($app) {
-  $st = $app['pdo']->prepare('SELECT name FROM test_table');
-  $st->execute();
 
-  $names = array();
-  while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
-    $app['monolog']->addDebug('Row ' . $row['name']);
-    $names[] = $row;
-  }
-
-  return $app['twig']->render('database.twig', array(
-    'names' => $names
-  ));
-}); */
-/*
-//admin data view
-$app->get('/db/', function() use($app) {
-  $st = $app['pdo']->prepare('SELECT * FROM uploadinfo');
-  $st->execute();
-
-  $images = array();
-  while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
-    $app['monolog']->addDebug('Row ' . $row['id']);
-    $images[] = $row;
-  }
-  return $app['twig']->render('admindata.twig', array(
-    'images' => $images
-  ));
-});
-
-//try upload?
-//$app->get('/up', function() use($app) {
-//  $app['monolog']->addDebug('logging output.');
-//  return $app['twig']->render('upload.twig'); //changed from index.twig
-//});
-
-//Register view rendering
-//$app->register(new Silex\Provider\TwigServiceProvider(), array(
-//    'twig.path' => __DIR__.'/views',
-//));
-
-// Our web handlers
-
-$app->get('/', function() use($app) {
-  //run query to grab most popular
-  $app['monolog']->addDebug('logging output.');
-  return $app['twig']->render('index.twig'); //changed from index.twig
-});
-*/
 $app->run();

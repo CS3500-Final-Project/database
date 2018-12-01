@@ -38,6 +38,28 @@
     </nav>
 
     <div class="container">
+<<<<<<< HEAD
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="/frontpage.html"><span class="glyphicon glyphicon-home"></span> Home</a>
+        </li>
+
+        <li>
+          <a href="#"><span class="glyphicon glyphicon-hdd"></span>Raw Data</a>
+        </li>
+        <li>
+          <a href="/upload"><span class="glyphicon glyphicon-cloud-upload"></span>Upload</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="navbar-right">
+          <a href="/account"><span class="glyphicon glyphicon-user"></span>Account</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</head>
+=======
       <h2>We're gonna need a bigger jumbotron...</h2>
 
       <a href="#" id="upload_widget_opener">Upload Image</a>
@@ -102,6 +124,7 @@
             return promise;
         } // postStuffToServer
       </script>
+>>>>>>> 92e64efd8e6439da0114899d909c515c7f7c81d4
 
       <script type="text/javascript">
         /*/
@@ -223,7 +246,38 @@
           },
           onUploadWidgetEvent
         );
+<<<<<<< HEAD
+      }
+    ); // addEventListener
+*/
+      cloudinary.applyUploadWidget('#upload_widget_opener',{
+        cloudName: 'hws6kskjw', uploadPreset: 'rywvoxo2',
+        cropping: true, folder: 'user_images' }, (error, result) => {
 
+          if (result && result.event === "success") {
+            //console.log('Did you get that thing i sent ya?');
+            //console.log( JSON.stringify( result => url ) );
+            //try making server request
+            result.title = 'Sample Dample';
+
+            postStuffToServer(
+              result
+            )
+            .then(
+              ( response ) => {
+                // response might be text (a JSON string)
+                // or it could be an object...
+                // I was getting JSON strings even with
+                // the headers set up to return JSON
+                console.log( 'received response from server' );
+                prompt("Your upload was successful!");
+              } // response callback
+            );
+        }
+           });
+=======
+
+>>>>>>> 92e64efd8e6439da0114899d909c515c7f7c81d4
       </script>
     </div>
 
