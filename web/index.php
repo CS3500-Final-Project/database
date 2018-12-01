@@ -100,7 +100,7 @@ $app->get('/fp/', function() use($app){
 });
 
 //user registration
-$app-> post();
+//$app-> post();
 
 //user login
 $app->post( '/user-login/', function( Request $request ) use ($app){
