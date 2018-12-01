@@ -40,10 +40,7 @@
     <div class="container">
       <h2>We're gonna need a bigger jumbotron...</h2>
 
-      <div id="upload-widget-container" >
-        test of inline
-        <a href="#upload-widget-containe" id="upload_widget_opener">Upload Image</a>
-      </div>
+      <a href="#" id="upload_widget_opener">Upload Image</a>
 
       <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
       <!--server com request func from josh -->
@@ -222,8 +219,7 @@
             cloudName: 'hws6kskjw',
             uploadPreset: 'rywvoxo2',
             cropping: true,
-            folder: 'user_images',
-            inlineContainer: '#upload-widget-container'
+            folder: 'user_images'
           },
           onUploadWidgetEvent
         );
