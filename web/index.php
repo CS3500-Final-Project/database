@@ -121,10 +121,10 @@ $app->get( '/login/', function( Request $request ) use ($app){
 $app->get('/account/', function() use ($app){
   //if no session go to login.php
   if( is_null($_SESSION['username']) ){
-    return $app->redirect('./account/login.php');
+    return $app->redirect('./login.php');
   }
 
-  return $app->redirect('./account/account-details.html');
+  return $app->redirect('./account-details.html');
   //otherwise go to accountDetails
 });
 //fp redirect
