@@ -32,10 +32,7 @@ $app->post(
   '/upload-image/',
   function ( Request $request ) use($app)
   {
-    //redirect to login if they are not logged in
-    if( is_null($_SESSION['username']) ){
-      return $app->redirect('/account/login.php');
-    }
+    
     $responseData = array();
     $messages = array();
     $contentType = isset($_SERVER['CONTENT_TYPE'])
