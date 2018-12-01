@@ -1,5 +1,5 @@
 <?php
-include('./nav.php');
+include('/nav.php');
  ?>
  <div class="page-header">
    <h1>Login</h1>

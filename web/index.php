@@ -34,7 +34,7 @@ $app->post(
   {
     //redirect to login if they are not logged in
     if( is_null($_SESSION['username']) ){
-      return $app->redirect('./account/login.php');
+      return $app->redirect('/account/login.php');
     }
     $responseData = array();
     $messages = array();
