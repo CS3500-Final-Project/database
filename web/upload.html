@@ -45,66 +45,67 @@
     <a href="#" id="upload_widget_opener">Upload Image</a>
 
     <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
-  <!--server com request func from josh -->
-  <script>
-      function postStuffToServer(
-         payload
-       ) {
-         let promise = new Promise(
-           function(
-             resolve,
-             reject
-           ) {
-             var request = new XMLHttpRequest();
+    <!--server com request func from josh -->
+    <script>
+        function postStuffToServer(
+          payload
+        ) {
+          let promise = new Promise(
+            function(
+              resolve,
+              reject
+            ) {
+              var request = new XMLHttpRequest();
 
-             request.open(
-               "POST",
-               './upload-image/'
-             );
+              request.open(
+                "POST",
+                './upload-image/'
+              );
 
-             request.setRequestHeader(
-               'Content-Type',
-               'application/json'
-             );
+              request.setRequestHeader(
+                'Content-Type',
+                'application/json'
+              );
 
-             request.onload = function() {
-               let status = this.status;
+              request.onload = function() {
+                let status = this.status;
 
-               if (
-                 status >= 200
-                 && status < 300
-               ) {
-                 resolve(
-                   this.response
-                 );
-               }
-               else {
-                 reject(
-                   this.statusText
-                 );
-               }
-             }; // onload callback
+                if (
+                  status >= 200
+                  && status < 300
+                ) {
+                  resolve(
+                    this.response
+                  );
+                }
+                else {
+                  reject(
+                    this.statusText
+                  );
+                }
+              }; // onload callback
 
-             // not sure if stringification needed.
-             // try other method first and switch
-             // to this one if there are issues
-             // sending an object
+              // not sure if stringification needed.
+              // try other method first and switch
+              // to this one if there are issues
+              // sending an object
 
-             let requestBody = JSON.stringify(
-               payload
-             );
+              let requestBody = JSON.stringify(
+                payload
+              );
 
-             request.send(
-               requestBody
-             );
+              request.send(
+                requestBody
+              );
 
-           } // executor
-         ); // promise
+            } // executor
+          ); // promise
 
-         return promise;
-     } // postStuffToServer
-  </script>
-    <script type="text/javascript">/*
+          return promise;
+      } // postStuffToServer
+    </script>
+    <script type="text/javascript">
+    /*
     var myUploadWidget;
     document.getElementById("upload_widget_opener")
     .addEventListener(
@@ -120,15 +121,59 @@
       }
     ); // addEventListener
 */
-      cloudinary.applyUploadWidget('#upload_widget_opener',{
-        cloudName: 'hws6kskjw', uploadPreset: 'rywvoxo2',
-        cropping: true, folder: 'user_images' }, (error, result) => {
+      //var uploadWidget = cloudinary.createUploadWidget();
 
-          if (result && result.event === "success") {
+      //uploadWidget.open(
+
+      var uploadWidget = cloudinary.applyUploadWidget(
+        '#upload_widget_opener',
+        {
+          cloudName: 'hws6kskjw',
+          uploadPreset: 'rywvoxo2',
+          cropping: true,
+          folder: 'user_images'
+        },
+        function ( error, result ) {
+          if (
+            error
+          ) {
+            console.error(
+              'error from cloudinary widget'
+            );
+
+            return;
+          }
+
+          if ( result && result.event ) {
+            switch ( result.event ) {
+              case 'upload-added': {
+                console.log( 'upload added' );
+                console.log( result.info );
+              } // upload-added
+              break;
+
+              case 'success': {
+                console.log( 'successfully uploaded image' );
+                console.log( result.info );
+              } // success
+              break;
+
+              default: {
+                console.log( 'unhandled event type' );
+                console.log( result );
+              } // default
+            } // switch result event
+
+            /*/
             //console.log('Did you get that thing i sent ya?');
             //console.log( JSON.stringify( result => url ) );
             //try making server request
             result.title = 'Sample Dample';
+
+            //showDetailsModal();
+
+            // somewhere in here I need to start
+            // promise chain
 
             postStuffToServer(
               result
@@ -143,9 +188,14 @@
                 prompt("Your upload was successful! Here is it's url: " + response.secure_url )
               } // response callback
             );
-        }
-           });
-      </script>
+            //*/
+          } // result
+        } // event callback
+      );
+
+      console.log( uploadWidget );
+      console.log( JSON.stringify( uploadWidget ) );
+    </script>
   </div>
 
 </body>
