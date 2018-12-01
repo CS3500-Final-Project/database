@@ -65,15 +65,19 @@ $app->post(
       $st->bindParam(':url', $url);
       $st->bindParam(':user', $user);
       $st->bindParam(':title', $title);
-      //$st->bindParam(':',$);
-      //$st->bindParam(':',$);
-      //$st->bindParam(':',$);
-      //$st->bindParam(':',$);
+      $st->bindParam(':description',$description);
+      $st->bindParam(':tag1',$tag1);
+      $st->bindParam(':tag2',$tag2);
+      $st->bindParam(':tag3',$tag3);
 
       $url = $requestBody['info']['secure_url'];
       //this needs to be set to current logged in user's username
       $user = 'admin';
       $title = $requestBody['title'];
+      $description = $requestBody['description'];
+      $tag1 = $requestBody['tag1'];
+      $tag2 = $requestBody['tag2'];
+      $tag3 = $requestBody['tag3'];
       $st->execute();
 
     return 'image uploaded, url: ' . $requestBody['info']['secure_url'];
