@@ -78,8 +78,8 @@ $app->post(
       $url = $requestBody['info']['secure_url'];
       //this needs to be set to current logged in user's username
       $user = 'admin';
-      $title = $requestBody['imageDetails']['title'];
-      $description = $requestBody['imageDetails']['description'];
+      $title = $requestBody['imageDetails']['imageTitle'];
+      $description = $requestBody['imageDetails']['imageDescription'];
       $tag1 = $requestBody['imageDetails']['tag1'];
       $tag2 = $requestBody['imageDetails']['tag2'];
       $tag3 = $requestBody['imageDetails']['tag3'];
@@ -218,8 +218,6 @@ $app->get('/account-details/{user}', function($user) use($app) {
 
 /* ----------------------Personal account editing? ----------------------------*/
 $app->post('/account-update/', function( Request $request ) use($app){
-  $responseData = array();
-
   $contentType = isset($_SERVER['CONTENT_TYPE'])
     ? trim($_SERVER['CONTENT_TYPE'])
     : "";
@@ -259,35 +257,31 @@ $app->post('/account-update/', function( Request $request ) use($app){
   }
   else {return 'Update Field Not Valid';}
 
-  /*return json with their account info and the images they have uploaded
-  $st = $app['pdo']->prepare('SELECT * FROM accountinfo WHERE username = :username');
-  $st->bindParam(':username', $_SESSION['username']);
-  $st->execute();
-  $result = $st->fetch(PDO::FETCH_ASSOC);
-  //images
-  $st = $app['pdo']->prepare('SELECT * FROM uploadinfo WHERE username = :username');
-  $st->bindParam(':username', $_SESSION['username']);
-  $images = array();
-  while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
-    $app['monolog']->addDebug('Row ' . $row['id']);
-    $images[] = $row;
-  }
-
-  if($result == 0 || $result == '0'){
-    //this means no one is logged in
-    return false;
-  }else{
-
-    return json_encode(array(
-        "uid"=>$result['uid'],
-        "username"=>$result['username'],
-        "bio"=>$result['bio'],
-        "displayname"=>$result['displayname'],
-        "images"=>$images
-    ));
-  } */
 });
 
+//------------------upvote/downvote--------------//
+$app->post('/vote/', function( Request $request) use ($app){
+  //check if theyre logged in, if not logged in return error or REDIRECt
+  if( is_null($_SESSION['username']) ){
+    return $app->redirect('/account-pages/account/login.html');
+  }
+  //get json
+  $contentType = isset($_SERVER['CONTENT_TYPE'])
+    ? trim($_SERVER['CONTENT_TYPE'])
+    : "";
+  if (
+    strcasecmp($contentType, "application/json") != 0
+  ) {
+    throw new Exception("Content type must be application/json");
+  }
+  $requestBody = json_decode(
+    $request->getContent(),
+    true
+  );
+  //----------------------------------------------------
+  return true;
+
+});
 
 //---------------------------------------------------------------------------REDIRECTS---------------------------------------------------------------
 //account details, find their posts
