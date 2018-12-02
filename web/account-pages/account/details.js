@@ -41,7 +41,7 @@ function makeGetRequest(
 
   var imagePreviews = [];
   //-----------------------------------------------this is setup to display admin info, need to make it dynamic for all users! --------------------------------
-  makeGetRequest('/account-details/9').then(
+  makeGetRequest('/account-details/admin').then(
     ( response ) => {
       // response might be text (a JSON string)
       // or it could be an object...
