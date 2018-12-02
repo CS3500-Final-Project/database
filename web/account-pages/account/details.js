@@ -49,7 +49,8 @@ function makeGetRequest(
       // the headers set up to return JSON
       let userdetails = JSON.parse(response);
       console.log( 'received response from server' );
-      console.log(response);
+      //debugging
+      console.log(userdetails);
       document.getElementById('accountheader').innerHTML = userdetails.displayname;
       //testing
       //let tiles = document.getElementById('tiles');

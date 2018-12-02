@@ -56,7 +56,7 @@
 
 <!--Displaying top images -->
 <div id="app-container">
-  
+
   <div class="image-preview-container" >
           <p v-if="imagePreviews.length === 0" >
             loading images...
@@ -68,7 +68,7 @@
               class="image-preview" >
               <img v-bind:src="imagePreview.thumbUrl" />
 
-              <a v-bind:href="imagePreview.secureUrl">
+              <a v-bind:href="imagePreview.url">
                 {{ imagePreview.title }}
               </a>
             </div><!-- image-preview -->
