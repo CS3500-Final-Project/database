@@ -8,15 +8,18 @@
 
 body {
   margin: 0;
+  padding: 0;
 
   background-color: #555;
 }
 
-body *,
-header *,
-main *,
-footer * {
-  background-color: #eee;
+#app-container {
+  width: 100%;
+  height: 100%;
+
+  margin: 0;
+
+  background-color: #555;
 }
 
 header {
@@ -30,7 +33,7 @@ header {
   border: thin solid black;
   padding: 16px;
 
-  background-color: #ccc;
+  background-color: #ddd;
 }
 
 main {
@@ -43,7 +46,7 @@ main {
   border: thin solid black;
   padding: 16px;
 
-  background-color: #ccc;
+  background-color: #ddd;
 }
 
 footer {
@@ -56,7 +59,7 @@ footer {
   border: thin solid black;
   padding: 16px;
 
-  background-color: #ccc;
+  background-color: #ddd;
 }
 
 /*
