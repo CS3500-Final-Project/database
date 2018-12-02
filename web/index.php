@@ -132,6 +132,7 @@ $app->post('/create/', function( Request $request ) use ($app){
   $st->bindParam(':username', $username);
   $username = $requestBody['username'];
   $st->execute();
+  $userExists = '';
   $userExists = $st->fetch();
 
   if(is_null($userExists) ){
@@ -139,7 +140,7 @@ $app->post('/create/', function( Request $request ) use ($app){
 
     return $app->redirect('/account-pages/account/details.html');
   }else{  //otherwise return success or route to account details
-    return 'Username Already Exists';
+    return 'Username ' + userExists + ' Already Exists';
   }
 
 
