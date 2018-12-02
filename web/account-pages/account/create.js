@@ -98,9 +98,10 @@ function onCreateAccountButtonPressed(
 
       //let parsedResponse = JSON.parse( response );
       if( response ){
-        alert( "username already exists!" );
+        alert( "You Have Created An Account!" );
+        window.location.replace("./details.html");
       }else{
-        alert( "Account Created!" );
+        alert( "username already exists!" );
       }
 
     } // response callback
