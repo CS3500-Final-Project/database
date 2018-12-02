@@ -18,7 +18,7 @@ function removeUnacceptableCharacters(
         character
       ) !== -1
     ) {
-      cleanedString.concat( character );
+      cleanedString = cleanedString.concat( character );
     }
   } // loop through characters
 
