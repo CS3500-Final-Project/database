@@ -84,6 +84,7 @@ function onCreateAccountButtonPressed(
     displayName: formData.displayName,
     bio: formData.bio
   }
+  //debuggin purposes ----------------------------------------------------------------------GET RID OF THIS
   console.log(JSON.stringify( creds ) );
 
   postStuffToServer( creds ).then(

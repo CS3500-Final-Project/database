@@ -108,15 +108,14 @@ $app->get('/fp/', function() use($app){
   return $app->json(array('images' => $images));
 });
 
+
 //user registration
 $app->post('/create/', function( Request $request ) use ($app){
   $responseData = array();
   $messages = array();
   $contentType = isset($_SERVER['CONTENT_TYPE'])
     ? trim($_SERVER['CONTENT_TYPE'])
-    : ""
-  ;
-
+    : "";
   if (
     strcasecmp($contentType, "application/json") != 0
   ) {
@@ -127,7 +126,24 @@ $app->post('/create/', function( Request $request ) use ($app){
     $request->getContent(),
     true
   );
-  
+
+  //check to see if username or displayName already exists in datase and return errors
+  $st = $app['pdo']->prepare('SELECT * FROM accountinfo WHERE username = :username');
+  $st->bindParam(':username', $username);
+  $username = $requestBody['username'];
+  $st->execute();
+  $userExists = $st->fetch();
+
+  if(is_null($userExists) ){
+    //insert user into db, START SESSION and ROUTE TO ACCOUNT DETAILS
+
+    return $app->redirect('/account-pages/account/details.html');
+  }else{  //otherwise return success or route to account details
+    return 'Username Already Exists';
+  }
+
+
+
   return $app->json($requestBody);
 
 });
