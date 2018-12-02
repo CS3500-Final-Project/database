@@ -109,22 +109,32 @@ $app->get('/fp/', function() use($app){
 });
 
 //user registration
-//$app-> post();
+$app->post('/create/', function( Request $request ) use ($app){
+  $responseData = array();
+  $messages = array();
+  $contentType = isset($_SERVER['CONTENT_TYPE'])
+    ? trim($_SERVER['CONTENT_TYPE'])
+    : ""
+  ;
+
+  if (
+    strcasecmp($contentType, "application/json") != 0
+  ) {
+    throw new Exception("Content type must be application/json");
+  }
+
+  $requestBody = json_decode(
+    $request->getContent(),
+    true
+  );
+  
+  return $app->json($requestBody);
+
+});
 
 //user login NEEDS TO BE POST!!!
 //THIS IS TrASH
-$app->get( '/login/', function( Request $request ) use ($app){
-  $loginValid = True;
 
-  if($loginValid){
-    //if login is successful
-    return $app->redirect('./account/account-details.html');
-  }else{
-    //return error if login is not successful
-    return 'Username Or Password Is Invalid';
-  }
-
-});
 
 
 //REDIRECTS
