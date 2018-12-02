@@ -1,63 +1,74 @@
-<title>Image~In</title>
+<!doctype html>
+<html>
+  <head>
+    <title>Image~In</title>
+
+    <style>
+      .image-previews {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        width: 80%;
+        margin: auto;
+        border: thin solid black;
+        padding: 16px;
+      }
+
+      .image-preview {
+        width: 400px;
+        margin: auto;
+        margin-bottom: 8px;
+        border: thin solid black;
+        padding: 8px;
+      }
+    </style>
+    <!--took out bootstrap and jquery -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="/vue-dev.js"></script>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />
+
+    <link rel="stylesheet"
+      href="/account-pages/styles.css" />
 
 
-<style>
-  .image-previews {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  </head>
 
-  width: 80%;
-  margin: auto;
-  border: thin solid black;
-  padding: 16px;
-}
+  <body>
+    <div id="app-container">
+      <header>
+        <nav class="navbar navbar-default navbar-static-top navbar-inverse">
+          <div class="container">
+            <ul class="nav navbar-nav">
+              <li>
+                <a href="/frontpage.html"><span class="glyphicon glyphicon-home"></span> Home</a>
+              </li>
 
-.image-preview {
-  width: 400px;
-  margin: auto;
-  margin-bottom: 8px;
-  border: thin solid black;
-  padding: 8px;
-}
-</style
-<!--took out bootstrap and jquery -->
-<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+              <li>
+                <a href="/db"><span class="glyphicon glyphicon-hdd"></span>Raw Data</a>
+              </li>
+              <li>
+                <a href="/upload.html"><span class="glyphicon glyphicon-cloud-upload"></span>Upload</a>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="navbar-right">
+                <a href="/account"><span class="glyphicon glyphicon-user"></span>Account</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
 
-<script type="text/javascript" src="/vue-dev.js"></script>
-<link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />
-<nav class="navbar navbar-default navbar-static-top navbar-inverse">
-  <div class="container">
-    <ul class="nav navbar-nav">
-      <li>
-        <a href="/frontpage.html"><span class="glyphicon glyphicon-home"></span> Home</a>
-      </li>
+      <main>
+      <h1>Account Details For <span id="accountheader">DisplayName<span><h1>
 
-      <li>
-        <a href="/db"><span class="glyphicon glyphicon-hdd"></span>Raw Data</a>
-      </li>
-      <li>
-        <a href="/upload.html"><span class="glyphicon glyphicon-cloud-upload"></span>Upload</a>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li class="navbar-right">
-        <a href="/account"><span class="glyphicon glyphicon-user"></span>Account</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-<link rel="stylesheet"
-  href="/account-pages/styles.css" >
+      <!--Displaying top images -->
 
-<h1>Account Details For <span id="accountheader">DisplayName<span><h1>
-
-<!--Displaying top images -->
-<div id="app-container">
-
-  <div class="image-preview-container" >
+        <div class="image-preview-container" >
           <p v-if="imagePreviews.length === 0" >
             loading images...
           </p>
@@ -74,6 +85,9 @@
             </div><!-- image-preview -->
           </div><!-- image-previews -->
         </div><!-- image-preview-container -->
-</div> <!-- app-container -->
+      </main>
+    </div> <!-- app-container -->
 
-<script type="text/javascript" src="./details.js"></script>
+    <script type="text/javascript" src="./details.js"></script>
+
+  </body>

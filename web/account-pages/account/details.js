@@ -53,8 +53,7 @@ function makeGetRequest(
       console.log(userdetails);
       document.getElementById('accountheader').innerHTML = userdetails.displayname;
       //testing
-      //let tiles = document.getElementById('tiles');
-      //tiles.innerHTML = '<hr></br>';
+
       for(var i=0; i<userdetails.images.length; i++){
         let imagePreview = userdetails.images[i];
         //debugging
@@ -67,7 +66,7 @@ function makeGetRequest(
     } // response callback
   );
 
-var view = new Vue(
+var vueRoot = new Vue(
   {
     el: '#app-container',
     data: {
