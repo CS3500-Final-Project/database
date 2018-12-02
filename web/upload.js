@@ -5,7 +5,7 @@
 // so that the values from any previous upload
 // attempts are not left filled in
 var imageDetailsFormData = {
-  isShown = false,
+  isShown : false,
 
   imageTitle : '',
   imageTitleErrors : [],
@@ -178,6 +178,8 @@ function onConfirmImageDetailsButtonPressed(
   ) {
     // early exit
     // todo: show form error modal
+    showFormErrorModal();
+
     return;
   }
 
