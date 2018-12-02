@@ -186,7 +186,7 @@ $app->post('/login/', function(Request $request) use($app){
 });
 
 //---------------account details server call---------------
-$app->get('/account-details/{id}', function($id){
+$app->get('/account-details/{id}', function($id) use($app) {
   $st = $app['pdo']->prepare('SELECT * FROM accountinfo WHERE uid = :id');
   $st->bindParam(':id', $id);
   $st->execute();
