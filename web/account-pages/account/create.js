@@ -245,7 +245,7 @@ Vue.component(
         </p>
 
         <div slot="footer">
-          <button onclick="onDismissErrorModal( event );">
+          <button onclick="onDismissFormErrorModal( event );">
             Return to form
           </button>
         </div>
