@@ -45,6 +45,14 @@ function attemptToLogin() {
   // should form data be updated with
   // the cleaned values?
 
+  console.log(
+    'debug: \n'
+    + 'formData.username: ' + formData.username + '\n'
+    + 'formData.password: ' + formData.password + '\n'
+    + 'processedUsername: ' + processedUsername + '\n'
+    + 'processedPassword: ' + processedPassword + '\n'
+  )
+
   let credentials = {
     username: processedUsername,
     password: processedPassword
@@ -78,7 +86,7 @@ function attemptToLogin() {
       );
     }
 
-    showErrorModal();
+    showFormErrorModal();
 
     return;
   }
