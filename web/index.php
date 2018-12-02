@@ -173,8 +173,22 @@ $app->post('/login/', function(Request $requestBody) use($app){
     true
   );
 
-  $st = $app['pdo']->pre
+  $st = $app['pdo']->prepare('SELECT * FROM accountinfo WHERE username = :username AND password = :password');
+  $st->bindParam(':username', $requestBody['username']);
+  $st->bindParam(':password', $requestBody['password']);
+  $st->execute();
+  $result = $st->fetch(PDO::FETCH_ASSOC);
 
+  if($result == 0 || $result == '0'){
+    return false;
+  }else{
+    json(array(
+        $result['uid'],
+        $result['username'],
+        $result['bio'],
+        $result['displayname']
+    ));
+  }
 });
 
 
