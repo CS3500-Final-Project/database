@@ -137,10 +137,10 @@ $app->post('/create/', function( Request $request ) use ($app){
   if( $userExists == 0 || $userExists == '0' ){
     //insert user into db, START SESSION and ROUTE TO ACCOUNT DETAILS
 
-    return $app->redirect('/account-pages/account/details.html');
+    return true;
   }
   else{  //otherwise return success or route to account details
-    return 'Username ' + $userExists['username'] + ' Already Exists';
+    return false;
   }
 
 
