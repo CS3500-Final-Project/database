@@ -62,15 +62,7 @@ $app->post(
       $request->getContent(),
       true
     );
-    /*
-    $content = trim(
-      file_get_contents("php://input")
-    );
 
-    // attempt to decode the RAW post data
-    // from JSON into an associative array
-    $requestBody = json_decode($content, true);
-    */
 
       $st = $app['pdo']->prepare( "INSERT INTO uploadinfo ( url, username, title, description, tag1, tag2, tag3 )
                                   VALUES ( :url , :user, :title, :description, :tag1, :tag2, :tag3 )" );
@@ -195,7 +187,7 @@ $app->post('/login/', function(Request $request) use($app){
 });
 
 
-//REDIRECTS
+//---------------------------------------------------------------------------REDIRECTS---------------------------------------------------------------
 //account details, find their posts
 //$app->post('',)
 //direct to login or account details
