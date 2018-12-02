@@ -139,7 +139,7 @@ $app->post('/create/', function( Request $request ) use ($app){
 
     return $app->redirect('/account-pages/account/details.html');
   }else{  //otherwise return success or route to account details
-    return 'Username ' + $userExists + ' Already Exists';
+    return 'Username ' + $userExists[1] + ' Already Exists';
   }
 
 
