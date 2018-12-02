@@ -4,146 +4,122 @@
     <title>
       Login
     </title>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/vue-dev.js"></script>
+
     <link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />
+
 
     <link rel="stylesheet"
       href="../styles.css" >
 
+    <script type="text/javascript" src="/vue-dev.js"></script>
+
+    <script type="text/javascript"
+      src="../../common.js" >
+    </script>
+
+    <script type="text/javascript"
+      src="./login.js"
+      defer="defer" >
+    </script>
   </head>
 
   <body>
-  <nav class="navbar navbar-default navbar-static-top navbar-inverse">
-    <div class="container">
-      <ul class="nav navbar-nav">
-        <li>
-          <a href="/frontpage.html"><span class="glyphicon glyphicon-home"></span> Home</a>
-        </li>
 
-        <li>
-          <a href="/db"><span class="glyphicon glyphicon-hdd"></span>Raw Data</a>
-        </li>
-        <li>
-          <a href="/upload.html"><span class="glyphicon glyphicon-cloud-upload"></span>Upload</a>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="navbar-right">
-          <a href="/account"><span class="glyphicon glyphicon-user"></span>Account</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
     <div id="app-container" >
-      <form id="login-form" >
-        <div id="username-field"
-          v-bind:class="
-            ( usernameErrors.length )
-            ? 'form-field form-field-with-error'
-            : 'form-field'
-          " >
-          <label for="username" >
-            Username:
-            <input id="username-control"
-              type="text"
-              name="username"
-              v-model="username" />
-              <!-- note that vue example uses v-model -->
-          </label>
+      <header>
+        <nav class="navbar navbar-default navbar-static-top navbar-inverse">
+          <div class="container">
+            <ul class="nav navbar-nav">
+              <li>
+                <a href="/frontpage.html"><span class="glyphicon glyphicon-home"></span> Home</a>
+              </li>
 
-          <!-- output for field? (to list errors in) -->
-          <ul id="username-errors-display"
-            v-if="usernameErrors.length" >
-            <li v-for="error in usernameErrors" >
-              <p>
-                {{ error }}
-              </p>
-            </li>
-          </ul>
-        </div><!-- username-field -->
+              <li>
+                <a href="/db"><span class="glyphicon glyphicon-hdd"></span>Raw Data</a>
+              </li>
+              <li>
+                <a href="/upload.html"><span class="glyphicon glyphicon-cloud-upload"></span>Upload</a>
+              </li>
+            </ul>
 
-        <div id="password-field"
-          v-bind:class="
-            ( passwordErrors.length )
-            ? 'form-field form-field-with-error'
-            : 'form-field'
-          " >
-          <label for="password" >
-            Password:
-            <input id="password-control"
-              type="password"
-              name="password"
-              v-model="password" />
-              <!-- note that vue example uses v-model -->
-          </label>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="navbar-right">
+                <a href="/account"><span class="glyphicon glyphicon-user"></span>Account</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
 
-          <!-- output for field? (to list errors in) -->
-          <ul id="password-errors-display"
-            v-if="passwordErrors.length" >
-            <li v-for="error in passwordErrors" >
-              <p>
-                {{ error }}
-              </p>
-            </li>
-          </ul>
-        </div><!-- password-field -->
+      <main>
+        <form id="login-form" >
+          <div id="username-field"
+            v-bind:class="
+              ( formData.usernameErrors.length )
+              ? 'form-field form-field-with-error'
+              : 'form-field'
+            " >
+            <label for="username" >
+              Username:
+              <input id="username-control"
+                type="text"
+                name="username"
+                v-model="formData.username"
+                required />
+            </label>
 
-        <div id="form-output"
-          v-if="formOutputMessage.length" >
-          <!--
-            info, error, result?
-            info = sending stuff to server
-            error = list of fields with issues?
-          -->
-          <p>
-            {{ formOutputMessage[ 0 ] }}
-          </p>
-        </div>
+            <ul id="username-errors-display"
+              v-if="formData.usernameErrors.length" >
+              <li v-for="error in formData.usernameErrors" >
+                <p>
+                  {{ error }}
+                </p>
+              </li>
+            </ul>
+          </div><!-- username-field -->
 
-        <button id="login-button"
-          onclick="event.preventDefault(); vueRoot.isLoadingModalShown = true; setTimeout( () => { vueRoot.isLoadingModalShown = false; vueRoot.isFailResultModalShown = true; }, 2000 ); return false;" >
-          Login
-        </button>
+          <div id="password-field"
+            v-bind:class="
+              ( formData.passwordErrors.length )
+              ? 'form-field form-field-with-error'
+              : 'form-field'
+            " >
+            <label for="password" >
+              Password:
+              <input id="password-control"
+                type="password"
+                name="password"
+                v-model="formData.password"
+                required />
+            </label>
 
-        <a href="./create.html" >
-          create an account
-        </a>
-      </form>
+            <ul id="password-errors-display"
+              v-if="formData.passwordErrors.length" >
+              <li v-for="error in formData.passwordErrors" >
+                <p>
+                  {{ error }}
+                </p>
+              </li>
+            </ul>
+          </div><!-- password-field -->
 
-
-      <modal v-if="isLoadingModalShown">
-        <h2 slot="header">
-          Loading
-        </h2>
-
-        <p slot="body">
-          sending credentials to server
-        </p>
-
-        <p slot="footer">
-          please wait
-        </p>
-      </modal>
-
-      <modal v-if="isFailResultModalShown">
-        <h2 slot="header">
-          Login Failed
-        </h2>
-
-        <p slot="body">
-          credentials did not match any accounts
-        </p>
-
-        <div slot="footer">
-          <button v-on:click="isFailResultModalShown = false;">
-            Ok
+          <button id="login-button"
+            onclick="return onLoginButtonPressed( event );" >
+            Login
           </button>
-        </div>
+
+          <a href="./create.html" >
+            create an account
+          </a>
+        </form>
+      </main>
+
+      <modal v-if="modalData.isModalShown"
+        v-bind:is="modalData.currentModal" >
       </modal>
-      <!--
-      -->
-    </div>
+    </div><!-- app-container -->
   </body>
 </html>
