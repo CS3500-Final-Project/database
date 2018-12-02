@@ -91,6 +91,7 @@ function attemptToLogin() {
     return;
   }
 
+  showLoadingModal();
 
   postStuffToServer(
     credentials,
@@ -99,6 +100,7 @@ function attemptToLogin() {
   .then(
     function( response ) {
       hideLoadingModal();
+
       window.location.replace("./details.html");
       //console.log( 'server response: ' + response );
     }
@@ -233,11 +235,11 @@ Vue.component(
         </h2>
 
         <p slot="body">
-          sending credentials to server
+          Sending credentials to server
         </p>
 
         <p slot="footer">
-          please wait
+          Please wait
         </p>
       </modal>
     `
@@ -253,7 +255,7 @@ Vue.component(
         </h2>
 
         <p slot="body">
-          please correct the fields with errors
+          Please correct the fields with errors
         </p>
 
         <div slot="footer">

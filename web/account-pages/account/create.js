@@ -12,104 +12,285 @@ var formData = {
   displayNameErrors : [],
 
   bio : '',
-  bioErrors : [],
+  bioErrors : []
+};
 
-  formOutputMessage : []
+var modalData = {
+  isModalShown: false,
+  currentModal: null
 };
 
 
-var isLoadingModalShown = false;
-var isFailResultModalShown = false;
-var isSuccessResultModalShown = false;
-
-function postStuffToServer(
-  payload
+function passwordsMatch(
+  password1,
+  password2
 ) {
-  let promise = new Promise(
-    function(
-      resolve,
-      reject
+  if (
+    password1.length !== password2.length
+  ) {
+    return false;
+  }
+
+  for (
+    let charIndex = 0;
+    charIndex < password1.length;
+    charIndex++
+  ) {
+    let p1Char = password1.charAt( charIndex );
+    let p2Char = password2.charAt( charIndex );
+
+    if (
+      p1Char !== p2Char
     ) {
-      var request = new XMLHttpRequest();
+      return false;
+    }
+  } // loop through characters of passwords
 
-      request.open(
-        "POST",
-        '../../create/'
-      );
+  return true;
+} // passwordsMatch
 
-      request.setRequestHeader(
-        'Content-Type',
-        'application/json'
-      );
+function attemptToCreateAccount() {
+  // TODO: clean input
 
-      request.onload = function() {
-        let status = this.status;
+  if (
+    !passwordsMatch(
+      formData.password1,
+      formData.password2
+    )
+  ) {
+    // todo: error modal and password errors
+    showFormErrorModal();
 
-        if (
-          status >= 200
-          && status < 300
-        ) {
-          resolve(
-            this.response
-          );
-        }
-        else {
-          reject(
-            this.statusText
-          );
-        }
-      };
-      let requestBody = JSON.stringify(
-        payload
-      );
+    return;
+  }
 
-      request.send(
-        requestBody
-      );
+  let creds = {
+    username: formData.username,
+    password: formData.password1,
+    displayName: formData.displayName,
+    bio: formData.bio
+  };
 
-    } // executor
-  ); // promise
+  showLoadingModal();
 
-  return promise;
-} // postStuffToServer
+  postStuffToServer(
+    creds,
+    '../../create/'
+  ).then(
+    ( response ) => {
+      console.log( 'received response from server' );
+      //console.log( response );
+
+      //let parsedResponse = JSON.parse( response );
+      if( response ){
+        //alert( "You Have Created An Account!" );
+        //window.location.replace("./details.html");
+
+        showSuccessResultModal();
+      }else{
+        //alert( "username already exists!" );
+        showFailResultModal();
+      }
+
+    } // response callback
+  );
+} // attemptToCreateAccount
 
 function onCreateAccountButtonPressed(
   event
 ) {
   event.preventDefault();
 
-  let creds= {
-    username: formData.username,
-    password: formData.password1,
-    displayName: formData.displayName,
-    bio: formData.bio
-  }
-  //debuggin purposes ----------------------------------------------------------------------GET RID OF THIS
-  console.log(JSON.stringify( creds ) );
+  attemptToCreateAccount();
 
-  postStuffToServer( creds ).then(
-    ( response ) => {
-      // response might be text (a JSON string)
-      // or it could be an object...
-      // I was getting JSON strings even with
-      // the headers set up to return JSON
-      console.log( 'received response from server' );
-      //console.log( response );
-
-      //let parsedResponse = JSON.parse( response );
-      if( response ){
-        alert( "You Have Created An Account!" );
-        window.location.replace("./details.html");
-      }else{
-        alert( "username already exists!" );
-      }
-
-    } // response callback
-  );
   // to prevent the form from doing the default form action
   // of navigating/refreshing the page
   return false;
+} // onCreateAccountButtonPressed
+
+function onDismissErrorModal() {
+  console.log( 'dismiss error modal pressed' );
+
+  hideFormErrorModal();
+
+  return;
+} // onDismissErrorModal
+
+function showLoadingModal() {
+  modalData.currentModal = MODALS.LOADING;
+  modalData.isModalShown = true;
+
+  return;
+} // showLoadingModal
+function hideLoadingModal() {
+  modalData.isModalShown = false;
+
+  return;
+} // hideLoadingModal
+
+function showFormErrorModal() {
+  modalData.currentModal = MODALS.FORM_ERROR;
+  modalData.isModalShown = true;
+
+  return;
+} // showFormErrorModal
+function hideFormErrorModal() {
+  modalData.isModalShown = false;
+
+  return;
+} // hideFormErrorModal
+
+function showFailResultModal() {
+  modalData.currentModal = MODALS.FAIL_RESULT;
+  modalData.isModalShown = true;
+
+  return;
+} // showFailResultModal
+function hideFailResultModal() {
+  modalData.isModalShown = false;
+
+  return;
+} // hideFailResultModal
+
+function showSuccessResultModal() {
+  modalData.currentModal = MODALS.SUCCESS_RESULT;
+  modalData.isModalShown = true;
+
+  return;
+} // showSuccessResultModal
+function hideSuccessResultModal() {
+  modalData.isModalShown = false;
+
+  return;
+} // hideSuccessResultModal
+
+
+
+Vue.component(
+  'modal',
+  {
+    template: `
+      <transition name="modal">
+        <div class="modal-mask">
+          <div class="modal-wrapper">
+            <div class="modal-container">
+
+              <div class="modal-header">
+                <slot name="header">
+                </slot>
+              </div>
+
+              <div class="modal-body">
+                <slot name="body">
+                </slot>
+              </div>
+
+              <div class="modal-footer">
+                <slot name="footer">
+                </slot>
+              </div>
+            </div>
+          </div>
+        </div>
+      </transition>
+    `
+  }
+);
+
+
+
+const MODALS = {
+  LOADING: 'loading-modal',
+  FORM_ERROR: 'form-error-modal',
+  FAIL_RESULT: 'fail-result-modal',
+  SUCCESS_RESULT: 'success-result-modal'
 }
+Vue.component(
+  MODALS.LOADING,
+  {
+    template: `
+      <modal>
+        <h2 slot="header">
+          Loading
+        </h2>
+
+        <p slot="body">
+          Sending stuff to server
+        </p>
+
+        <p slot="footer">
+          Please wait
+        </p>
+      </modal>
+    `
+  }
+);
+Vue.component(
+  MODALS.FORM_ERROR,
+  {
+    template: `
+      <modal>
+        <h2 slot="header">
+          Errors in Form
+        </h2>
+
+        <p slot="body">
+          Please correct the fields with errors
+        </p>
+
+        <div slot="footer">
+          <button onclick="onDismissErrorModal( event );">
+            Return to form
+          </button>
+        </div>
+      </modal>
+    `
+  }
+);
+Vue.component(
+  MODALS.FAIL_RESULT,
+  {
+    template: `
+      <modal>
+        <h2 slot="header">
+          Failed To Create Account
+        </h2>
+
+        <p slot="body">
+          todo: show errors
+        </p>
+
+        <div slot="footer">
+          <button onclick="onDismissFailResultModal( event );">
+            Return to form
+          </button>
+        </div>
+      </modal>
+    `
+  }
+);
+Vue.component(
+  MODALS.SUCCESS_RESULT,
+  {
+    template: `
+      <modal>
+        <h2 slot="header">
+          Successfully Created Account
+        </h2>
+
+        <p slot="body">
+          Hello there
+        </p>
+
+        <div slot="footer">
+          <a href="./details.html>
+            Continue to account
+          </a>
+        </div>
+      </modal>
+    `
+  }
+);
 
 
 var vueRoot = new Vue(
@@ -118,9 +299,7 @@ var vueRoot = new Vue(
     data: {
       formData: formData,
 
-      isLoadingModalShown: isLoadingModalShown,
-      isFailResultModalShown: isFailResultModalShown,
-      isSuccessResultModalShown: isSuccessResultModalShown
+      modalData: modalData
     }
   }
 );
