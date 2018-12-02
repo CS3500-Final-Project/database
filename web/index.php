@@ -43,7 +43,7 @@ $app->post(
   function ( Request $request ) use($app)
   {
     $responseData = array();
-    $messages = array();
+
     $contentType = isset($_SERVER['CONTENT_TYPE'])
       ? trim($_SERVER['CONTENT_TYPE'])
       : ""
@@ -146,22 +146,35 @@ $app->post('/create/', function( Request $request ) use ($app){
     $st->execute();
 
     $_SESSION['user'] = $requestBody['username'];
-    return true;
+    return $requestBody['username'];
   }
   else{  //otherwise return success or route to account details
     return false;
   }
-
-
-
-  return $app->json($userExists);
-
+//return $app->json($userExists);
 });
 
 //user login NEEDS TO BE POST!!!
 //THIS IS TrASH
 $app->post('/login/', function(Request $requestBody) use($app){
-  return $app->redirect('/frontpage.html');
+  $responseData = array();
+  $messages = array();
+  $contentType = isset($_SERVER['CONTENT_TYPE'])
+    ? trim($_SERVER['CONTENT_TYPE'])
+    : "";
+  if (
+    strcasecmp($contentType, "application/json") != 0
+  ) {
+    throw new Exception("Content type must be application/json");
+  }
+
+  $requestBody = json_decode(
+    $request->getContent(),
+    true
+  );
+
+  $st = $app['pdo']->pre
+
 });
 
 
