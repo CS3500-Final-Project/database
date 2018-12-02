@@ -94,7 +94,7 @@ function onCreateAccountButtonPressed(
       // I was getting JSON strings even with
       // the headers set up to return JSON
       console.log( 'received response from server' );
-      console.log( response );
+      //console.log( response );
 
       //let parsedResponse = JSON.parse( response );
       if( response ){

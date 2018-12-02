@@ -143,8 +143,7 @@ $app->post('/create/', function( Request $request ) use ($app){
     $st->bindParam(':bio',$requestBody['bio']);
     $st->bindParam(':displayname',$requestBody['displayName']);
     $st->execute();
-    //start SESSION
-    session_start();
+
     $_SESSION['user'] = $requestBody['username'];
     return true;
   }
@@ -160,7 +159,9 @@ $app->post('/create/', function( Request $request ) use ($app){
 
 //user login NEEDS TO BE POST!!!
 //THIS IS TrASH
-
+$app->post('/login/', function(Request $requestBody) use($app){
+  return $app->redirect('/frontpage.html');
+});
 
 
 //REDIRECTS
