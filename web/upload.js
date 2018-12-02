@@ -91,7 +91,7 @@ function validateImageDetails(
     );
   }
   else if (
-    imageTitle.length >= MAX_IMAGE_TITLE_LENGTH
+    imageDetails.imageTitle.length >= MAX_IMAGE_TITLE_LENGTH
   ) {
     validationResults.validity = false;
 
@@ -108,7 +108,7 @@ function validateImageDetails(
   var MAX_IMAGE_DESCRIPTION_LENGTH = 127;
 
   if (
-    imageDescription.length <= MIN_IMAGE_DESCRIPTION_LENGTH
+    imageDetails.imageDescription.length <= MIN_IMAGE_DESCRIPTION_LENGTH
   ) {
     validationResults.validity = false;
 
@@ -119,7 +119,7 @@ function validateImageDetails(
     );
   }
   else if (
-    imageDescription.length >= MAX_IMAGE_DESCRIPTION_LENGTH
+    imageDetails.imageDescription.length >= MAX_IMAGE_DESCRIPTION_LENGTH
   ) {
     validationResults.validity = false;
 
