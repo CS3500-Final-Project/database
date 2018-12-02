@@ -58,7 +58,7 @@ function makeGetRequest(
 //        let urlParts = imagePreview.url.split( 'upload/' );
 //        imagePreview.thumbUrl = urlParts.join( 'upload/t_media_lib_thumb/' );
 //        imagePreviews.push( imagePreview );
-      }
+//      }
 
     } // response callback
   );
