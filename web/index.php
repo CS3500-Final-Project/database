@@ -2,7 +2,8 @@
 
 require('../vendor/autoload.php');
 use Symfony\Component\HttpFoundation\Request;
-
+//session start goes here?
+session_start();
 //app and var decs
   //check to see if user is logged in
 function loggedIn () {
