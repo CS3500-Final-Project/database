@@ -6,6 +6,12 @@
   font-family: monospace;
 }
 
+body {
+  margin: 0;
+
+  background-color: #555;
+}
+
 
 header {
   display: flex;
@@ -17,7 +23,36 @@ header {
   margin-bottom: 16px;
   border: thin solid black;
   padding: 16px;
+
+  background-color: #ccc;
 }
+
+main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  width: 90%;
+  margin: auto;
+  border: thin solid black;
+  padding: 16px;
+
+  background-color: #ccc;
+}
+
+footer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  width: 90%;
+  margin: auto;
+  border: thin solid black;
+  padding: 16px;
+
+  background-color: #ccc;
+}
+
 /*
 nav {
   display: flex;
@@ -38,17 +73,6 @@ nav a {
   font-size: 1.2em;
 }
 */
-main {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-
-  width: 90%;
-  margin: auto;
-  border: thin solid black;
-  padding: 16px;
-}
-
 
 /*
   TODO: card stuff
