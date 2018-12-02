@@ -53,11 +53,11 @@
 
             <div id="username-field"
               v-bind:class="
-                ( usernameErrors.length )
+                ( formData.usernameErrors.length )
                 ? 'form-field form-field-with-error'
                 : 'form-field'
               " >
-              <label for="username" >
+              <label for="formData.username" >
                 <span>
                   Username:
                 </span>
@@ -65,13 +65,13 @@
                 <input id="username-control"
                   type="text"
                   name="username"
-                  v-model="username" />
+                  v-model="formData.username" />
               </label><!-- username -->
 
               <!-- output for field? (to list errors in) -->
               <ul id="username-errors-display"
-                v-if="usernameErrors.length" >
-                <li v-for="error in usernameErrors" >
+                v-if="formData.usernameErrors.length" >
+                <li v-for="error in formData.usernameErrors" >
                   <p>
                     {{ error }}
                   </p>
@@ -81,7 +81,7 @@
 
             <div id="password-field"
               v-bind:class="
-                ( passwordErrors.length )
+                ( formData.passwordErrors.length )
                 ? 'form-field form-field-with-error'
                 : 'form-field'
               " >
@@ -93,7 +93,7 @@
                 <input id="password1-control"
                   type="password"
                   name="password1"
-                  v-model="password1" />
+                  v-model="formData.password1" />
                   <!-- note that vue example uses v-model -->
               </label><!-- password1 -->
 
@@ -105,14 +105,14 @@
                 <input id="password2-control"
                   type="password"
                   name="password2"
-                  v-model="password2" />
+                  v-model="formData.password2" />
                   <!-- note that vue example uses v-model -->
               </label><!-- password2 -->
 
               <!-- output for field? (to list errors in) -->
               <ul id="password-errors-display"
-                v-if="passwordErrors.length" >
-                <li v-for="error in passwordErrors" >
+                v-if="formData.passwordErrors.length" >
+                <li v-for="error in formData.passwordErrors" >
                   <p>
                     {{ error }}
                   </p>
@@ -128,7 +128,7 @@
 
             <div id="display-name-field"
               v-bind:class="
-                ( displayNameErrors.length )
+                ( formData.displayNameErrors.length )
                 ? 'form-field form-field-with-error'
                 : 'form-field'
               " >
@@ -140,14 +140,14 @@
                 <input id="display-name-control"
                   type="text"
                   name="display-name"
-                  v-model="displayName" />
+                  v-model="formData.displayName" />
                   <!-- note that vue example uses v-model -->
               </label>
 
               <!-- output for field? (to list errors in) -->
               <ul id="display-name-errors-display"
-                v-if="displayNameErrors.length" >
-                <li v-for="error in displayNameErrors" >
+                v-if="formData.displayNameErrors.length" >
+                <li v-for="error in formData.displayNameErrors" >
                   <p>
                     {{ error }}
                   </p>
@@ -157,7 +157,7 @@
 
             <div id="bio-field"
               v-bind:class="
-                ( bioErrors.length )
+                ( formData.bioErrors.length )
                 ? 'form-field form-field-with-error'
                 : 'form-field'
               " >
@@ -171,14 +171,14 @@
                   name="bio"
                   type="text"
                   maxlength="250"
-                  v-model="bio" />
+                  v-model="formData.bio" />
               </label>
 
 
               <!-- output for field? (to list errors in) -->
               <ul id="bio-errors-display"
-                v-if="bioErrors.length" >
-                <li v-for="error in bioErrors" >
+                v-if="formData.bioErrors.length" >
+                <li v-for="error in formData.bioErrors" >
                   <p>
                     {{ error }}
                   </p>

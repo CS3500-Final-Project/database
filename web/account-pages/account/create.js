@@ -1,25 +1,26 @@
 
-var username = '';
-var usernameErrors = [];
+var formData = {
+  username : '',
+  usernameErrors : [],
 
-var password1 = '';
-var password2 = '';
-var passwordErrors = [];
-
-
-var displayName = '';
-var displayNameErrors = [];
-
-var bio = '';
-var bioErrors = [];
+  password1 : '',
+  password2 : '',
+  passwordErrors : [],
 
 
-var formOutputMessage = [];
+  displayName : '',
+  displayNameErrors : [],
+
+  bio : '',
+  bioErrors : [],
+
+  formOutputMessage : []
+};
+
 
 var isLoadingModalShown = false;
 var isFailResultModalShown = false;
 var isSuccessResultModalShown = false;
-
 
 function postStuffToServer(
   payload
@@ -109,18 +110,8 @@ var vueRoot = new Vue(
   {
     el: '#app-container',
     data: {
-      username: username,
-      usernameErrors: usernameErrors,
-      password1: password1,
-      password2: password2,
-      passwordErrors: passwordErrors,
+      formData: formData,
 
-      displayName: displayName,
-      displayNameErrors: displayNameErrors,
-      bio: bio,
-      bioErrors: bioErrors,
-
-      formOutputMessage: formOutputMessage,
       isLoadingModalShown: isLoadingModalShown,
       isFailResultModalShown: isFailResultModalShown,
       isSuccessResultModalShown: isSuccessResultModalShown
