@@ -56,15 +56,23 @@ function attemptToLogin() {
   if (
     credentialsValidationResults.validity === CREDENTIALS_VALIDATION_RESULT_TYPES.INVALID
   ) {
-    credentialsValidationResults.usernameErrors
-    .forEach(
-      formData.usernameErrors.push
-    );
+    if (
+      credentialsValidationResults.usernameErrors.length
+    ) {
+      credentialsValidationResults.usernameErrors
+      .forEach(
+        formData.usernameErrors.push
+      );
+    }
 
-    credentialsValidationResults.passwordErrors
-    .forEach(
-      formData.passwordErrors.push
-    );
+    if (
+      credentialsValidationResults.passwordErrors.length
+    ) {
+      credentialsValidationResults.passwordErrors
+      .forEach(
+        formData.passwordErrors.push
+      );
+    }
 
     showErrorModal();
 

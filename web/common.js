@@ -37,7 +37,7 @@ function validateCredentials(
   let username = credentials.username;
   let password = credentials.password;
 
-  let validationResult = {
+  let validationResults = {
     validity: CREDENTIALS_VALIDATION_RESULT_TYPES.VALID,
     usernameErrors: [],
     passwordErrors: []
@@ -46,24 +46,24 @@ function validateCredentials(
   // todo: arrays of constraints
   // for username and password
   if ( username.length < 8 ) {
-    validationResult.validity = CREDENTIALS_VALIDATION_RESULT_TYPES.INVALID;
-    validationResult.usernameErrors.push(
+    validationResults.validity = CREDENTIALS_VALIDATION_RESULT_TYPES.INVALID;
+    validationResults.usernameErrors.push(
       'username is too short: must be at least 8 characters'
     );
   }
 
   if ( password.length < 8 ) {
-    validationResult.validity = CREDENTIALS_VALIDATION_RESULT_TYPES.INVALID;
-    validationResult.passwordErrors.push(
+    validationResults.validity = CREDENTIALS_VALIDATION_RESULT_TYPES.INVALID;
+    validationResults.passwordErrors.push(
       'password is too short: must be at least 8 characters'
     );
   }
 
 
-  return validationResult;
+  return validationResults;
   /*/
   let promise = Promise.resolve(
-    validationResult
+    validationResults
   );
 
   return promise;
