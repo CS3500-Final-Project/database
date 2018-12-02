@@ -280,7 +280,9 @@ $app->get('/account/', function() use ($app){
 //upload redirect
 
 $app->get('/upload/', function () use ($app){
-  if( loggedIn() ){ return $app->redirect('./account-pages/html'); }
+  if( is_null($_SESSION['username']) ){
+    return $app->redirect('/account-pages/account/login.html');
+  }
   return $app->redirect('/upload.html');
 });
 
