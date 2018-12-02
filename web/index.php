@@ -186,14 +186,14 @@ $app->post('/login/', function(Request $request) use($app){
 });
 
 //---------------account details server call---------------
-$app->get('/account-details/{id}', function($id) use($app) {
-  $st = $app['pdo']->prepare('SELECT * FROM accountinfo WHERE uid = :id');
-  $st->bindParam(':id', $id);
+$app->get('/account-details/{user}', function($user) use($app) {
+  $st = $app['pdo']->prepare('SELECT * FROM accountinfo WHERE username = :user');
+  $st->bindParam(':user', $user);
   $st->execute();
   $userinfo = $st->fetch(PDO::FETCH_ASSOC);
 
-  if($userInfo == 0 || $userInfo == '0'){
-    return "Could Not Find User In Database";
+  if($userinfo == 0 || $userinfo == '0'){
+    return "Could Not Find User " . $user . " In Database";
   }else{
     return json_encode(array(
         "uid"=>$userInfo['uid'],

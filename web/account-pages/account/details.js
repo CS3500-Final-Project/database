@@ -50,6 +50,7 @@ function makeGetRequest(
 //      let fp_images = JSON.parse(response);
       console.log( 'received response from server' );
       console.log(response);
+      document.getElementById('accountheader').innerHTML = response.displayname;
       //testing
 //      let tiles = document.getElementById('tiles');
 //      tiles.innerHTML = '<hr></br>';
