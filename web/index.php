@@ -187,6 +187,26 @@ $app->post('/login/', function(Request $request) use($app){
 });
 
 //---------------account details server call---------------
+$app->get('/account-details/{id}', function(Request $request, $id){
+  $st = $app['pdo']->prepare('SELECT * FROM accountinfo WHERE uid = :id');
+  $st->bindParam(':id', $id);
+  $st->execute();
+  $userinfo = $st->fetch(PDO::FETCH_ASSOC);
+
+  if($result == 0 || $result == '0'){
+    return false;
+  }else{
+    return json_encode(array(
+        "uid"=>$userInfo['uid'],
+        "username"=>$userInfo['username'],
+        "bio"=>$userInfo['bio'],
+        "displayname"=>$userInfo['displayname'] 
+
+    ));
+  }
+})
+
+/* ----------------------Personal account editing? ----------------------------
 $app->post('/account-details/', function( Request $request ) use($app){
   $responseData = array();
   $messages = array();
@@ -231,6 +251,7 @@ $app->post('/account-details/', function( Request $request ) use($app){
     ));
   }
 });
+*/
 
 //---------------------------------------------------------------------------REDIRECTS---------------------------------------------------------------
 //account details, find their posts

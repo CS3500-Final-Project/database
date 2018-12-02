@@ -1,9 +1,33 @@
+<title>Image~In</title>
+
+
+<style>
+  .image-previews {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  width: 80%;
+  margin: auto;
+  border: thin solid black;
+  padding: 16px;
+}
+
+.image-preview {
+  width: 400px;
+  margin: auto;
+  margin-bottom: 8px;
+  border: thin solid black;
+  padding: 8px;
+}
+</style
+<!--took out bootstrap and jquery -->
+<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
 <script type="text/javascript" src="/vue-dev.js"></script>
 <link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />
-<link rel="stylesheet"
-  href="../styles.css" >
 <nav class="navbar navbar-default navbar-static-top navbar-inverse">
   <div class="container">
     <ul class="nav navbar-nav">
@@ -25,7 +49,31 @@
     </ul>
   </div>
 </nav>
+<link rel="stylesheet"
+  href="./account-pages/styles.css" >
 
-<h1 id="accountheader"> Account Details </h1>
+<h1>Account Details For <span id="accountheader">DisplayName<span><h1>
+<div id="tiles">
+</div>
+<!--Displaying top images -->
+<div id="app-container">
+  <div class="image-preview-container" >
+          <p v-if="imagePreviews.length === 0" >
+            loading images...
+          </p>
+
+          <div id="image-previews"
+            v-if="imagePreviews.length !== 0" >
+            <div v-for="imagePreview in imagePreviews"
+              class="image-preview" >
+              <img v-bind:src="imagePreview.thumbUrl" />
+
+              <a v-bind:href="imagePreview.secureUrl">
+                {{ imagePreview.title }}
+              </a>
+            </div><!-- image-preview -->
+          </div><!-- image-previews -->
+        </div><!-- image-preview-container -->
+</div> <!-- app-container -->
 
 <script type="text/javascript" src="./details.js"></script>

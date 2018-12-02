@@ -1,72 +1,72 @@
-//grab user info and images from server
-function postStuffToServer(
-  payload
-) {
-  let promise = new Promise(
-    function(
-      resolve,
-      reject
-    ) {
-      var request = new XMLHttpRequest();
+function makeGetRequest(
+    url
+  ) {
+    let promise = new Promise(
+      function(
+        resolve,
+        reject
+      ) {
+        var request = new XMLHttpRequest();
 
-      request.open(
-        "POST",
-        './account-details/'
-      );
+        request.open(
+          "GET",
+          url
+        );
 
-      request.setRequestHeader(
-        'Content-Type',
-        'application/json'
-      );
+        request.onload = function() {
+          let status = this.status;
 
-      request.onload = function() {
-        let status = this.status;
+          if (
+            status >= 200
+            && status < 300
+          ) {
+            resolve(
+              this.response
+            );
+          }
+          else {
+            reject(
+              this.statusText
+            );
+          }
+        }; // onload callback
 
-        if (
-          status >= 200
-          && status < 300
-        ) {
-          resolve(
-            this.response
-          );
-        }
-        else {
-          reject(
-            this.statusText
-          );
-        }
-      }; // onload callback
+        request.send();
+      } // executor
+    ); // promise
 
-      // not sure if stringification needed.
-      // try other method first and switch
-      // to this one if there are issues
-      // sending an object
+    return promise;
+  } // makeGetRequest
 
-      let requestBody = JSON.stringify(
-        payload
-      );
 
-      request.send(
-        requestBody
-      );
+  var imagePreviews = [];
+  //-----------------------------------------------this is setup to display admin info, need to make it dynamic for all users! --------------------------------
+  makeGetRequest('/account-details/9').then(
+    ( response ) => {
+      // response might be text (a JSON string)
+      // or it could be an object...
+      // I was getting JSON strings even with
+      // the headers set up to return JSON
+//      let fp_images = JSON.parse(response);
+      console.log( 'received response from server' );
+      console.log(response);
+      //testing
+//      let tiles = document.getElementById('tiles');
+//      tiles.innerHTML = '<hr></br>';
+//      for(var i=0; i<fp_images.images.length; i++){
+//        let imagePreview = fp_images.images[i];
+//        let urlParts = imagePreview.url.split( 'upload/' );
+//        imagePreview.thumbUrl = urlParts.join( 'upload/t_media_lib_thumb/' );
+//        imagePreviews.push( imagePreview );
+      }
 
-    } // executor
-  ); // promise
-
-  return promise;
-} // postStuffToServer
-
-postStuffToServer(
-  payload
-)
-.then(
-  ( response ) => {
-    // response might be text (a JSON string)
-    // or it could be an object...
-    // I was getting JSON strings even with
-    // the headers set up to return JSON
-    console.log( 'received response from server' );
-    console.log( response );
-
-  } // response callback
+    } // response callback
+  );
+var view = new Vue(
+  {
+    el: '#app-container',
+    data: {
+      imagePreviews: imagePreviews
+    }
+  }
 );
