@@ -156,7 +156,7 @@ $app->post('/create/', function( Request $request ) use ($app){
 
 //user login NEEDS TO BE POST!!!
 //THIS IS TrASH
-$app->post('/login/', function(Request $requestBody) use($app){
+$app->post('/login/', function(Request $request) use($app){
   $responseData = array();
   $messages = array();
   $contentType = isset($_SERVER['CONTENT_TYPE'])
