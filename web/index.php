@@ -192,8 +192,8 @@ $app->get('/account-details/{id}', function($id) use($app) {
   $st->execute();
   $userinfo = $st->fetch(PDO::FETCH_ASSOC);
 
-  if($result == 0 || $result == '0'){
-    return "Could Not Find User" . $id . " In Database";
+  if($userInfo == 0 || $userInfo == '0'){
+    return "Could Not Find User In Database";
   }else{
     return json_encode(array(
         "uid"=>$userInfo['uid'],
