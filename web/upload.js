@@ -5,6 +5,8 @@
 // so that the values from any previous upload
 // attempts are not left filled in
 var imageDetailsFormData = {
+  isShown = false,
+
   imageTitle : '',
   imageTitleErrors : [],
 
@@ -230,7 +232,7 @@ function onCancelImageDetailsButtonPressed(
 ) {
   event.preventDefault();
 
-  hideDetailsModal();
+  hideImageDetails();
 
   // todo: have server delete uploaded image?
 
@@ -238,6 +240,24 @@ function onCancelImageDetailsButtonPressed(
 
   return; //? or use throw error?
 } // onCancelImageDetailsButtonPressed
+
+
+function showImageDetails() {
+  console.log( 'enter showImageDetails' );
+
+  modalData.isModalShown = false;
+
+  imageDetailsFormData.isShown = true;
+
+  console.log( 'exit showImageDetails' );
+} // showImageDetails
+function hideImageDetails() {
+  console.log( 'enter hideImageDetails' );
+
+  imageDetailsFormData.isShown = false;
+
+  console.log( 'exit hideImageDetails' );
+} // hideImageDetails
 
 
 
@@ -252,23 +272,6 @@ function hideLoadingModal() {
 
   return;
 } // hideLoadingModal
-
-function showImageDetailsModal() {
-  console.log( 'enter showImageDetailsModal' );
-
-  modalData.currentModal = MODALS.IMAGE_DETAILS;
-  modalData.isModalShown = true;
-
-  console.log( 'exit showImageDetailsModal' );
-} // showImageDetailsModal
-function hideImageDetailsModal() {
-  console.log( 'enter hideImageDetailsModal' );
-
-  modalData.isModalShown = false;
-
-  console.log( 'exit hideImageDetailsModal' );
-} // hideImageDetailsModal
-
 
 
 // todo move into common.js after
@@ -308,7 +311,6 @@ Vue.component(
 
 const MODALS = {
   LOADING: 'loading-modal',
-  IMAGE_DETAILS: 'image-details-modal',
   //FORM_ERROR: 'form-error-modal',
   //FAIL_RESULT: 'fail-result-modal',
   //SUCCESS_RESULT: 'success-result-modal'
@@ -329,175 +331,6 @@ Vue.component(
         <p slot="footer">
           please wait
         </p>
-      </modal>
-    `
-  }
-);
-Vue.component(
-  MODALS.IMAGE_DETAILS,
-  {
-    data: {
-      imageDetailsFormData: imageDetailsFormData
-    },
-    template: `
-      <modal>
-        <h2 slot="header">
-          Enter some details about the image
-        </h2>
-
-        <p slot="body">
-          <form>
-            <div id="image-title-field"
-              v-bind:class="
-                ( imageDetailsFormData.imageTitleErrors.length )
-                ? 'form-field form-field-with-error'
-                : 'form-field'
-              " >
-              <label for="image-title" >
-                <span>
-                  Image title:
-                </span>
-
-                <input id="image-title-control"
-                  type="text"
-                  name="image-title"
-                  v-model="imageDetailsFormData.imageTitle"
-                  required />
-              </label><!-- image-title -->
-
-              <ul id="image-title-errors-display"
-                v-if="imageDetailsFormData.imageTitleErrors.length" >
-                <li v-for="error in imageDetailsFormData.imageTitleErrors" >
-                  <p>
-                    {{ error }}
-                  </p>
-                </li>
-              </ul>
-            </div><!-- image-title-field -->
-
-            <div id="image-description-field"
-              v-bind:class="
-                ( imageDetailsFormData.imageDescriptionErrors.length )
-                ? 'form-field form-field-with-error'
-                : 'form-field'
-              " >
-              <label for="image-description" >
-                <span>
-                  Image description:
-                </span>
-
-                <input id="image-description-control"
-                  type="text"
-                  name="image-description"
-                  v-model="imageDetailsFormData.imageDescription"
-                  required />
-              </label><!-- image-description -->
-
-              <ul id="image-description-errors-display"
-                v-if="imageDetailsFormData.imageDescriptionErrors.length" >
-                <li v-for="error in imageDetailsFormData.imageDescriptionErrors" >
-                  <p>
-                    {{ error }}
-                  </p>
-                </li>
-              </ul>
-            </div><!-- image-description-field -->
-
-            <div id="image-tag1-field"
-              v-bind:class="
-                ( imageDetailsFormData.imageTag1Errors.length )
-                ? 'form-field form-field-with-error'
-                : 'form-field'
-              " >
-              <label for="image-tag1" >
-                <span>
-                  Image tag 1:
-                </span>
-
-                <input id="image-tag1-control"
-                  type="text"
-                  name="image-tag1"
-                  v-model="imageDetailsFormData.imageTag1" />
-              </label><!-- image-tag1 -->
-
-              <ul id="image-tag1-errors-display"
-                v-if="imageDetailsFormData.imageTag1Errors.length" >
-                <li v-for="error in imageDetailsFormData.imageTag1Errors" >
-                  <p>
-                    {{ error }}
-                  </p>
-                </li>
-              </ul>
-            </div><!-- image-tag1-field -->
-
-            <div id="image-tag2-field"
-              v-bind:class="
-                ( imageDetailsFormData.imageTag2Errors.length )
-                ? 'form-field form-field-with-error'
-                : 'form-field'
-              " >
-              <label for="image-tag2" >
-                <span>
-                  Image tag 2:
-                </span>
-
-                <input id="image-tag2-control"
-                  type="text"
-                  name="image-tag2"
-                  v-model="imageDetailsFormData.imageTag2" />
-              </label><!-- image-tag2 -->
-
-              <ul id="image-tag2-errors-display"
-                v-if="imageDetailsFormData.imageTag2Errors.length" >
-                <li v-for="error in imageDetailsFormData.imageTag2Errors" >
-                  <p>
-                    {{ error }}
-                  </p>
-                </li>
-              </ul>
-            </div><!-- image-tag2-field -->
-
-            <div id="image-tag3-field"
-              v-bind:class="
-                ( imageDetailsFormData.imageTag3Errors.length )
-                ? 'form-field form-field-with-error'
-                : 'form-field'
-              " >
-              <label for="image-tag3" >
-                <span>
-                  Image tag 3:
-                </span>
-
-                <input id="image-tag3-control"
-                  type="text"
-                  name="image-tag3"
-                  v-model="imageDetailsFormData.imageTag3" />
-              </label><!-- image-tag -->
-
-              <ul id="image-tag3-errors-display"
-                v-if="imageDetailsFormData.imageTag3Errors.length" >
-                <li v-for="error in imageDetailsFormData.imageTag3Errors" >
-                  <p>
-                    {{ error }}
-                  </p>
-                </li>
-              </ul>
-            </div><!-- image-tag-field -->
-
-            <button id="confirm-image-details-button"
-              onclick="return onConfirmImageDetailsButtonPressed( event );" >
-              confirm details
-            </button>
-
-            <button id="cancel-image-details-button"
-              onclick="return onCancelImageDetailsButtonPressed( event );" >
-              cancel upload
-            </button>
-          </form>
-        </p>
-
-        <div slot="footer">
-        </div>
       </modal>
     `
   }
@@ -552,8 +385,6 @@ function onImageAdded( result ) {
 
   //uploadWidget.hide();
 
-  showImageDetailsModal();
-
   return;
 } // onImageAdded
 
@@ -565,10 +396,10 @@ function onUploadSuccess( result ) {
 
   imageUploadInfo = result.info;
 
-  // todo thumbnail url for image details modal
+  // todo thumbnail url for image details
 
   initializeImageDetails();
-  showImageDetailsModal();
+  showImageDetails();
 
   return;
 } // onUploadSuccess
@@ -591,8 +422,7 @@ var uploadWidget = cloudinary.applyUploadWidget(
     cloudName: 'hws6kskjw',
     uploadPreset: 'rywvoxo2',
     cropping: true,
-    folder: 'user_images'//,
-    //inlineContainer: '#upload-widget-container'
+    folder: 'user_images'
   },
   onUploadWidgetEvent
 );
