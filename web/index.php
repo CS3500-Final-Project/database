@@ -8,9 +8,11 @@ session_start();
   //check to see if user is logged in
 function loggedIn () {
   if( is_null($_SESSION['username']) ){
-    return true;
-  }else{
     return false;
+  }else if( isset($_SESSION['username']) )
+    return true;
+  else{
+    return "crap";
   }
 }
 $app = new Silex\Application();
@@ -182,6 +184,7 @@ $app->post('/login/', function(Request $request) use($app){
   if($result == 0 || $result == '0'){
     return false;
   }else{
+    $_SESSION['username'] = $result['username'];
     return json_encode(array(
         $result['uid'],
         $result['username'],
