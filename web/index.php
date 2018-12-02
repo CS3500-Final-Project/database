@@ -148,8 +148,7 @@ $app->post('/create/', function( Request $request ) use ($app){
 //return $app->json($userExists);
 });
 
-//user login NEEDS TO BE POST!!!
-//THIS IS TrASH
+//--------------------user login-----------------------------
 $app->post('/login/', function(Request $request) use($app){
   $responseData = array();
   $messages = array();
@@ -200,11 +199,10 @@ $app->get('/account-details/{id}', function(Request $request, $id){
         "uid"=>$userInfo['uid'],
         "username"=>$userInfo['username'],
         "bio"=>$userInfo['bio'],
-        "displayname"=>$userInfo['displayname'] 
-
+        "displayname"=>$userInfo['displayname']
     ));
   }
-})
+});
 
 /* ----------------------Personal account editing? ----------------------------
 $app->post('/account-details/', function( Request $request ) use($app){
