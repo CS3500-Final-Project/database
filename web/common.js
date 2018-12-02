@@ -70,8 +70,6 @@ function validateCredentials(
   //*/
 } // validateCredentials
 
-
-// todo copy in post and get functions
 function postStuffToServer(
   payload,
   relativeUrl // rename?
@@ -124,6 +122,45 @@ function postStuffToServer(
 
   return promise;
 } // postStuffToServer
+function makeGetRequest(
+  url
+) {
+  let promise = new Promise(
+    function(
+      resolve,
+      reject
+    ) {
+      var request = new XMLHttpRequest();
+
+      request.open(
+        "GET",
+        url
+      );
+
+      request.onload = function() {
+        let status = this.status;
+
+        if (
+          status >= 200
+          && status < 300
+        ) {
+          resolve(
+            this.response
+          );
+        }
+        else {
+          reject(
+            this.statusText
+          );
+        }
+      }; // onload callback
+
+      request.send();
+    } // executor
+  ); // promise
+
+  return promise;
+} // makeGetRequest
 
 
 function emptyErrorsArray( errors ) {

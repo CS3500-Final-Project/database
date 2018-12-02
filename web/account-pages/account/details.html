@@ -34,6 +34,9 @@
     <link rel="stylesheet"
       href="/account-pages/styles.css" />
 
+    <script type="text/javascript"
+      src="../../common.js" >
+    </script>
 
     <script type="text/javascript"
       src="./details.js"
@@ -78,7 +81,7 @@
           </p>
 
           <div id="image-previews"
-            v-if="imagePreviews.length !== 0 || true" >
+            v-if="imagePreviews.length !== 0=" >
             <div v-for="imagePreview in imagePreviews"
               class="image-preview" >
               <img v-bind:src="imagePreview.thumbUrl" />
