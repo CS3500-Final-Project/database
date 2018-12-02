@@ -76,13 +76,14 @@ function onCreateAccountButtonPressed(
   event
 ) {
   event.preventDefault();
-  
+
   let creds= {
     username: username,
     password: password1,
     displayName: displayName,
     bio: bio
   }
+  console.log(JSON.stringify( creds ) );
 
   postStuffToServer( creds ).then(
     ( response ) => {
