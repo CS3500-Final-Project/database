@@ -63,6 +63,7 @@ function makeGetRequest(
 
     } // response callback
   );
+  
 var view = new Vue(
   {
     el: '#app-container',
