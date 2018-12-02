@@ -109,7 +109,7 @@ $app->get('/fp/', function() use($app){
 });
 
 //user registration
-$app-> post('/create/'function( Request $request ) use ($app){
+$app-> post('/create/', function( Request $request ) use ($app){
   $responseData = array();
   $messages = array();
   $contentType = isset($_SERVER['CONTENT_TYPE'])
