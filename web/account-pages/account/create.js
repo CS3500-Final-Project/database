@@ -108,13 +108,12 @@ function onCreateAccountButtonPressed(
   return false;
 } // onCreateAccountButtonPressed
 
-function onDismissErrorModal() {
-  console.log( 'dismiss error modal pressed' );
+function onDismissFormErrorModal() {
 
   hideFormErrorModal();
 
   return;
-} // onDismissErrorModal
+} // onDismissFormErrorModal
 
 function showLoadingModal() {
   modalData.currentModal = MODALS.LOADING;
