@@ -56,6 +56,8 @@ function makeGetRequest(
       //tiles.innerHTML = '<hr></br>';
       for(var i=0; i<userdetails.images.length; i++){
         let imagePreview = userdetails.images[i];
+        //debugging
+        console.log(imagePreview.url);
         let urlParts = imagePreview.url.split( 'upload/' );
        imagePreview.thumbUrl = urlParts.join( 'upload/t_media_lib_thumb/' );
        imagePreviews.push( imagePreview );
