@@ -61,7 +61,9 @@ function attemptToLogin() {
     ) {
       credentialsValidationResults.usernameErrors
       .forEach(
-        formData.usernameErrors.push
+        ( error ) => {
+          formData.usernameErrors.push( error );
+        }
       );
     }
 
@@ -70,7 +72,9 @@ function attemptToLogin() {
     ) {
       credentialsValidationResults.passwordErrors
       .forEach(
-        formData.passwordErrors.push
+        ( error ) => {
+          formData.passwordErrors.push( error );
+        }
       );
     }
 
