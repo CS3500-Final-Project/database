@@ -281,7 +281,7 @@ $app->get('/account/', function() use ($app){
 
 $app->get('/upload/', function () use ($app){
   if( loggedIn() ){ return $app->redirect('./account-pages/html'); }
-  return $app->redirect('./upload.html');
+  return $app->redirect('/upload.html');
 });
 
 
