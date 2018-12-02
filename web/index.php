@@ -135,14 +135,17 @@ $app->post('/create/', function( Request $request ) use ($app){
   $userExists = $st->fetch(PDO::FETCH_ASSOC);
 
   if( $userExists == 0 || $userExists == '0' ){
+    //----------------------------- MAKE SURE THEIR INFO IS NOT VALID!!!!---------------------------------------------------------------------------
     //insert user into db, START SESSION and ROUTE TO ACCOUNT DETAILS
     $st = $app['pdo']->prepare('INSERT INTO accountinfo (username, password, bio, displayname) VALUES (:username, :password, :bio, :displayname)');
     $st->bindParam(':username',$requestBody['username']);
-    $st->bindParam(':password',$requestBody['password1']);
+    $st->bindParam(':password',$requestBody['password']);
     $st->bindParam(':bio',$requestBody['bio']);
     $st->bindParam(':displayname',$requestBody['displayName']);
     $st->execute();
-
+    //start SESSION
+    session_start();
+    $_SESSION['user'] = $requestBody['username'];
     return true;
   }
   else{  //otherwise return success or route to account details
@@ -161,7 +164,8 @@ $app->post('/create/', function( Request $request ) use ($app){
 
 
 //REDIRECTS
-
+//account details, find their posts
+//$app->post('',)
 //direct to login or account details
 $app->get('/account/', function() use ($app){
   //if no session go to login.php
