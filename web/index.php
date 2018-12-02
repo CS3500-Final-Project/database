@@ -216,10 +216,10 @@ $app->get('/account-details/{user}', function($user) use($app) {
   }
 });
 
-/* ----------------------Personal account editing? ----------------------------
-$app->post('/account-details/', function( Request $request ) use($app){
+/* ----------------------Personal account editing? ----------------------------*/
+$app->post('/account-update/', function( Request $request ) use($app){
   $responseData = array();
-  $messages = array();
+
   $contentType = isset($_SERVER['CONTENT_TYPE'])
     ? trim($_SERVER['CONTENT_TYPE'])
     : "";
@@ -233,7 +233,33 @@ $app->post('/account-details/', function( Request $request ) use($app){
     true
   );
 
-  //return json with their account info and the images they have uploaded
+  //check to see which thing they are trying to update and run sql accordingly
+  if( $requestBody['field'] == 'password' ){
+    $st = $app['pdo']->prepare('UPDATE accountinfo SET password = :password WHERE username = :username');
+    $st->bindParam(':password', $requestBody['newvalue']);
+    $st->bindParam(':username', $_SESSION['username']);
+
+    return 'changed password for user ' . $_SESSION['username'];
+  }
+  else if( $requestBody['field'] == 'displayname' ){
+    $st = $app['pdo']->prepare('UPDATE accountinfo SET displayname = :displayname WHERE username = :username');
+    $st->bindParam(':displayname', $requestBody['newvalue']);
+    $st->bindParam(':username', $_SESSION['username']);
+    $st->execute();
+
+    return 'changed display name to ' . $requestBody['newvalue'];
+  }
+  else if( $requestBody['field'] == 'delete' ){
+    $st = $app['pdo']->prepare('DELETE FROM accountinfo WHERE username = :username');
+    $st->bindParam(':username', $_SESSION['username']);
+    $st->execute();
+    $_SESSION = array();
+    session_destroy();
+    return 'account deleted';
+  }
+  else {return 'Update Field Not Valid';}
+
+  /*return json with their account info and the images they have uploaded
   $st = $app['pdo']->prepare('SELECT * FROM accountinfo WHERE username = :username');
   $st->bindParam(':username', $_SESSION['username']);
   $st->execute();
@@ -259,9 +285,9 @@ $app->post('/account-details/', function( Request $request ) use($app){
         "displayname"=>$result['displayname'],
         "images"=>$images
     ));
-  }
+  } */
 });
-*/
+
 
 //---------------------------------------------------------------------------REDIRECTS---------------------------------------------------------------
 //account details, find their posts
