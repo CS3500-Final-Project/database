@@ -99,8 +99,8 @@ function attemptToLogin() {
   .then(
     function( response ) {
       hideLoadingModal();
-
-      console.log( 'server response: ' + response );
+      window.location.replace("./details.html");
+      //console.log( 'server response: ' + response );
     }
   )
   .catch(
@@ -320,4 +320,3 @@ var vueRoot = new Vue(
     }
   }
 );
-

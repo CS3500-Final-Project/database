@@ -178,14 +178,59 @@ $app->post('/login/', function(Request $request) use($app){
   }else{
     $_SESSION['username'] = $result['username'];
     return json_encode(array(
-        $result['uid'],
-        $result['username'],
-        $result['bio'],
-        $result['displayname']
+        "uid"=>$result['uid'],
+        "username"=>$result['username'],
+        "bio"=>$result['bio'],
+        "displayname"=>$result['displayname']
     ));
   }
 });
 
+//---------------account details server call---------------
+$app->post('/account-details/', function( Request $request ) use($app){
+  $responseData = array();
+  $messages = array();
+  $contentType = isset($_SERVER['CONTENT_TYPE'])
+    ? trim($_SERVER['CONTENT_TYPE'])
+    : "";
+  if (
+    strcasecmp($contentType, "application/json") != 0
+  ) {
+    throw new Exception("Content type must be application/json");
+  }
+  $requestBody = json_decode(
+    $request->getContent(),
+    true
+  );
+
+  //return json with their account info and the images they have uploaded
+  $st = $app['pdo']->prepare('SELECT * FROM accountinfo WHERE username = :username');
+  $st->bindParam(':username', $_SESSION['username']);
+  $st->execute();
+  $result = $st->fetch(PDO::FETCH_ASSOC);
+  //images
+  $st = $app['pdo']->prepare('SELECT * FROM uploadinfo WHERE username = :username');
+  $st->bindParam(':username', $_SESSION['username']);
+  $images = array();
+  while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
+    $app['monolog']->addDebug('Row ' . $row['id']);
+    $images[] = $row;
+  }
+
+  if($result == 0 || $result == '0'){
+    //this means no one is logged in
+    return false;
+  }else{
+
+    return json_encode(array(
+        "uid"=>$result['uid'],
+        "username"=>$result['username'],
+        "bio"=>$result['bio'],
+        "displayname"=>$result['displayname'],
+        "images"=>$images
+    ));
+  }
+});
 
 //---------------------------------------------------------------------------REDIRECTS---------------------------------------------------------------
 //account details, find their posts
