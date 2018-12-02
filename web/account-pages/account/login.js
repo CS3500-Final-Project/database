@@ -133,7 +133,7 @@ function onDismissErrorModal() {
   hideFormErrorModal();
 
   return;
-}
+} // onDismissErrorModal
 
 function showLoadingModal() {
   modalData.currentModal = MODALS.LOADING;
