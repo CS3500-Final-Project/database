@@ -134,16 +134,13 @@ $app->post('/create/', function( Request $request ) use ($app){
   $st->execute();
   $userExists = $st->fetch(PDO::FETCH_ASSOC);
 
-  if(is_null($userExists) ){
+  if( $userExists == 0 || $userExists == '0' ){
     //insert user into db, START SESSION and ROUTE TO ACCOUNT DETAILS
 
     return $app->redirect('/account-pages/account/details.html');
   }
-  else if($userExists == 0 || $userExists == '0'){ //-----------------------------------------------------------debugging
-    return 'HA';
-  }
   else{  //otherwise return success or route to account details
-    return 'Username ' + $userExists[0] + ' Already Exists';
+    return 'Username ' + $userExists['username'] + ' Already Exists';
   }
 
 
