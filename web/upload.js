@@ -570,18 +570,6 @@ function onUploadSuccess( result ) {
   return;
 } // onUploadSuccess
 
-var uploadWidget = cloudinary.applyUploadWidget(
-  '#upload_widget_opener',
-  {
-    cloudName: 'hws6kskjw',
-    uploadPreset: 'rywvoxo2',
-    cropping: true,
-    folder: 'user_images',
-    inlineContainer: '#upload-widget-container'
-  },
-  onUploadWidgetEvent
-);
-
 
 var vueRoot = new Vue(
   {
