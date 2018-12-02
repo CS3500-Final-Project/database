@@ -336,6 +336,9 @@ Vue.component(
 Vue.component(
   MODALS.IMAGE_DETAILS,
   {
+    data: {
+      imageDetailsFormData: imageDetailsFormData
+    },
     template: `
       <modal>
         <h2 slot="header">
