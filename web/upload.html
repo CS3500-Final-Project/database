@@ -64,6 +64,11 @@
         </script>
       </div><!-- upload-widget-container -->
     </main>
+
+      <modal v-if="modalData.isModalShown"
+        v-bind:is="modalData.currentModal" >
+      </modal>
+
     </div> <!-- app-container -->
   </body>
 </html>

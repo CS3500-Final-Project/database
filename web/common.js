@@ -74,7 +74,7 @@ function validateCredentials(
 // todo copy in post and get functions
 function postStuffToServer(
   payload,
-  relativeUrl
+  relativeUrl // rename?
 ) {
   let promise = new Promise(
     function(
@@ -124,3 +124,16 @@ function postStuffToServer(
 
   return promise;
 } // postStuffToServer
+
+
+function emptyErrorsArray( errors ) {
+  for (
+    let i = errors.length;
+    i > 0;
+    i--
+  ) {
+    errors.pop();
+  }
+
+  return;
+} // emptyErrorsArray
