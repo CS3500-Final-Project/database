@@ -20,12 +20,6 @@ var isLoadingModalShown = false;
 var isFailResultModalShown = false;
 var isSuccessResultModalShown = false;
 
-let creds= {
-  username: username,
-  password: password1,
-  displayName: displayName,
-  bio: bio
-}
 
 function postStuffToServer(
   payload
@@ -82,6 +76,13 @@ function onCreateAccountButtonPressed(
   event
 ) {
   event.preventDefault();
+  
+  let creds= {
+    username: username,
+    password: password1,
+    displayName: displayName,
+    bio: bio
+  }
 
   postStuffToServer( creds ).then(
     ( response ) => {
