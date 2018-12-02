@@ -309,7 +309,7 @@ Vue.component(
         </p>
 
         <div slot="footer">
-          <a href="./details.html>
+          <a href="./details.html">
             Continue to account
           </a>
         </div>
