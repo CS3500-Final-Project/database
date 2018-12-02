@@ -68,7 +68,7 @@ $app->post(
       $st = $app['pdo']->prepare( "INSERT INTO uploadinfo ( url, username, title, description, tag1, tag2, tag3 )
                                   VALUES ( :url , :user, :title, :description, :tag1, :tag2, :tag3 )" );
       $st->bindParam(':url', $url);
-      $st->bindParam(':user', $user);
+      $st->bindParam(':user', $_SESSION['username']);
       $st->bindParam(':title', $title);
       $st->bindParam(':description',$description);
       $st->bindParam(':tag1',$tag1);
