@@ -79,10 +79,10 @@ function onCreateAccountButtonPressed(
   event.preventDefault();
 
   let creds= {
-    username: username,
-    password: password1,
-    displayName: displayName,
-    bio: bio
+    username: formData.username,
+    password: formData.password1,
+    displayName: formData.displayName,
+    bio: formData.bio
   }
   console.log(JSON.stringify( creds ) );
 
