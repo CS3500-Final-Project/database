@@ -129,7 +129,7 @@ function onLoginButtonPressed(
 
 
 function showFormErrorModal() {
-  currentModal = MODALS.FORM_ERROR;
+  modalData.currentModal = MODALS.FORM_ERROR;
   modalData.isModalShown = true;
 
   return;
