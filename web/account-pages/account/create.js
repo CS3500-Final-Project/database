@@ -96,9 +96,9 @@ function onCreateAccountButtonPressed(
       console.log( 'received response from server' );
       console.log( response );
 
-      let parsedResponse = JSON.parse( response );
+      //let parsedResponse = JSON.parse( response );
 
-      //alert( "Your upload was successful! Here is it's url: " + parsedResponse.secure_url );
+      alert( "That Username Already Exists!" );
     } // response callback
   );
   // to prevent the form from doing the default form action
