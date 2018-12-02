@@ -23,11 +23,6 @@
     <script type="text/javascript"
       src="./common.js" >
     </script>
-
-    <script type="text/javascript"
-      src="./upload.js"
-      defer="defer" >
-    </script>
   </head>
 
   <body>
@@ -72,7 +67,12 @@
 
     </div> <!-- app-container -->
 
-    <script type="text/javascript" >
+    <script type="text/javascript"
+      src="./upload.js" >
+    </script>
+
+    <script type="text/javascript"
+      defer="defer" >
       var uploadWidget = cloudinary.applyUploadWidget(
         '#upload_widget_opener',
         {
