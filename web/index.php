@@ -182,7 +182,7 @@ $app->post('/login/', function(Request $request) use($app){
   if($result == 0 || $result == '0'){
     return false;
   }else{
-    json_encode(array(
+    return json_encode(array(
         $result['uid'],
         $result['username'],
         $result['bio'],
