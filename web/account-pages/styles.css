@@ -12,7 +12,6 @@ body {
   background-color: #555;
 }
 
-
 header {
   display: flex;
   flex-direction: row;
@@ -51,6 +50,13 @@ footer {
   padding: 16px;
 
   background-color: #ccc;
+}
+
+body *,
+header *,
+main *,
+footer * {
+  background-color: #eee;
 }
 
 /*
