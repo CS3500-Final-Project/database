@@ -136,7 +136,7 @@ $app->post('/create/', function( Request $request ) use ($app){
 
   if( $userExists == 0 || $userExists == '0' ){
     //insert user into db, START SESSION and ROUTE TO ACCOUNT DETAILS
-    $st = $app['pdo']->prepare('INSERT INTO accountinfo (username, password, bio, displayname) VALUES (:username, :password, :bio, :displayname) ')
+    $st = $app['pdo']->prepare('INSERT INTO accountinfo (username, password, bio, displayname) VALUES (:username, :password, :bio, :displayname)');
     $st->bindParam(':username',$requestBody['username']);
     $st->bindParam(':password',$requestBody['password1']);
     $st->bindParam(':bio',$requestBody['bio']);
