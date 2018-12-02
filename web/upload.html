@@ -64,67 +64,6 @@
         </script>
       </div><!-- upload-widget-container -->
     </main>
-
-      <!--server com request func from josh -->
-      <script>
-          function postStuffToServer(
-            payload
-          ) {
-            let promise = new Promise(
-              function(
-                resolve,
-                reject
-              ) {
-                var request = new XMLHttpRequest();
-
-                request.open(
-                  "POST",
-                  './upload-image/'
-                );
-
-                request.setRequestHeader(
-                  'Content-Type',
-                  'application/json'
-                );
-
-                request.onload = function() {
-                  let status = this.status;
-
-                  if (
-                    status >= 200
-                    && status < 300
-                  ) {
-                    resolve(
-                      this.response
-                    );
-                  }
-                  else {
-                    reject(
-                      this.statusText
-                    );
-                  }
-                }; // onload callback
-
-                // not sure if stringification needed.
-                // try other method first and switch
-                // to this one if there are issues
-                // sending an object
-
-                let requestBody = JSON.stringify(
-                  payload
-                );
-
-                request.send(
-                  requestBody
-                );
-
-              } // executor
-            ); // promise
-
-            return promise;
-        } // postStuffToServer
-      </script>
-
     </div> <!-- app-container -->
   </body>
 </html>

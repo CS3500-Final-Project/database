@@ -89,7 +89,8 @@ function onUploadSuccess( result ) {
   };
 
   postStuffToServer(
-    payload
+    payload,
+    './upload-image/'
   )
   .then(
     ( response ) => {
