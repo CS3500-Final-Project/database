@@ -127,6 +127,13 @@ function onLoginButtonPressed(
   return false;
 } // onLoginButtonPressed
 
+function onDismissErrorModal() {
+  console.log( 'dismiss error modal pressed' );
+
+  hideFormErrorModal();
+
+  return;
+}
 
 function showLoadingModal() {
   modalData.currentModal = MODALS.LOADING;
@@ -151,6 +158,30 @@ function hideFormErrorModal() {
 
   return;
 } // hideFormErrorModal
+
+function showFailResultModal() {
+  modalData.currentModal = MODALS.FAIL_RESULT;
+  modalData.isModalShown = true;
+
+  return;
+} // showFailResultModal
+function hideFailResultModal() {
+  modalData.isModalShown = false;
+
+  return;
+} // hideFailResultModal
+
+function showSuccessResultModal() {
+  modalData.currentModal = MODALS.SUCCESS_RESULT;
+  modalData.isModalShown = true;
+
+  return;
+} // showSuccessResultModal
+function hideSuccessResultModal() {
+  modalData.isModalShown = false;
+
+  return;
+} // hideSuccessResultModal
 
 
 Vue.component(
