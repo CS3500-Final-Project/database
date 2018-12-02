@@ -7,45 +7,64 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />
+    <link rel="stylesheet"
+      type="text/css"
+      href="./stylesheets/main.css" />
 
-    <script src="./vue-dev.js"
-      type="text/javascript" >
+    <script type="text/javascript"
+      src="./vue-dev.js" >
+    </script>
+
+    <script type="text/javascript"
+      src="./common.js" >
+    </script>
+
+    <script type="text/javascript"
+      src="./upload.js"
+      defer="defer" >
     </script>
   </head>
 
   <body>
-    <nav class="navbar navbar-default navbar-static-top navbar-inverse">
-      <div class="container">
-        <ul class="nav navbar-nav">
-          <li>
-            <a href="/frontpage.html"><span class="glyphicon glyphicon-home"></span> Home</a>
-          </li>
+    <div id="app-container" class="container">
+    <header>
+      <nav class="navbar navbar-default navbar-static-top navbar-inverse">
+        <div class="container">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="/frontpage.html"><span class="glyphicon glyphicon-home"></span> Home</a>
+            </li>
 
-          <li>
-            <a href="#"><span class="glyphicon glyphicon-hdd"></span>Raw Data</a>
-          </li>
-          <li>
-            <a href="/upload.html"><span class="glyphicon glyphicon-cloud-upload"></span>Upload</a>
-          </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li class="navbar-right">
-            <a href="#"><span class="glyphicon glyphicon-user"></span>Account</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+            <li>
+              <a href="#"><span class="glyphicon glyphicon-hdd"></span> Raw Data</a>
+            </li>
+            <li>
+              <a href="/upload.html"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</a>
+            </li>
+          </ul>
 
-    <div class="container">
-      <h2>We're gonna need a bigger jumbotron...</h2>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="navbar-right">
+              <a href="/account"><span class="glyphicon glyphicon-user"></span> Account</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
 
+    <main>
       <div id="upload-widget-container" >
-        test of inline
-        <a href="#upload-widget-containe" id="upload_widget_opener">Upload Image</a>
-      </div>
+        <a id="upload_widget_opener"
+          href="#upload-widget-container" >
+          Upload Image
+        </a>
 
-      <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+        <script type="text/javascript"
+          src="https://widget.cloudinary.com/v2.0/global/all.js" >
+        </script>
+      </div><!-- upload-widget-container -->
+    </main>
+
       <!--server com request func from josh -->
       <script>
           function postStuffToServer(
@@ -106,130 +125,6 @@
         } // postStuffToServer
       </script>
 
-      <script type="text/javascript">
-        /*/
-          var myUploadWidget;
-          document.getElementById("upload_widget_opener")
-          .addEventListener(
-            "click",
-            function() {
-              myUploadWidget = cloudinary.openUploadWidget(
-                {
-                  cloudName: 'hws6kskjw',
-                  uploadPreset: 'rywvoxo2'
-                },
-                ( error, result ) => {        }, false
-              );
-            }
-          ); // addEventListener
-        //*/
-
-        var imageDetails = {
-          title: '',
-          description: '',
-          tag1: '',
-          tag2: '',
-          tag3: ''
-        };
-        // todo vue stuff and form errors
-
-        function showImageDetailsModal() {
-          console.log( 'enter showImageDetailsModal' );
-          console.log( 'exit showImageDetailsModal' );
-        } // showImageDetailsModal
-        function hideImageDetailsModal() {
-          console.log( 'enter hideImageDetailsModal' );
-          console.log( 'exit hideImageDetailsModal' );
-        } // hideImageDetailsModal
-
-        function onUploadWidgetEvent(
-          error, // optional
-          result
-        ) {
-          if ( error ) {
-            console.error(
-              'error from cloudinary widget'
-            );
-
-            uploadWidget.close();
-
-            return;
-          }
-
-          if ( result && result.event ) {
-            // handle result event based on event type
-            switch ( result.event ) {
-              case 'upload-added': {
-                onImageAdded( result );
-              } // upload-added
-              break;
-
-              case 'success': {
-                onUploadSuccess( result );
-              } // success
-              break;
-
-              default: {
-                console.log( 'unhandled event type' );
-                console.log( result );
-              } // default
-            } // switch result event
-          } // result
-
-          return;
-        } // onUploadWidgetEvent
-
-        function onImageAdded( result ) {
-          console.log( 'upload added' );
-          console.log( result.info );
-
-          //uploadWidget.hide();
-
-          showImageDetailsModal();
-        } // onImageAdded
-
-        function onUploadSuccess( result ) {
-          console.log( 'successfully uploaded image' );
-          console.log( result.info );
-
-          let payload = {
-            imageDetails: imageDetails,
-            info: result.info
-          };
-
-          postStuffToServer(
-            payload
-          )
-          .then(
-            ( response ) => {
-              // response might be text (a JSON string)
-              // or it could be an object...
-              // I was getting JSON strings even with
-              // the headers set up to return JSON
-              console.log( 'received response from server' );
-              console.log( response );
-
-              let parsedResponse = JSON.parse( response );
-
-              alert( "Your upload was successful! Here is it's url: " + parsedResponse.secure_url );
-            } // response callback
-          );
-        } // onUploadSuccess
-
-        var uploadWidget = cloudinary.applyUploadWidget(
-          '#upload_widget_opener',
-          {
-            cloudName: 'hws6kskjw',
-            uploadPreset: 'rywvoxo2',
-            cropping: true,
-            folder: 'user_images',
-            inlineContainer: '#upload-widget-container'
-          },
-          onUploadWidgetEvent
-        );
-
-      </script>
-    </div>
-
+    </div> <!-- app-container -->
   </body>
 </html>
