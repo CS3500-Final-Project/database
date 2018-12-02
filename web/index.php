@@ -191,15 +191,26 @@ $app->get('/account-details/{user}', function($user) use($app) {
   $st->bindParam(':user', $user);
   $st->execute();
   $userinfo = $st->fetch(PDO::FETCH_ASSOC);
+  //now grab pics
+  $st = $app['pdo']->prepare('SELECT * FROM uploadinfo WHERE username = :user');
+  $st->bindParam(':user', $user);
+  $st->execute();
+  $images = array();
+  while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
+    //$app['monolog']->addDebug('Row ' . $row['id']);
+    $images[] = $row;
+  }
+
 
   if($userinfo == 0 || $userinfo == '0'){
     return "Could Not Find User " . $user . " In Database";
   }else{
     return json_encode(array(
-        "uid"=>$userInfo['uid'],
-        "username"=>$userInfo['username'],
-        "bio"=>$userInfo['bio'],
-        "displayname"=>$userInfo['displayname']
+        "uid"=>$userinfo['uid'],
+        "username"=>$userinfo['username'],
+        "bio"=>$userinfo['bio'],
+        "displayname"=>$userinfo['displayname'],
+        "images"=>$images
     ));
   }
 });

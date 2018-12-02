@@ -47,19 +47,19 @@ function makeGetRequest(
       // or it could be an object...
       // I was getting JSON strings even with
       // the headers set up to return JSON
-//      let fp_images = JSON.parse(response);
+      let userdetails = JSON.parse(response);
       console.log( 'received response from server' );
       console.log(response);
-      document.getElementById('accountheader').innerHTML = response.displayname;
+      document.getElementById('accountheader').innerHTML = userdetails.displayname;
       //testing
-//      let tiles = document.getElementById('tiles');
-//      tiles.innerHTML = '<hr></br>';
-//      for(var i=0; i<fp_images.images.length; i++){
-//        let imagePreview = fp_images.images[i];
-//        let urlParts = imagePreview.url.split( 'upload/' );
-//        imagePreview.thumbUrl = urlParts.join( 'upload/t_media_lib_thumb/' );
-//        imagePreviews.push( imagePreview );
-//      }
+      let tiles = document.getElementById('tiles');
+      tiles.innerHTML = '<hr></br>';
+      for(var i=0; i<userdetails.images.length; i++){
+        let imagePreview = userdetails.images[i];
+        let urlParts = imagePreview.url.split( 'upload/' );
+       imagePreview.thumbUrl = urlParts.join( 'upload/t_media_lib_thumb/' );
+       imagePreviews.push( imagePreview );
+      }
 
     } // response callback
   );
