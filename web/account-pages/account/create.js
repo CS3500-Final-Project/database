@@ -97,8 +97,12 @@ function onCreateAccountButtonPressed(
       console.log( response );
 
       //let parsedResponse = JSON.parse( response );
+      if( response ){
+        alert( "username already exists!" );
+      }else{
+        alert( "Account Created!" );
+      }
 
-      alert( "username already exists!" );
     } // response callback
   );
   // to prevent the form from doing the default form action
