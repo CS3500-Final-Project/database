@@ -9,8 +9,9 @@ session_start();
 function loggedIn () {
   if( is_null($_SESSION['username']) ){
     return false;
-  }else if( isset($_SESSION['username']) )
+  }else if( isset($_SESSION['username']) ){
     return true;
+  }
   else{
     return "crap";
   }
@@ -279,7 +280,7 @@ $app->get('/account/', function() use ($app){
 //upload redirect
 
 $app->get('/upload/', function () use ($app){
-  if(loggedIn()){ return $app->redirect('./account-pages/html') }
+  if( loggedIn() ){ return $app->redirect('./account-pages/html') }
   return $app->redirect('./upload.html');
 });
 
