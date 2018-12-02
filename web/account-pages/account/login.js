@@ -136,6 +136,13 @@ function onDismissFormErrorModal() {
   return;
 } // onDismissFormErrorModal
 
+function onDismissFailResultModal() {
+
+  hideFailResultModal();
+
+  return;
+} // onDismissFailResultModal
+
 function showLoadingModal() {
   modalData.currentModal = MODALS.LOADING;
   modalData.isModalShown = true;
