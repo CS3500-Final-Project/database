@@ -141,6 +141,7 @@ $app->post('/create/', function( Request $request ) use ($app){
     $st->bindParam(':password',$requestBody['password1']);
     $st->bindParam(':bio',$requestBody['bio']);
     $st->bindParam(':displayname',$requestBody['displayName']);
+    $st->execute();
     return true;
   }
   else{  //otherwise return success or route to account details
