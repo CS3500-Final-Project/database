@@ -128,6 +128,18 @@ function onLoginButtonPressed(
 } // onLoginButtonPressed
 
 
+function showLoadingModal() {
+  modalData.currentModal = MODALS.LOADING;
+  modalData.isModalShown = true;
+
+  return;
+} // showLoadingModal
+function hideLoadingModal() {
+  modalData.isModalShown = false;
+
+  return;
+} // hideLoadingModal
+
 function showFormErrorModal() {
   modalData.currentModal = MODALS.FORM_ERROR;
   modalData.isModalShown = true;
