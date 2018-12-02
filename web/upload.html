@@ -7,6 +7,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
+    <script type="text/javascript"
+      src="https://widget.cloudinary.com/v2.0/global/all.js" >
+    </script>
+
+
     <link rel="stylesheet"
       type="text/css"
       href="./stylesheets/main.css" />
@@ -26,44 +31,40 @@
   </head>
 
   <body>
-    <div id="app-container" class="container">
-    <header>
-      <nav class="navbar navbar-default navbar-static-top navbar-inverse">
-        <div class="container">
-          <ul class="nav navbar-nav">
-            <li>
-              <a href="/frontpage.html"><span class="glyphicon glyphicon-home"></span> Home</a>
-            </li>
+    <div id="app-container" >
+      <header>
+        <nav class="navbar navbar-default navbar-static-top navbar-inverse">
+          <div class="container">
+            <ul class="nav navbar-nav">
+              <li>
+                <a href="/frontpage.html"><span class="glyphicon glyphicon-home"></span> Home</a>
+              </li>
 
-            <li>
-              <a href="#"><span class="glyphicon glyphicon-hdd"></span> Raw Data</a>
-            </li>
-            <li>
-              <a href="/upload.html"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</a>
-            </li>
-          </ul>
+              <li>
+                <a href="#"><span class="glyphicon glyphicon-hdd"></span> Raw Data</a>
+              </li>
+              <li>
+                <a href="/upload.html"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</a>
+              </li>
+            </ul>
 
-          <ul class="nav navbar-nav navbar-right">
-            <li class="navbar-right">
-              <a href="/account"><span class="glyphicon glyphicon-user"></span> Account</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="navbar-right">
+                <a href="/account"><span class="glyphicon glyphicon-user"></span> Account</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
 
-    <main>
-      <div id="upload-widget-container" >
-        <a id="upload_widget_opener"
-          href="#upload-widget-container" >
-          Upload Image
-        </a>
-
-        <script type="text/javascript"
-          src="https://widget.cloudinary.com/v2.0/global/all.js" >
-        </script>
-      </div><!-- upload-widget-container -->
-    </main>
+      <main>
+        <div id="upload-widget-container" >
+          <a id="upload_widget_opener"
+            href="#upload-widget-container" >
+            Upload Image
+          </a>
+        </div><!-- upload-widget-container -->
+      </main>
 
       <modal v-if="modalData.isModalShown"
         v-bind:is="modalData.currentModal" >

@@ -56,6 +56,10 @@ function initializeImageDetails() {
 } // initializeImageDetails
 
 
+// todo: prefix title, description, etc
+// with imageDetails.
+// todo: return validation result
+// with errors arrays
 function validateImageDetails(
   imageDetails
 ) {
@@ -183,15 +187,15 @@ function onConfirmImageDetailsButtonPressed(
   }
 
   if (
-    imageTag1IsValid
+    imageTag2IsValid
   ) {
-    imageDetails.tag1 = imageTag1;
+    imageDetails.tag2 = imageTag2;
   }
 
   if (
-    imageTag1IsValid
+    imageTag3IsValid
   ) {
-    imageDetails.tag1 = imageTag1;
+    imageDetails.tag3 = imageTag3;
   }
 
   // check for duplicate tags?
