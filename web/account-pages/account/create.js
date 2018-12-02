@@ -39,7 +39,7 @@ function postStuffToServer(
 
       request.open(
         "POST",
-        '../../create'
+        '../../create/'
       );
 
       request.setRequestHeader(
