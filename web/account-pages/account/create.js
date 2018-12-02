@@ -84,6 +84,7 @@ function onCreateAccountButtonPressed(
     displayName: formData.displayName,
     bio: formData.bio
   }
+  //debuggin purposes ----------------------------------------------------------------------GET RID OF THIS
   console.log(JSON.stringify( creds ) );
 
   postStuffToServer( creds ).then(
@@ -95,9 +96,14 @@ function onCreateAccountButtonPressed(
       console.log( 'received response from server' );
       console.log( response );
 
-      let parsedResponse = JSON.parse( response );
+      //let parsedResponse = JSON.parse( response );
+      if( response ){
+        alert( "You Have Created An Account!" );
+        window.location.replace("./details.html");
+      }else{
+        alert( "username already exists!" );
+      }
 
-      //alert( "Your upload was successful! Here is it's url: " + parsedResponse.secure_url );
     } // response callback
   );
   // to prevent the form from doing the default form action

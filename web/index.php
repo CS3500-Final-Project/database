@@ -108,15 +108,14 @@ $app->get('/fp/', function() use($app){
   return $app->json(array('images' => $images));
 });
 
+
 //user registration
 $app->post('/create/', function( Request $request ) use ($app){
   $responseData = array();
   $messages = array();
   $contentType = isset($_SERVER['CONTENT_TYPE'])
     ? trim($_SERVER['CONTENT_TYPE'])
-    : ""
-  ;
-
+    : "";
   if (
     strcasecmp($contentType, "application/json") != 0
   ) {
@@ -127,8 +126,32 @@ $app->post('/create/', function( Request $request ) use ($app){
     $request->getContent(),
     true
   );
-  
-  return $app->json($requestBody);
+
+  //check to see if username or displayName already exists in datase and return errors
+  $st = $app['pdo']->prepare('SELECT * FROM accountinfo WHERE username = :username');
+  $st->bindParam(':username', $username);
+  $username = $requestBody['username'];
+  $st->execute();
+  $userExists = $st->fetch(PDO::FETCH_ASSOC);
+
+  if( $userExists == 0 || $userExists == '0' ){
+    //insert user into db, START SESSION and ROUTE TO ACCOUNT DETAILS
+    $st = $app['pdo']->prepare('INSERT INTO accountinfo (username, password, bio, displayname) VALUES (:username, :password, :bio, :displayname)');
+    $st->bindParam(':username',$requestBody['username']);
+    $st->bindParam(':password',$requestBody['password1']);
+    $st->bindParam(':bio',$requestBody['bio']);
+    $st->bindParam(':displayname',$requestBody['displayName']);
+    $st->execute();
+
+    return true;
+  }
+  else{  //otherwise return success or route to account details
+    return false;
+  }
+
+
+
+  return $app->json($userExists);
 
 });
 
