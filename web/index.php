@@ -142,6 +142,7 @@ $app->post('/create/', function( Request $request ) use ($app){
     $st->bindParam(':bio',$requestBody['bio']);
     $st->bindParam(':displayname',$requestBody['displayName']);
     $st->execute();
+
     return true;
   }
   else{  //otherwise return success or route to account details
@@ -150,7 +151,7 @@ $app->post('/create/', function( Request $request ) use ($app){
 
 
 
-  return $app->json($requestBody);
+  return $app->json($userExists);
 
 });
 
