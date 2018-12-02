@@ -133,7 +133,7 @@ function validateImageDetails(
   return validationResults;
 } // validateImageTag
 
-function validateImageTag(
+function isValidImageTag(
   imageTag
 ) {
   if (
@@ -152,7 +152,7 @@ function validateImageTag(
   // todo: constraints
 
   return true;
-} // validateImageTag
+} // isValidImageTag
 
 function onConfirmImageDetailsButtonPressed(
   event
@@ -189,24 +189,32 @@ function onConfirmImageDetailsButtonPressed(
 
 
   if (
-    imageTag1IsValid
+    isValidImageTag(
+      imageDetailsFormData.imageTag1
+    )
   ) {
-    imageDetails.tag1 = imageTag1;
+    imageDetails.tag1 = imageDetailsFormData.imageTag1;
   }
 
   if (
-    imageTag2IsValid
+    isValidImageTag(
+      imageDetailsFormData.imageTag2
+    )
   ) {
-    imageDetails.tag2 = imageTag2;
+    imageDetails.tag2 = imageDetailsFormData.imageTag2;
   }
 
   if (
-    imageTag3IsValid
+    isValidImageTag(
+      imageDetailsFormData.imageTag3
+    )
   ) {
-    imageDetails.tag3 = imageTag3;
+    imageDetails.tag3 = imageDetailsFormData.imageTag3;
   }
 
   // check for duplicate tags?
+
+  // move tags up if previous removed/missing?
 
 
   // todo: move into its own function
