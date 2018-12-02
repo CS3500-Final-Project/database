@@ -65,7 +65,11 @@ function initializeImageDetails() {
 function validateImageDetails(
   imageDetails
 ) {
-  let validImageDetails = true;
+  let validationResults = {
+    validity: true, // todo validation result type enum thing?
+    imageTitleErrors : [],
+    imageDescriptionErrors : []
+  }
 
   // todo: more on constraints
 
@@ -73,28 +77,29 @@ function validateImageDetails(
   var MIN_IMAGE_TITLE_LENGTH = 8;
   var MAX_IMAGE_TITLE_LENGTH = 127;
 
+
+
   if (
-    imageTitle.length <= MIN_IMAGE_TITLE_LENGTH
+    imageDetails.imageTitle.length <= MIN_IMAGE_TITLE_LENGTH
   ) {
-    imageTitleErrors.push(
+    validationResults.validity = false;
+
+    validationResults.imageTitleErrors.push(
       'title is too short: must be at least '
       + MIN_IMAGE_TITLE_LENGTH
       + ' characters'
     );
-
-    validImageDetails = false;
   }
-
-  if (
+  else if (
     imageTitle.length >= MAX_IMAGE_TITLE_LENGTH
   ) {
-    imageTitleErrors.push(
+    validationResults.validity = false;
+
+    validationResults.imageTitleErrors.push(
       'title is too long: must be no more than '
       + MAX_IMAGE_TITLE_LENGTH
       + ' characters'
     );
-
-    validImageDetails = false;
   }
 
 
@@ -105,28 +110,27 @@ function validateImageDetails(
   if (
     imageDescription.length <= MIN_IMAGE_DESCRIPTION_LENGTH
   ) {
-    imageDescriptionErrors.push(
+    validationResults.validity = false;
+
+    validationResults.imageDescriptionErrors.push(
       'description is too short: must be at least '
       + MIN_IMAGE_DESCRIPTION_LENGTH
       + ' characters'
     );
-
-    validImageDetails = false;
   }
-
-  if (
+  else if (
     imageDescription.length >= MAX_IMAGE_DESCRIPTION_LENGTH
   ) {
-    imageDescriptionErrors.push(
+    validationResults.validity = false;
+
+    validationResults.imageDescriptionErrors.push(
       'description is too long: must be no more than '
       + MAX_IMAGE_DESCRIPTION_LENGTH
       + ' characters'
     );
-
-    validImageDetails = false;
   }
 
-  return true;
+  return validationResults;
 } // validateImageTag
 
 function validateImageTag(
@@ -168,13 +172,13 @@ function onConfirmImageDetailsButtonPressed(
 
   // imageDetailsFormData.
 
-  let validImageDetails = validateImageDetails(
+  let imageDetailsValidationResults = validateImageDetails(
     imageDetails
   );
 
 
   if (
-    !validImageDetails
+    !imageDetailsValidationResults.validity
   ) {
     // early exit
     // todo: show form error modal
@@ -211,6 +215,8 @@ function onConfirmImageDetailsButtonPressed(
     info: imageUploadInfo
   };
 
+  showLoadingModal();
+
   postStuffToServer(
     payload,
     '/upload-image/'
@@ -220,9 +226,12 @@ function onConfirmImageDetailsButtonPressed(
       console.log( 'received response from server' );
       console.log( response );
 
+      hideLoadingModal();
+
       let parsedResponse = JSON.parse( response );
 
       //alert( "Your upload was successful! Here is it's url: " + parsedResponse.secure_url );
+      showSuccessResultModal();
     } // response callback
   );
 
@@ -276,46 +285,74 @@ function hideLoadingModal() {
 } // hideLoadingModal
 
 
-// todo move into common.js after
-// matt is done working with login page
-Vue.component(
-  'modal',
-  {
-    template: `
-      <transition name="modal">
-        <div class="modal-mask">
-          <div class="modal-wrapper">
-            <div class="modal-container">
+function onDismissFormErrorModal() {
 
-              <div class="modal-header">
-                <slot name="header">
-                </slot>
-              </div>
+  hideFormErrorModal();
 
-              <div class="modal-body">
-                <slot name="body">
-                </slot>
-              </div>
+  return;
+} // onDismissFormErrorModal
 
-              <div class="modal-footer">
-                <slot name="footer">
-                </slot>
-              </div>
-            </div>
-          </div>
-        </div>
-      </transition>
-    `
-  }
-);
+function onDismissFailResultModal() {
 
+  hideFailResultModal();
+
+  return;
+} // onDismissFailResultModal
+
+function showLoadingModal() {
+  modalData.currentModal = MODALS.LOADING;
+  modalData.isModalShown = true;
+
+  return;
+} // showLoadingModal
+function hideLoadingModal() {
+  modalData.isModalShown = false;
+
+  return;
+} // hideLoadingModal
+
+function showFormErrorModal() {
+  modalData.currentModal = MODALS.FORM_ERROR;
+  modalData.isModalShown = true;
+
+  return;
+} // showFormErrorModal
+function hideFormErrorModal() {
+  modalData.isModalShown = false;
+
+  return;
+} // hideFormErrorModal
+
+function showFailResultModal() {
+  modalData.currentModal = MODALS.FAIL_RESULT;
+  modalData.isModalShown = true;
+
+  return;
+} // showFailResultModal
+function hideFailResultModal() {
+  modalData.isModalShown = false;
+
+  return;
+} // hideFailResultModal
+
+function showSuccessResultModal() {
+  modalData.currentModal = MODALS.SUCCESS_RESULT;
+  modalData.isModalShown = true;
+
+  return;
+} // showSuccessResultModal
+function hideSuccessResultModal() {
+  modalData.isModalShown = false;
+
+  return;
+} // hideSuccessResultModal
 
 
 const MODALS = {
   LOADING: 'loading-modal',
-  //FORM_ERROR: 'form-error-modal',
-  //FAIL_RESULT: 'fail-result-modal',
-  //SUCCESS_RESULT: 'success-result-modal'
+  FORM_ERROR: 'form-error-modal',
+  FAIL_RESULT: 'fail-result-modal',
+  SUCCESS_RESULT: 'success-result-modal'
 }
 Vue.component(
   MODALS.LOADING,
@@ -327,12 +364,78 @@ Vue.component(
         </h2>
 
         <p slot="body">
-          sending credentials to server
+          Sending credentials to server
         </p>
 
         <p slot="footer">
-          please wait
+          Please wait
         </p>
+      </modal>
+    `
+  }
+);
+Vue.component(
+  MODALS.FORM_ERROR,
+  {
+    template: `
+      <modal>
+        <h2 slot="header">
+          Errors in Form
+        </h2>
+
+        <p slot="body">
+          Please correct the fields with errors
+        </p>
+
+        <div slot="footer">
+          <button onclick="onDismissFormErrorModal( event );">
+            Return to form
+          </button>
+        </div>
+      </modal>
+    `
+  }
+);
+Vue.component(
+  MODALS.FAIL_RESULT,
+  {
+    template: `
+      <modal>
+        <h2 slot="header">
+          Login Failed
+        </h2>
+
+        <p slot="body">
+          todo: show errors
+        </p>
+
+        <div slot="footer">
+          <button onclick="onDismissFailResultModal( event );">
+            Return to form
+          </button>
+        </div>
+      </modal>
+    `
+  }
+);
+Vue.component(
+  MODALS.SUCCESS_RESULT,
+  {
+    template: `
+      <modal>
+        <h2 slot="header">
+          Login Successful
+        </h2>
+
+        <p slot="body">
+          Welcome back
+        </p>
+
+        <div slot="footer">
+          <a href="./details.html">
+            Continue to account
+          </a>
+        </div>
       </modal>
     `
   }
