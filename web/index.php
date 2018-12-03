@@ -278,8 +278,35 @@ $app->post('/vote/', function( Request $request) use ($app){
     $request->getContent(),
     true
   );
-  //----------------------------------------------------
-  return true;
+
+  //check to see if they have upvoted, if they have return false?
+  //grab uid
+  $st = $app['pdo']->prepare('SELECT uid FROM accountinfo where username = :username');
+  $st->bindParam(':username',$_SESSION['username']);
+  $st->execute();
+  $uid = $st->fetch(PDO::FETCH_ASSOC);
+  //check to see if they have voted, if null then put in vote
+  $st = $app['pdo']->prepare('SELECT imgid FROM votes WHERE userid = :uid');
+  $st->bindParam(':uid', $uid['uid']);
+  $img = $st->fetch(PDO::FETCH_ASSOC);
+  if( $img['imgid'] != $requestBody['imageid'] ){
+    //put in their upvote
+    $st = $app['pdo']->prepare('INSERT INTO votes (imgid, vote, userid) VALUES (:imgid, :vote, :userid)');
+    $st->bindParam(':imgid',$requestBody['imageid']);
+    $st->bindParam(':vote',$requestBody['vote']);
+    $st->bindParam('userid',$uid['uid']);
+    $st->execute();
+    //return total upvotes and downvotes
+    //
+    return 'vote successful';
+  }
+  else if( $img['imgid'] == $requestBody['imageid'] ){
+    //theyve already upvoted
+    return 'you have already voted on this image';
+  }
+  else{
+    return 'there was an error';
+  }
 
 });
 
