@@ -67,14 +67,29 @@ $app->post(
 
       $url = $requestBody['info']['secure_url'];
       //this needs to be set to current logged in user's username
-      $user = 'admin';
       $title = $requestBody['imageDetails']['imageTitle'];
       $description = $requestBody['imageDetails']['imageDescription'];
       $tag1 = $requestBody['imageDetails']['tag1'];
       $tag2 = $requestBody['imageDetails']['tag2'];
       $tag3 = $requestBody['imageDetails']['tag3'];
       $st->execute();
-
+      //grab uid
+      $st = $app['pdo']->prepare('SELECT uid FROM accountinfo WHERE username = :username');
+      $st->bindParam(':username', $_SESSION['username']);
+      $st->execute();
+      $uid = $st->fetch(PDO:FETCH_ASSOC);
+      //grab imgid
+      $st = $app['pdo']->prepare('SELECT id FROM uploadinfo WHERE url = :url');
+      $st->bindParam(':url', $url);
+      $st->execute();
+      $imgid = $st->fetch(PDO:FETCH_ASSOC);
+      //user automatically gives is one upvote
+      $st = $app['pdo']->prepare('INSERT INTO votes (imgid, vote, userid) VALUES (:imgid, :vote, :userid)');
+      $st->bindParam(':imgid',$imgid['imgid']);
+      $st->bindParam(':vote',$vote);
+      $st->bindParam(':userid',$uid['uid']);
+      $vote = 1;
+      $st->execute();
     return 'image uploaded, url: ' . $requestBody['info']['secure_url'];
 
   }
