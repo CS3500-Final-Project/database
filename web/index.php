@@ -147,7 +147,7 @@ $app->post('/create/', function( Request $request ) use ($app){
     $st->execute();
 
     $_SESSION['user'] = $requestBody['username'];
-    return json_encode(array(
+    return $app->json(array(
         //"uid"=>$userinfo['uid'],
         "username"=>$requestBody['username'],
         "bio"=>$requestBody['bio'],
