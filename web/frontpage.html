@@ -32,12 +32,32 @@
 
           <a href="/about"><span class="glyphicon glyphicon-about"></span>About</a>
         </nav>
+
+        <div class="account-widget" >
+          <div v-if="account.accountId === 0" >
+            <a href="/account-pages/account/create.html" >
+              create account
+            </a>
+
+            <a href="/account-pages/account/login.html" >
+              login
+            </a>
+          </div>
+
+          <div v-if="account.accountId !== 0">
+            <a href="/account"><span class="glyphicon glyphicon-user"></span>Account</a>
+
+            <a href="/logout">
+              Logout
+            </a>
+          </div>
+        </div><!-- account-widget -->
       </header>
 
-  <main>
-    <h1> Most Popular </h1>
-  </main>
-  <div class="image-preview-container" >
+      <main>
+        <h1> Most Popular </h1>
+
+        <div class="image-preview-container" >
           <p v-if="imagePreviews.length === 0" >
             loading images...
           </p>
@@ -61,7 +81,7 @@
             </div><!-- image-preview -->
           </div><!-- image-previews -->
         </div><!-- image-preview-container -->
-</div> <!-- app-container -->
-</main>
-</body>
+      </main>
+    </div> <!-- app-container -->
+  </body>
 </html>

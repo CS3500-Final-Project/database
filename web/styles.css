@@ -473,7 +473,7 @@ form label span {
   flex-direction: row;
   flex-wrap: wrap;
 
-  width: 80%;
+  width: 90%;
   margin: auto;
   border: thin solid black;
   padding: 16px;
@@ -489,4 +489,16 @@ form label span {
   margin-bottom: 8px;
   border: thin solid black;
   padding: 8px;
+}
+.image-preview img {
+  display: block;
+
+  width: 380px;
+  height: auto;
+
+  margin: auto;
+  margin-bottom: 4px;
+  padding: 8px;
+
+  background-color: black;
 }
