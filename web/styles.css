@@ -484,7 +484,7 @@ form label span {
   flex-direction: column;
   flex-wrap: nowrap;
 
-  width: 400px;
+  width: 200px;
   margin: auto;
   margin-bottom: 8px;
   border: thin solid black;
@@ -493,7 +493,7 @@ form label span {
 .image-preview img {
   display: block;
 
-  width: 380px;
+  width: 180px;
   height: auto;
 
   margin: auto;
