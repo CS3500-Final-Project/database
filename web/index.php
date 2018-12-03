@@ -77,7 +77,7 @@ $app->post(
       $st = $app['pdo']->prepare('SELECT uid FROM accountinfo WHERE username = :username');
       $st->bindParam(':username', $_SESSION['username']);
       $st->execute();
-      $uid = $st->fetch(PDO:FETCH_ASSOC);
+      $uid = $st->fetch(PDO::FETCH_ASSOC);
       //grab imgid
       $st = $app['pdo']->prepare('SELECT id FROM uploadinfo WHERE url = :url');
       $st->bindParam(':url', $url);
