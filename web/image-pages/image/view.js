@@ -1,4 +1,21 @@
 
+var pageData = {
+  account : {
+    uid: 0,
+    username: '',
+    displayName: ''
+  },
+  viewedImageData : {
+    imageId: 0,
+    uploaderUsername: '',
+    imageDescription: '',
+    upvotes: 0,
+    downvotes: 0,
+    comments: []
+  }
+}
+
+/*
 var account = {
   uid: 0,
   username: '',
@@ -35,6 +52,7 @@ makeGetRequest('/image-pages/').then(
     viewedImageData = JSON.parse(response);
     console.log(viewedImageData);
 
+    pageData.viewedImageData = viewedImageData;
   }
 );
 
@@ -43,8 +61,7 @@ var vueRoot = new Vue(
   {
     el: '#app-container',
     data: {
-      account: account,
-      viewedImageData: viewedImageData
+      pageData
     }
   }
 );

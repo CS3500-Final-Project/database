@@ -31,7 +31,7 @@
           </a>
 
           <a href="/upload"
-            v-if="account.accountId !== 0">
+            v-if="pageData.account.accountId !== 0">
             Upload
           </a>
 
@@ -41,7 +41,7 @@
         </nav>
 
         <div class="account-widget" >
-          <div v-if="account.accountId === 0" >
+          <div v-if="pageData.account.accountId === 0" >
             <a href="/account-pages/account/create.html" >
               create account
             </a>
@@ -51,7 +51,7 @@
             </a>
           </div>
 
-          <div v-if="account.accountId !== 0">
+          <div v-if="pageData.account.accountId !== 0">
             <a href="/account">
               Account
             </a>
@@ -71,7 +71,7 @@
             </h2>
           </div><!-- image-card-title-bar -->
 
-          <img v-bind:src="viewedImageData.url" />
+          <img v-bind:src="pageData.viewedImageData.url" />
 
           <div class="image-card-body" >
             <p>
