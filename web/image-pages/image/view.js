@@ -4,7 +4,7 @@ var account = {
   username: '',
   displayName: ''
 };
-/*
+
 var viewedImageData = {
   imageId: 0,
   uploaderUsername: '',
@@ -32,7 +32,7 @@ function deleteComment() {}
 
 makeGetRequest('/image-pages/').then(
   ( response ) => {
-    var viewedImageData = JSON.parse(response);
+    viewedImageData = JSON.parse(response);
     console.log(viewedImageData);
 
   }
