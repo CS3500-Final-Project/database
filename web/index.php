@@ -325,26 +325,31 @@ $app->post('/vote/', function( Request $request) use ($app){
 
 });
 
+$app->get('/image-view/{id}' function($id) use ($app){
+  $_SESSION['temp'] = $id;
+  return $app->redirect('/image-pages/image/view.html');
+});
+
 //get image INFO
-$app->get('/image-pages/{id}', function($id) use($app){
+$app->get('/image-pages/', function() use($app){
   $st = $app['pdo']->prepare('SELECT * FROM uploadinfo WHERE id = :id');
-  $st->bindParam(':id', $id);
+  $st->bindParam(':id', $_SESSION['temp'];
   $st->execute();
   $img = $st->fetch(PDO::FETCH_ASSOC);
 
   //upvotes
   $st = $app['pdo']->prepare('SELECT sum(vote) AS upvotes FROM votes WHERE imgid = :id AND vote = 1');
-  $st->bindParam(':id', $id);
+  $st->bindParam(':id', $_SESSION['temp']);
   $st->execute();
   $up = $st->fetch(PDO::FETCH_ASSOC);
   //downvotes
   $st = $app['pdo']->prepare('SELECT sum(vote) AS downvotes FROM votes WHERE imgid = :id AND vote = -1');
-  $st->bindParam(':id', $id);
+  $st->bindParam(':id', $_SESSION['temp']);
   $st->execute();
   $down = $st->fetch(PDO::FETCH_ASSOC);
 
-  $app->redirect('/image-pages/image/view.html');
-  
+
+
   return $app->json(array(
     "imageId"=>$img['id'],
     "uploaderUsername"=>$img['username'],

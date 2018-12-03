@@ -30,6 +30,14 @@ function favoriteImage() {}
 function deleteComment() {}
 
 
+makeGetRequest('/image-pages/').then(
+  ( response ) => {
+    viewedImageData = JSON.parse(response);
+    console.log(viewedImageData);
+
+  }
+);
+
 
 var vueRoot = new Vue(
   {
