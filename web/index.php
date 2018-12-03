@@ -147,7 +147,14 @@ $app->post('/create/', function( Request $request ) use ($app){
     $st->execute();
 
     $_SESSION['user'] = $requestBody['username'];
-    return $requestBody['username'];
+    return json_encode(array(
+        //"uid"=>$userinfo['uid'],
+        "username"=>$requestBody['username'],
+        "bio"=>$requestBody['bio'],
+        "displayname"=>$requestBody['displayName']
+        //"images"=>"No Images Yet, Go Upload Some!"
+    ));
+    ));
   }
   else{  //otherwise return success or route to account details
     return false;
