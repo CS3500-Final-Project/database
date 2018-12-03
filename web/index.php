@@ -333,7 +333,7 @@ $app->get('/image-view/{id}', function($id) use ($app){
 //get image INFO
 $app->get('/image-pages/', function() use($app){
   $st = $app['pdo']->prepare('SELECT * FROM uploadinfo WHERE id = :id');
-  $st->bindParam(':id', $_SESSION['temp'];
+  $st->bindParam(':id', $_SESSION['temp']);
   $st->execute();
   $img = $st->fetch(PDO::FETCH_ASSOC);
 
