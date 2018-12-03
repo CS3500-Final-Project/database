@@ -111,9 +111,10 @@ nav a {
   align-items: stretch;
 
   flex-grow: 1;
+  justify-self: flex-end;
 
   width: fit-content;
-  min-width: 300px;
+  min-width: 400px;
   max-width: 600px;
 
   margin: 2px;
@@ -306,7 +307,9 @@ main {
 
 nav,
 .image-card-comment-section,
-.account-widget {
+.account-widget,
+.image-previews,
+.image-preview-container {
   background-color: #ccc;
 }
 
@@ -479,6 +482,9 @@ form label span {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: flex-start;
+  align-items: stretch;
 
   width: 100%;
 
