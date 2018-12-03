@@ -100,8 +100,13 @@ function attemptToLogin() {
   .then(
     function( response ) {
       hideLoadingModal();
+      //
+      if ( response ){
+        window.location.replace("./details.html");
+      }else{
+        alert("Invalid Username or Password");
+      }
 
-      window.location.replace("./details.html");
       //console.log( 'server response: ' + response );
     }
   )

@@ -195,7 +195,8 @@ $app->get('/account-details/{user}', function($user) use($app) {
   $userinfo = $st->fetch(PDO::FETCH_ASSOC);
   //now grab pics
   $st = $app['pdo']->prepare('SELECT * FROM uploadinfo WHERE username = :user');
-  $st->bindParam(':user', $user);
+  //$st->bindParam(':user', $user);
+  $st->bindParam(':user', $_SESSION['username']);
   $st->execute();
   $images = array();
   while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
