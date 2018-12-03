@@ -34,7 +34,7 @@
         </nav>
 
         <div class="account-widget" >
-          <div v-if="account.accountId === 0" >
+          <div v-if="accountData.accountId === 0" >
             <a href="/account-pages/account/create.html" >
               create account
             </a>
@@ -44,7 +44,7 @@
             </a>
           </div>
 
-          <div v-if="account.accountId !== 0">
+          <div v-if="accountData.accountId !== 0">
             <a href="/account"><span class="glyphicon glyphicon-user"></span>Account</a>
 
             <a href="/logout">
