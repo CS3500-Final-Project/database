@@ -1,0 +1,709 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      /*/
+        structure styling
+      //*/
+
+      * {
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+        background-color: #eec;
+
+        text-align: center;
+      }
+      body {
+        width: 100%;
+        height: 100%;
+
+        margin: 0;
+        padding: 0;
+
+        font-size: 100%;
+      }
+
+      button {
+        display: block;
+
+        flex-grow: 1;
+
+        width: fit-content;
+        min-width: 100px;
+        max-width: 160px;
+
+        margin: 4px;
+        border: thin solid black;
+        padding: 8px;
+      }
+
+      #app-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        width: 100%;
+        height: 100%;
+
+        margin: 0;
+        padding: 0;
+      }
+
+      header {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap-reverse;
+        align-content: stretch;
+        align-items: stretch;
+        justify-content: space-between;
+
+        margin: 0 8px 8px 8px;
+        border: thin solid black;
+        padding: 4px;
+
+        background-color: #887;
+      }
+      main {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: space-around;
+
+        margin: 8px 8px 8px 8px;
+        border: thin solid black;
+        padding: 16px;
+
+        background-color: #887;
+      }
+
+      nav {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        flex-grow: 1;
+
+        min-width: 400px;
+
+        margin: 4px;
+        border: thin solid black;
+        padding: 2px;
+      }
+      nav a {
+        display: block;
+
+        flex-grow: 1;
+
+        width: fit-content;
+        min-width: 100px;
+        max-width: 160px;
+
+        margin: 4px;
+        border: thin solid black;
+        padding: 8px;
+
+        text-decoration: none;
+      }
+
+      .account-widget {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: stretch;
+
+        flex-grow: 1;
+
+        width: fit-content;
+        min-width: 300px;
+        max-width: 600px;
+
+        margin: 2px;
+        border: thin solid black;
+        padding: 4px;
+      }
+      .account-widget a {
+        display: block;
+
+        width: fit-content;
+        min-width: 100px;
+
+        margin: 4px;
+        margin-left: 8px;
+        margin-right: 8px;
+        border: thin solid black;
+        padding: 8px;
+
+        text-decoration: none;
+        font-size: medium;
+      }
+      .account-widget button {
+        flex-grow: 0;
+
+        min-width: 40px;
+
+        margin: 4px;
+        margin-left: 8px;
+        margin-right: 8px;
+        padding-left: 12px;
+        padding-right: 12px;
+
+        font-size: small;
+      }
+
+      .image-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: stretch;
+        align-content: stretch;
+
+        width: 90%;
+        min-width: 480px;
+        max-width: 800px;
+
+        margin: 16px;
+        border: thin solid black;
+        padding: 4px;
+      }
+      .image-card-title-bar {
+        width: 90%;
+        min-width: 400px;
+
+        margin: auto;
+        margin-bottom: 8px;
+        border: thin solid black;
+        padding: 8px;
+      }
+      .image-card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        justify-items: stretch;
+        align-items: stretch;
+        align-content: center;
+
+        width: 90%;
+        min-width: 400px;
+        flex-grow: 1;
+
+        margin: auto;
+        margin-top: 8px;
+        border: thin solid black;
+        padding: 4px;
+      }
+      .image-card img {
+        display: block;
+        width: 90%;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+
+        margin: auto;
+
+        background-color: black;
+      }
+      .image-card > img,
+      .comment-card-body > img {
+        min-width: 300px;
+      }
+      .image-card-action-bar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+
+        min-width: 400px;
+
+        margin: 8px;
+        border: thin solid black;
+        padding: 8px;
+      }
+      .image-card-comment-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        align-content: center;
+
+        flex-grow: 1;
+
+        min-width: 400px;
+
+        margin: 8px;
+        border: thin solid black;
+        padding: 2px;
+      }
+
+      .comment-card {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+
+        min-width: 360px;
+
+        margin: 4px;
+        margin-bottom: 8px;
+        border: thin solid black;
+        padding: 4px;
+      }
+      .comment-card-profile {
+        display: flex;
+        flex-direction: column;
+
+        min-width: 100px;
+
+        margin-right: 4px;
+        border: thin solid black;
+        padding: 8px;
+      }
+      .comment-card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        flex-grow: 1;
+
+        min-width: 200px;
+
+        margin: 4px;
+        border: thin solid black;
+        padding: 8px;
+      }
+      .comment-card-action-bar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+
+        min-width: 160px;
+
+        margin: 4px;
+        border: thin solid black;
+        padding: 8px;
+      }
+
+      button {
+        border: thin solid black;
+        padding: 8px;
+      }
+
+
+      /*/
+        color styling
+      //*/
+      * {
+        background-color: #eee;
+      }
+
+      body,
+      #app-container {
+        background-color: #666;
+      }
+
+      header,
+      main {
+        background-color: #998;
+      }
+
+      nav,
+      .image-card-comment-section,
+      .account-widget {
+        background-color: #ccc;
+      }
+
+      .image-card,
+      .comment-card {
+        background-color: #ddc
+      }
+
+
+      /* interaction styling */
+      nav a,
+      .account-widget a,
+      button {
+        outline: thin solid black;
+        outline-offset: -2px;
+
+        background-color: #ee9;
+
+        font-weight: bold;
+
+        transition: all 160ms;
+      }
+      nav a:hover,
+      .account-widget a:hover,
+      button:hover {
+        outline-offset: -4px;
+
+        background-color: #ff9;
+      }
+      nav a:active,
+      .account-widget a:active,
+      button:active {
+        outline-offset: -6px;
+        outline-width: thick;
+
+        background-color: #ff6;
+      }
+
+
+    </style>
+  </head>
+
+  <body>
+    <div id="app-container" >
+      <header>
+        <!--<nav-bar></nav-bar>-->
+        <nav>
+          <a>
+            front page
+          </a>
+
+          <a>
+            upload
+          </a>
+
+          <a>
+            about
+          </a>
+        </nav>
+
+        <div class="account-widget">
+          <a>
+            account
+          </a>
+
+          <button>
+            logout
+          </button>
+        </div><!-- account-widget -->
+      </header>
+
+      <main>
+        <div class="image-card" >
+          <div class="image-card-title-bar" >
+            <h2>
+              {{ viewedImage.imageTitle }}
+            </h2>
+          </div><!-- image-card-title-bar -->
+
+          <img src="https://res.cloudinary.com/hws6kskjw/image/upload/v1543267309/user_images/zyfjat8qnm8f9hyjmhxn.jpg" />
+
+          <div class="image-card-body" >
+            <p>
+              some image details some image details <br>
+              some image details some image details <br>
+              some image details some image details <br>
+            </p>
+
+            <div class="image-card-action-bar" >
+              <button>
+                +
+              </button>
+
+              <button>
+                -
+              </button>
+
+              <button>
+                Favorite
+              </button>
+            </div><!-- image-card-action-bar -->
+
+            <div class="image-card-comment-section" >
+              <div class="comment-card" >
+                <div class="comment-card-profile" >
+                  <img src="http://res.cloudinary.com/hws6kskjw/image/upload/t_media_lib_thumb/v1543600949/user_images/pfhy7fgnzfm26kfedz6x.jpg"
+                    width="32px"
+                    height="32px" />
+
+                  <a href="accounts/6">
+                    <h3>
+                      display name
+                    </h3>
+                  </a>
+                </div><!-- comment-card-profile -->
+
+                <div class="comment-card-body" >
+                  <p>
+                    some brilliant insight from a stranger on the internet
+                  </p>
+
+                  <div class="comment-card-action-bar" >
+                    <button>
+                      +
+                    </button>
+
+                    <button>
+                      -
+                    </button>
+                  </div><!-- comment-card-action-bar -->
+
+                </div><!-- comment-card-body -->
+              </div><!-- comment-card -->
+
+              <div class="comment-card" >
+                <div class="comment-card-profile" >
+                  <img src="http://res.cloudinary.com/hws6kskjw/image/upload/t_media_lib_thumb/v1543600949/user_images/pfhy7fgnzfm26kfedz6x.jpg"
+                    width="32px"
+                    height="32px" />
+
+                  <a href="accounts/6">
+                    <h3>
+                      display name
+                    </h3>
+                  </a>
+                </div><!-- comment-card-profile -->
+
+                <div class="comment-card-body" >
+                  <p>
+                    some brilliant insight from a stranger on the internet
+                  </p>
+
+                  <div class="comment-card-action-bar" >
+                    <button>
+                      +
+                    </button>
+
+                    <button>
+                      -
+                    </button>
+                  </div><!-- comment-card-action-bar -->
+
+                </div><!-- comment-card-body -->
+              </div><!-- comment-card -->
+
+
+              <div class="comment-card" >
+                <div class="comment-card-profile" >
+                  <img src="http://res.cloudinary.com/hws6kskjw/image/upload/t_media_lib_thumb/v1543600949/user_images/pfhy7fgnzfm26kfedz6x.jpg"
+                    width="32px"
+                    height="32px" />
+
+                  <a href="accounts/6">
+                    <h3>
+                      display name
+                    </h3>
+                  </a>
+                </div><!-- comment-card-profile -->
+
+                <div class="comment-card-body" >
+                  <p>
+                    some brilliant insight from a stranger on the internet
+                  </p>
+
+                  <div class="comment-card-action-bar" >
+                    <button>
+                      +
+                    </button>
+
+                    <button>
+                      -
+                    </button>
+                  </div><!-- comment-card-action-bar -->
+
+                </div><!-- comment-card-body -->
+              </div><!-- comment-card -->
+
+
+              <div class="comment-card" >
+                <div class="comment-card-profile" >
+                  <img src="http://res.cloudinary.com/hws6kskjw/image/upload/t_media_lib_thumb/v1543600949/user_images/pfhy7fgnzfm26kfedz6x.jpg"
+                    width="32px"
+                    height="32px" />
+
+                  <a href="accounts/6">
+                    <h3>
+                      display name
+                    </h3>
+                  </a>
+                </div><!-- comment-card-profile -->
+
+                <div class="comment-card-body" >
+                  <p>
+                    some brilliant insight from a stranger on the internet
+                  </p>
+
+                  <div class="comment-card-action-bar" >
+                    <button>
+                      +
+                    </button>
+
+                    <button>
+                      -
+                    </button>
+                  </div><!-- comment-card-action-bar -->
+
+                </div><!-- comment-card-body -->
+              </div><!-- comment-card -->
+
+            </div><!-- image-card-comment-section -->
+          </div><!-- image-card-body -->
+        </div><!-- image-card -->
+
+
+        <div class="image-card" >
+          <div class="image-card-title-bar" >
+            <h2>
+              {{ viewedImage.imageTitle }}
+            </h2>
+          </div><!-- image-card-title-bar -->
+
+          <div class="image-card-body" >
+            <img src="https://res.cloudinary.com/hws6kskjw/image/upload/v1543267309/user_images/zyfjat8qnm8f9hyjmhxn.jpg" />
+
+            <p>
+              some image details some image details <br>
+              some image details some image details <br>
+              some image details some image details <br>
+            </p>
+
+            <div class="image-card-action-bar" >
+              <button>
+                +
+              </button>
+
+              <button>
+                -
+              </button>
+
+              <button>
+                Favorite
+              </button>
+            </div><!-- image-card-action-bar -->
+
+            <div class="image-card-comment-section" >
+              <div class="comment-card" >
+                <div class="comment-card-profile" >
+                  <img src="http://res.cloudinary.com/hws6kskjw/image/upload/t_media_lib_thumb/v1543600949/user_images/pfhy7fgnzfm26kfedz6x.jpg"
+                    width="32px"
+                    height="32px" />
+
+                  <a href="accounts/6">
+                    <h3>
+                      display name
+                    </h3>
+                  </a>
+                </div><!-- comment-card-profile -->
+
+                <div class="comment-card-body" >
+                  <p>
+                    some brilliant insight from a stranger on the internet
+                  </p>
+
+                  <div class="comment-card-action-bar" >
+                    <button>
+                      +
+                    </button>
+
+                    <button>
+                      -
+                    </button>
+                  </div><!-- comment-card-action-bar -->
+
+                </div><!-- comment-card-body -->
+              </div><!-- comment-card -->
+
+              <div class="comment-card" >
+                <div class="comment-card-profile" >
+                  <img src="http://res.cloudinary.com/hws6kskjw/image/upload/t_media_lib_thumb/v1543600949/user_images/pfhy7fgnzfm26kfedz6x.jpg"
+                    width="32px"
+                    height="32px" />
+
+                  <a href="accounts/6">
+                    <h3>
+                      display name
+                    </h3>
+                  </a>
+                </div><!-- comment-card-profile -->
+
+                <div class="comment-card-body" >
+                  <p>
+                    some brilliant insight from a stranger on the internet
+                  </p>
+
+                  <div class="comment-card-action-bar" >
+                    <button>
+                      +
+                    </button>
+
+                    <button>
+                      -
+                    </button>
+                  </div><!-- comment-card-action-bar -->
+
+                </div><!-- comment-card-body -->
+              </div><!-- comment-card -->
+
+
+              <div class="comment-card" >
+                <div class="comment-card-profile" >
+                  <img src="http://res.cloudinary.com/hws6kskjw/image/upload/t_media_lib_thumb/v1543600949/user_images/pfhy7fgnzfm26kfedz6x.jpg"
+                    width="32px"
+                    height="32px" />
+
+                  <a href="accounts/6">
+                    <h3>
+                      display name
+                    </h3>
+                  </a>
+                </div><!-- comment-card-profile -->
+
+                <div class="comment-card-body" >
+                  <p>
+                    some brilliant insight from a stranger on the internet
+                  </p>
+
+                  <div class="comment-card-action-bar" >
+                    <button>
+                      +
+                    </button>
+
+                    <button>
+                      -
+                    </button>
+                  </div><!-- comment-card-action-bar -->
+
+                </div><!-- comment-card-body -->
+              </div><!-- comment-card -->
+
+
+              <div class="comment-card" >
+                <div class="comment-card-profile" >
+                  <img src="http://res.cloudinary.com/hws6kskjw/image/upload/t_media_lib_thumb/v1543600949/user_images/pfhy7fgnzfm26kfedz6x.jpg"
+                    width="32px"
+                    height="32px" />
+
+                  <a href="accounts/6">
+                    <h3>
+                      display name
+                    </h3>
+                  </a>
+                </div><!-- comment-card-profile -->
+
+                <div class="comment-card-body" >
+                  <p>
+                    some brilliant insight from a stranger on the internet
+                  </p>
+
+                  <div class="comment-card-action-bar" >
+                    <button>
+                      +
+                    </button>
+
+                    <button>
+                      -
+                    </button>
+                  </div><!-- comment-card-action-bar -->
+
+                </div><!-- comment-card-body -->
+              </div><!-- comment-card -->
+
+            </div><!-- image-card-comment-section -->
+
+          </div><!-- image-card-body -->
+        </div><!-- image-card -->
+      </main>
+    </div><!-- app-container -->
+  </body>
+</html>
