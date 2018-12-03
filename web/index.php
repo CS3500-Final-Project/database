@@ -325,7 +325,7 @@ $app->post('/vote/', function( Request $request) use ($app){
 
 });
 
-$app->get('/image-view/{id}' function($id) use ($app){
+$app->get('/image-view/{id}', function($id) use ($app){
   $_SESSION['temp'] = $id;
   return $app->redirect('/image-pages/image/view.html');
 });
