@@ -236,7 +236,7 @@ function onConfirmImageDetailsButtonPressed(
 
       hideLoadingModal();
 
-      let parsedResponse = JSON.parse( response );
+      //let parsedResponse = JSON.parse( response );
 
       //alert( "Your upload was successful! Here is it's url: " + parsedResponse.secure_url );
       showSuccessResultModal();
