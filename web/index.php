@@ -82,7 +82,7 @@ $app->post(
       $st = $app['pdo']->prepare('SELECT id FROM uploadinfo WHERE url = :url');
       $st->bindParam(':url', $url);
       $st->execute();
-      $imgid = $st->fetch(PDO:FETCH_ASSOC);
+      $imgid = $st->fetch(PDO::FETCH_ASSOC);
       //user automatically gives is one upvote
       $st = $app['pdo']->prepare('INSERT INTO votes (imgid, vote, userid) VALUES (:imgid, :vote, :userid)');
       $st->bindParam(':imgid',$imgid['imgid']);
