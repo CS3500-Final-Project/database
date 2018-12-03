@@ -154,7 +154,6 @@ $app->post('/create/', function( Request $request ) use ($app){
         "displayname"=>$requestBody['displayName']
         //"images"=>"No Images Yet, Go Upload Some!"
     ));
-    ));
   }
   else{  //otherwise return success or route to account details
     return false;
