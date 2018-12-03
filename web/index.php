@@ -343,12 +343,6 @@ $app->get('/image-pages/{id}', function($id) use($app){
   $st->execute();
   $down = $st->fetch(PDO::FETCH_ASSOC);
 
-  imageId: 0,
-  uploaderUsername: '',
-  imageDescription: '',
-  upvotes: 0,
-  downvotes: 0,
-  comments: []
 
   return $app->json(array(
     "imageId"=>$img['id'],
