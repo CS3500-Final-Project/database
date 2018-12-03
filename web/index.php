@@ -5,17 +5,7 @@ use Symfony\Component\HttpFoundation\Request;
 //session start goes here?
 session_start();
 //app and var decs
-  //check to see if user is logged in
-function loggedIn () {
-  if( is_null($_SESSION['username']) ){
-    return false;
-  }else if( isset($_SESSION['username']) ){
-    return true;
-  }
-  else{
-    return "crap";
-  }
-}
+
 $app = new Silex\Application();
 $app['debug'] = true;
 //$app['debug'] = false;
@@ -92,15 +82,15 @@ $app->post(
 
 //front page
 $app->get('/fp/', function() use($app){
-  $st = $app['pdo']->prepare('SELECT * FROM uploadinfo');
+  $st = $app['pdo']->prepare('SELECT * FROM uploadinfo, votes WHERE uploadinfo.id = votes.imgid');
   $st->execute();
 
   $images = array();
   while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
-    $app['monolog']->addDebug('Row ' . $row['id']);
     $images[] = $row;
   }
-  //$app->json(array('images' => $images));
+
+
   return $app->json(array('images' => $images));
 });
 
@@ -288,10 +278,10 @@ $app->post('/vote/', function( Request $request) use ($app){
   $st->execute();
   $uid = $st->fetch(PDO::FETCH_ASSOC);
   //check to see if they have voted, if null then put in vote
-  $st = $app['pdo']->prepare('SELECT imgid FROM votes WHERE userid = :uid');
+  $st = $app['pdo']->prepare('SELECT imgid, vote FROM votes WHERE userid = :uid');
   $st->bindParam(':uid', $uid['uid']);
   $img = $st->fetch(PDO::FETCH_ASSOC);
-  if( $img['imgid'] != $requestBody['imageid'] ){
+  if( $img['imgid'] != $requestBody['imageid'] || $img['vote'] != $requestBody['vote'] ){
     //put in their upvote
     $st = $app['pdo']->prepare('INSERT INTO votes (imgid, vote, userid) VALUES (:imgid, :vote, :userid)');
     $st->bindParam(':imgid',$requestBody['imageid']);
@@ -311,7 +301,12 @@ $app->post('/vote/', function( Request $request) use ($app){
   }
 
 });
-
+//---------get image upvotes and downvotes----------
+/*
+$app->post('/getvotes/', function( Request $request ) use ($app){
+  return $app->
+});
+*/
 //---------------------------------------------------------------------------REDIRECTS---------------------------------------------------------------
 //account details, find their posts
 //$app->post('',)
