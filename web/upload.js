@@ -31,6 +31,22 @@ var modalData = {
 var imageUploadInfo;
 
 
+var accountData = {
+  accountId : 0,
+  displayName: ''
+};
+
+
+let storedAccountData = localStorage.getItem( 'accountData' );
+if (
+  storedAccountData
+) {
+  parsedAccountData = JSON.parse( storedAccountData );
+  // todo check if valid
+  accountData = parsedAccountData;
+}
+
+
 function initializeImageDetails() {
   imageDetailsFormData.imageTitle = '';
   imageDetailsFormData.imageDescription = '';
@@ -523,7 +539,8 @@ var vueRoot = new Vue(
     el: '#app-container',
     data: {
       imageDetailsFormData: imageDetailsFormData,
-      modalData: modalData
+      modalData: modalData,
+      accountData: accountData
     }
   }
 );

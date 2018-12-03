@@ -13,6 +13,15 @@ var pageData = {
     downvotes: 0,
     comments: []
   }
+};
+
+let storedAccountData = localStorage.getItem( 'accountData' );
+if (
+  storedAccountData
+) {
+  parsedAccountData = JSON.parse( storedAccountData );
+  // todo check if valid
+  pageData.account = parsedAccountData;
 }
 
 /*

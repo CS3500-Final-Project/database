@@ -1,5 +1,19 @@
 
 
+var accountData = {
+  accountId : 0,
+  displayName: ''
+};
+
+
+let storedAccountData = localStorage.getItem( 'accountData' );
+if (
+  storedAccountData
+) {
+  parsedAccountData = JSON.parse( storedAccountData );
+  // todo check if valid
+  accountData = parsedAccountData;
+}
 
 var imagePreviews = [];
 
@@ -7,7 +21,8 @@ var vueRoot = new Vue(
   {
     el: '#app-container',
     data: {
-      imagePreviews: imagePreviews
+      imagePreviews: imagePreviews,
+      accountData: accountData
     }
   }
 );

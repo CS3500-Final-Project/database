@@ -94,6 +94,13 @@ function attemptToLogin() {
       hideLoadingModal();
       //
       if ( response ){
+        let parsedResponse = JSON.parse(
+          response
+        );
+        localStorage.setItem(
+          'accountData',
+          response
+        );
         window.location.replace("./details.html");
       }else{
         alert("Invalid Username or Password");

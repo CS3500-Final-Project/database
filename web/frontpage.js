@@ -4,6 +4,16 @@ var accountData = {
   displayName: ''
 };
 
+
+let storedAccountData = localStorage.getItem( 'accountData' );
+if (
+  storedAccountData
+) {
+  parsedAccountData = JSON.parse( storedAccountData );
+  // todo check if valid
+  accountData = parsedAccountData;
+}
+
 function makeGetRequest(
   url
 ) {
