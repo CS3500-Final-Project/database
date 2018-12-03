@@ -26,11 +26,18 @@
       <header>
         <!--<nav-bar></nav-bar>-->
         <nav>
-          <a href="/frontpage.html"><span class="glyphicon glyphicon-home"></span> Home</a>
+          <a href="/frontpage.html">
+            Home
+          </a>
 
-          <a href="/upload"><span class="glyphicon glyphicon-cloud-upload"></span>Upload</a>
+          <a href="/upload"
+            v-if="account.accountId !== 0">
+            Upload
+          </a>
 
-          <a href="/about"><span class="glyphicon glyphicon-about"></span>About</a>
+          <a href="/about">
+            About
+          </a>
         </nav>
 
         <div class="account-widget" >
@@ -45,7 +52,9 @@
           </div>
 
           <div v-if="account.accountId !== 0">
-            <a href="/account"><span class="glyphicon glyphicon-user"></span>Account</a>
+            <a href="/account">
+              Account
+            </a>
 
             <a href="/logout">
               Logout
@@ -56,7 +65,7 @@
 
       <main>
         <div class="image-card" >
-          <div class="image-card-title-bar" >
+          <div class="title-bar" >
             <h2>
               {{ viewedImageData.imageTitle }}
             </h2>
@@ -77,7 +86,7 @@
               {{ ( viewedImageData.upvotes - viewedImageData.downvotes ) }}
             </p>
 
-            <div class="image-card action-bar" >
+            <div class="action-bar" >
               <button onclick="upvoteImage( event );">
                 +
               </button>

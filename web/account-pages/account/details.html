@@ -28,11 +28,18 @@
       <header>
         <!--<nav-bar></nav-bar>-->
         <nav>
-          <a href="/frontpage.html"><span class="glyphicon glyphicon-home"></span> Home</a>
+          <a href="/frontpage.html">
+            Home
+          </a>
 
-          <a href="/upload"><span class="glyphicon glyphicon-cloud-upload"></span>Upload</a>
+          <a href="/upload"
+            v-if="account.accountId !== 0">
+            Upload
+          </a>
 
-          <a href="/about"><span class="glyphicon glyphicon-about"></span>About</a>
+          <a href="/about">
+            About
+          </a>
         </nav>
 
         <div class="account-widget" >
@@ -68,7 +75,7 @@
             You Haven't Uploaded Any Images Yet
           </p>
 
-          <div id="image-previews"
+          <div class="image-previews"
             v-if="imagePreviews.length !== 0" >
             <div v-for="imagePreview in imagePreviews"
               class="image-preview" >

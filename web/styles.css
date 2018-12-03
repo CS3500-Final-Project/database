@@ -150,6 +150,14 @@ nav a {
   font-size: small;
 }
 
+.title-bar {
+  width: 90%;
+
+  margin: auto;
+  margin-bottom: 8px;
+  border: thin solid black;
+  padding: 16px;
+}
 .action-bar {
   display: flex;
   flex-direction: row;
@@ -175,13 +183,9 @@ nav a {
   border: thin solid black;
   padding: 4px;
 }
-.image-card-title-bar {
-  width: 90%;
+.image-card .title-bar {
   min-width: 400px;
 
-  margin: auto;
-  margin-bottom: 8px;
-  border: thin solid black;
   padding: 8px;
 }
 .image-card-body {
