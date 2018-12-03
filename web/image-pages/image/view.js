@@ -39,8 +39,39 @@ var comment = {
 //*/
 
 
-function upvoteImage() {}
-function downvoteImage() {}
+function upvoteImage() {
+  let payload = {
+    vote: 1
+  };
+
+  postStuffToServer(
+    payload,
+    '/vote/'
+  )
+  .then(
+    ( response ) => {
+      console.log( 'received response from server' );
+      console.log( response );
+    } // response callback
+  );
+  //imageid and vote
+}
+function downvoteImage() {
+  let payload = {
+    vote: 1
+  };
+
+  postStuffToServer(
+    payload,
+    '/vote/'
+  )
+  .then(
+    ( response ) => {
+      console.log( 'received response from server' );
+      console.log( response );
+    } // response callback
+  );
+}
 
 function favoriteImage() {}
 

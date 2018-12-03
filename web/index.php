@@ -304,10 +304,10 @@ $app->post('/vote/', function( Request $request) use ($app){
   $st = $app['pdo']->prepare('SELECT imgid, vote FROM votes WHERE userid = :uid');
   $st->bindParam(':uid', $uid['uid']);
   $img = $st->fetch(PDO::FETCH_ASSOC);
-  if( $img['imgid'] != $requestBody['imageid'] || $img['vote'] != $requestBody['vote'] ){
+  if( $img['imgid'] != $_SESSION['temp'] || $img['vote'] != $requestBody['vote'] ){
     //put in their upvote
     $st = $app['pdo']->prepare('INSERT INTO votes (imgid, vote, userid) VALUES (:imgid, :vote, :userid)');
-    $st->bindParam(':imgid',$requestBody['imageid']);
+    $st->bindParam(':imgid',$_SESSION['temp']);
     $st->bindParam(':vote',$requestBody['vote']);
     $st->bindParam('userid',$uid['uid']);
     $st->execute();
@@ -315,7 +315,7 @@ $app->post('/vote/', function( Request $request) use ($app){
     //
     return 'vote successful';
   }
-  else if( $img['imgid'] == $requestBody['imageid'] ){
+  else if( $img['imgid'] == $_SESSION['temp'] ){
     //theyve already upvoted
     return 'you have already voted on this image';
   }
