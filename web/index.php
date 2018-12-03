@@ -189,7 +189,8 @@ $app->post('/login/', function(Request $request) use($app){
 //---------------account details server call---------------
 $app->get('/account-details/{user}', function($user) use($app) {
   $st = $app['pdo']->prepare('SELECT * FROM accountinfo WHERE username = :user');
-  $st->bindParam(':user', $user);
+  //$st->bindParam(':user', $user);
+  $st->bindParam(':user', $_SESSION['username']);
   $st->execute();
   $userinfo = $st->fetch(PDO::FETCH_ASSOC);
   //now grab pics
