@@ -432,15 +432,15 @@ Vue.component(
     template: `
       <modal>
         <h2 slot="header">
-          Login Successful
+          Upload Successful
         </h2>
 
         <p slot="body">
-          Welcome back
+          You can view your uploads on your account page
         </p>
 
         <div slot="footer">
-          <a href="./details.html">
+          <a href="/account-pages/account/details.html">
             Continue to account
           </a>
         </div>
