@@ -97,6 +97,7 @@ function attemptToLogin() {
         let parsedResponse = JSON.parse(
           response
         );
+        // todo check if valid
         localStorage.setItem(
           'accountData',
           response

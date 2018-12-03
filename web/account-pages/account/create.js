@@ -85,9 +85,16 @@ function attemptToCreateAccount() {
       if( response ){
         //alert( "You Have Created An Account!" );
         //window.location.replace("./details.html");
+        let parsedResponse = JSON.parse( response );
+        // todo check if valid
+        localStorage.setItem(
+          'accountData',
+          response
+        );
 
         showSuccessResultModal();
-      }else{
+      }
+      else {
         //alert( "username already exists!" );
         showFailResultModal();
       }
