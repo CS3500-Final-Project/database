@@ -152,14 +152,13 @@ $app->post('/create/', function( Request $request ) use ($app){
     $result = $st->fetch(PDO::FETCH_ASSOC);
 
     $_SESSION['username'] = $requestBody['username'];
-    return $app->json(array(
+
       return json_encode(array(
           "uid"=>$result['uid'],
           "username"=>$result['username'],
           "bio"=>$result['bio'],
           "displayname"=>$result['displayname']
       ));
-    ));
   }
   else{  //otherwise return success or route to account details
     return false;
