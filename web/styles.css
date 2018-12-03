@@ -468,15 +468,23 @@ form label span {
   padding: 16px;
 }
 
+.image-preview-container {
+  width: 90%;
+
+  margin: auto;
+  border: thin solid black;
+  padding: 16px;
+}
 .image-previews {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 
-  width: 90%;
-  margin: auto;
-  border: thin solid black;
-  padding: 16px;
+  width: 100%;
+
+  margin: 0;
+  border: none;
+  padding: 0;
 }
 
 .image-preview {
