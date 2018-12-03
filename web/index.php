@@ -352,6 +352,7 @@ $app->get('/image-pages/', function() use($app){
 
   return $app->json(array(
     "imageId"=>$img['id'],
+    "url"=>$img['url'],
     "uploaderUsername"=>$img['username'],
     "imageDescription"=>$img['description'],
     "upvotes"=>$up['upvotes'],
