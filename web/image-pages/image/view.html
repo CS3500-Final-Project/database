@@ -79,20 +79,19 @@
             </p>
 
             <p>
-              {{ pageData.viewedImageData.upvotes }}
-
-              {{ pageData.viewedImageData.downvotes }}
-
-              {{ ( pageData.viewedImageData.upvotes - pageData.viewedImageData.downvotes ) }}
+              Popularity:
+              {{ ( pageData.viewedImageData.upvotes + pageData.viewedImageData.downvotes ) }}
             </p>
 
             <div class="action-bar" >
               <button onclick="upvoteImage( event );">
                 +
+                {{ pageData.viewedImageData.upvotes }}
               </button>
 
               <button onclick="downvoteImage( event );">
                 -
+                {{ pageData.viewedImageData.downvotes }}
               </button>
 
               <button onclick="favoriteImage( event );">
