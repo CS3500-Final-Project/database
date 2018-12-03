@@ -44,7 +44,20 @@ function makeGetRequest(
   return promise;
 } // makeGetRequest
 var imagePreviews = [];
-makeGetRequest('/fp/').then(
+
+var view = new Vue(
+  {
+    el: '#app-container',
+    data: {
+      imagePreviews: imagePreviews,
+      accountData: accountData
+    }
+  }
+);
+
+
+makeGetRequest('/fp/')
+.then(
   ( response ) => {
     // response might be text (a JSON string)
     // or it could be an object...
@@ -70,13 +83,3 @@ makeGetRequest('/fp/').then(
   } // response callback
 );
 
-
-var view = new Vue(
-  {
-    el: '#app-container',
-    data: {
-      imagePreviews: imagePreviews,
-      accountData: accountData
-    }
-  }
-);

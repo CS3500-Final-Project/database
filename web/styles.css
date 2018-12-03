@@ -485,8 +485,7 @@ form label span {
   flex-wrap: nowrap;
 
   width: 200px;
-  margin: auto;
-  margin-bottom: 8px;
+  margin: 8px;
   border: thin solid black;
   padding: 8px;
 }
