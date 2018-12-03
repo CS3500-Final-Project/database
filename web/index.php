@@ -324,11 +324,37 @@ $app->post('/vote/', function( Request $request) use ($app){
 
 });
 //------------------------------------------------------------get image upvotes and downvotes---------------------------------------------------------------------------------------
-/*
+
 $app->post('/getvotes/', function( Request $request ) use ($app){
-  return $app->
+  $contentType = isset($_SERVER['CONTENT_TYPE'])
+    ? trim($_SERVER['CONTENT_TYPE'])
+    : "";
+  if (
+    strcasecmp($contentType, "application/json") != 0
+  ) {
+    throw new Exception("Content type must be application/json");
+  }
+  $requestBody = json_decode(
+    $request->getContent(),
+    true
+  );
+  //upvotes
+  $st = $app['pdo']->prepare('SELECT sum(vote) AS upvotes FROM votes WHERE imgid = :id AND vote = 1');
+  $st->bindParam(':id', $requestBody['id']);
+  $st->execute();
+  $up = $st->fetch(PDO::FETCH_ASSOC);
+  //downvotes
+  $st = $app['pdo']->prepare('SELECT sum(vote) AS downvotes FROM votes WHERE imgid = :id AND vote = -1');
+  $st->bindParam(':id', $requestBody['id']);
+  $st->execute();
+  $down = $st->fetch(PDO::FETCH_ASSOC);
+
+  return $app->json(array(
+    "upvotes"=>$up['upvotes'],
+    "downvotes"=>$down['downvotes']
+  ));
 });
-*/
+
 $app->get('/logout/', function() use ($app){
   $_SESSION = array();
   session_destroy();
@@ -337,7 +363,7 @@ $app->get('/logout/', function() use ($app){
 
 //---------------------------------------------------------------------------REDIRECTS---------------------------------------------------------------
 //account details, find their posts
-//$app->post('',)
+
 //direct to login or account details
 $app->get('/account/', function() use ($app){
   //if no session go to login.php
