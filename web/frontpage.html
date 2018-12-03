@@ -48,15 +48,15 @@
               v-for="imagePreview in imagePreviews" >
               <img v-bind:src="imagePreview.thumbUrl" />
 
-              <a v-bind:href="'/image-pages/image/' + imagePreview.id">
+              <a v-bind:href="'/image-pages/' + imagePreview.id">
                 {{ imagePreview.title }}
               </a>
               <!-- matt is adding this ------------------------------------------>
-              <a v-bind:href="'/account/' + imagePreview.username">
-                {{ imagePreview.username }}
+              <a v-bind:href="'/account-details/' + imagePreview.username">
+                Uploaded By {{ imagePreview.username }}
               </a>
               <a v-bind:href="imagePreview.upvotes">
-                {{ imagePreview.upvotes }}
+                {{ imagePreview.upvotes }} Upvotes
               </a>
             </div><!-- image-preview -->
           </div><!-- image-previews -->

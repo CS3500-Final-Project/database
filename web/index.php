@@ -230,6 +230,7 @@ $app->get('/account-details/{user}', function($user) use($app) {
   }
 });
 
+
 /* ----------------------Personal account editing? ----------------------------*/
 $app->post('/account-update/', function( Request $request ) use($app){
   $contentType = isset($_SERVER['CONTENT_TYPE'])
@@ -323,8 +324,28 @@ $app->post('/vote/', function( Request $request) use ($app){
   }
 
 });
-//------------------------------------------------------------get image upvotes and downvotes---------------------------------------------------------------------------------------
 
+//get image INFO
+$app->get('/image-pages/{id}', function($id) use($app){
+
+  //upvotes
+  $st = $app['pdo']->prepare('SELECT sum(vote) AS upvotes FROM votes WHERE imgid = :id AND vote = 1');
+  $st->bindParam(':id', $id);
+  $st->execute();
+  $up = $st->fetch(PDO::FETCH_ASSOC);
+  //downvotes
+  $st = $app['pdo']->prepare('SELECT sum(vote) AS downvotes FROM votes WHERE imgid = :id AND vote = -1');
+  $st->bindParam(':id', $id);
+  $st->execute();
+  $down = $st->fetch(PDO::FETCH_ASSOC);
+
+  return $app->json(array(
+    "upvotes"=>$up['upvotes'],
+    "downvotes"=>$down['downvotes']
+  ));
+});
+
+//------------------------------------------------------------get image upvotes and downvotes---------------------------------------------------------------------------------------
 $app->post('/getvotes/', function( Request $request ) use ($app){
   $contentType = isset($_SERVER['CONTENT_TYPE'])
     ? trim($_SERVER['CONTENT_TYPE'])
