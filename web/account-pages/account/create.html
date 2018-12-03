@@ -32,26 +32,6 @@
 
           <a href="/about"><span class="glyphicon glyphicon-about"></span>About</a>
         </nav>
-
-        <div class="account-widget" >
-          <div v-if="account.accountId === 0" >
-            <a href="/account-pages/account/create.html" >
-              create account
-            </a>
-
-            <a href="/account-pages/account/login.html" >
-              login
-            </a>
-          </div>
-
-          <div v-if="account.accountId !== 0">
-            <a href="/account"><span class="glyphicon glyphicon-user"></span>Account</a>
-
-            <a href="/logout">
-              Logout
-            </a>
-          </div>
-        </div><!-- account-widget -->
       </header>
 
       <main>
