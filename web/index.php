@@ -343,7 +343,8 @@ $app->get('/image-pages/{id}', function($id) use($app){
   $st->execute();
   $down = $st->fetch(PDO::FETCH_ASSOC);
 
-
+  $app->redirect('/image-pages/image/view.html');
+  
   return $app->json(array(
     "imageId"=>$img['id'],
     "uploaderUsername"=>$img['username'],
