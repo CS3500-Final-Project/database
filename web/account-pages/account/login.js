@@ -16,20 +16,12 @@ var modalData = {
 
 function attemptToLogin() {
   // remove old username and password errors
-  for (
-    let i = formData.usernameErrors.length;
-    i > 0;
-    i--
-  ) {
-    formData.usernameErrors.pop();
-  }
-  for (
-    let i = formData.passwordErrors.length;
-    i > 0;
-    i--
-  ) {
-    formData.passwordErrors.pop();
-  }
+  emptyErrorsArray(
+    formData.usernameErrors
+  );
+  emptyErrorsArray(
+    formData.passwordErrors
+  );
 
   // convert to combined promises?
   // probably not necessary to do
@@ -126,7 +118,6 @@ function attemptToLogin() {
 function onLoginButtonPressed(
   event
 ) {
-  console.log( 'login button pressed' );
   event.preventDefault();
 
   attemptToLogin();
