@@ -82,7 +82,8 @@ $app->post(
 
 //front page
 $app->get('/fp/', function() use($app){
-  $st = $app['pdo']->prepare('SELECT * FROM uploadinfo, votes WHERE uploadinfo.id = votes.imgid');
+  $st = $app['pdo']->prepare('SELECT uploadinfo.id, uploadinfo.url, uploadinfo.username, sum(votes.vote) as upvotes
+    FROM uploadinfo, votes WHERE uploadinfo.id = votes.imgid and votes.vote = 1 group by uploadinfo.id order by upvotes desc');
   $st->execute();
 
   $images = array();
