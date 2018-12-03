@@ -68,7 +68,7 @@
               v-for="imagePreview in imagePreviews" >
               <img v-bind:src="imagePreview.thumbUrl" />
 
-              <a v-bind:href="'/image-pages/' + imagePreview.id">
+              <a v-bind:href="'/image-pages/image/view.html' + imagePreview.id">
                 {{ imagePreview.title }}
               </a>
               <!-- matt is adding this ------------------------------------------>
