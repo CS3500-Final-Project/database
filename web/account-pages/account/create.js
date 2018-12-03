@@ -229,7 +229,7 @@ Vue.component(
         </h2>
 
         <p slot="body">
-          todo: show errors
+          Username is invalid
         </p>
 
         <div slot="footer">

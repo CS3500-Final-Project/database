@@ -146,7 +146,7 @@ $app->post('/create/', function( Request $request ) use ($app){
     $st->bindParam(':displayname',$requestBody['displayName']);
     $st->execute();
 
-    $_SESSION['user'] = $requestBody['username'];
+    $_SESSION['username'] = $requestBody['username'];
     return $app->json(array(
         //"uid"=>$userinfo['uid'],
         "username"=>$requestBody['username'],
