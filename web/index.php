@@ -330,7 +330,7 @@ $app->get('/image-pages/{id}', function($id) use($app){
   $st = $app['pdo']->prepare('SELECT * FROM uploadinfo WHERE id = :id');
   $st->bindParam(':id', $id);
   $st->execute();
-  $img = $st->fetch(PDO::FETCH_ASSOC)
+  $img = $st->fetch(PDO::FETCH_ASSOC);
 
   //upvotes
   $st = $app['pdo']->prepare('SELECT sum(vote) AS upvotes FROM votes WHERE imgid = :id AND vote = 1');
