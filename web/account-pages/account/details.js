@@ -21,6 +21,7 @@ makeGetRequest('/account-details/admin')
     //debugging
     console.log(userdetails);
     document.getElementById('accountheader').innerHTML = userdetails.displayname;
+    document.getElementById('user-bio').innerHTML = userdetails.bio;
     //testing
 
     for(var i=0; i<userdetails.images.length; i++){

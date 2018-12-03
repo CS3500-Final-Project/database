@@ -323,6 +323,12 @@ $app->post('/getvotes/', function( Request $request ) use ($app){
   return $app->
 });
 */
+$app->get('/logout/', function() use ($app){
+  $_SESSION = array();
+  session_destroy();
+  return $app->redirect('/frontpage.html');
+});
+
 //---------------------------------------------------------------------------REDIRECTS---------------------------------------------------------------
 //account details, find their posts
 //$app->post('',)
