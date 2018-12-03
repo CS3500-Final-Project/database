@@ -1,61 +1,42 @@
-<title>Image~In</title>
+<!doctype html>
+<html>
+  <head>
+    <title>
+      Create Account
+    </title>
 
+    <script type="text/javascript"
+      src="/vue-dev.js">
+    </script>
 
-<style>
-  .image-previews {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+    <link rel="stylesheet"
+      href="/styles.css" />
 
-  width: 80%;
-  margin: auto;
-  border: thin solid black;
-  padding: 16px;
-}
+    <script type="text/javascript"
+      src="/common.js" >
+    </script>
 
-.image-preview {
-  width: 400px;
-  margin: auto;
-  margin-bottom: 8px;
-  border: thin solid black;
-  padding: 8px;
-}
-</style>
-<!--took out bootstrap and jquery -->
-<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="./frontpage.js"
+      defer="defer" >
+    </script>
+  </head>
 
-<script type="text/javascript" src="./vue-dev.js"></script>
-<link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />
-<nav class="navbar navbar-default navbar-static-top navbar-inverse">
-  <div class="container">
-    <ul class="nav navbar-nav">
-      <li>
-        <a href="/frontpage.html"><span class="glyphicon glyphicon-home"></span> Home</a>
-      </li>
+  <body>
+    <div id="app-container" >
+      <header>
+        <!--<nav-bar></nav-bar>-->
+        <nav>
+          <a href="/frontpage.html"><span class="glyphicon glyphicon-home"></span> Home</a>
 
-      <li>
-        <a href="#"><span class="glyphicon glyphicon-hdd"></span>Raw Data</a>
-      </li>
-      <li>
-        <a href="/upload"><span class="glyphicon glyphicon-cloud-upload"></span>Upload</a>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li class="navbar-right">
-        <a href="/account"><span class="glyphicon glyphicon-user"></span>Account</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-<link rel="stylesheet"
-  href="./account-pages/styles.css" >
+          <a href="/upload"><span class="glyphicon glyphicon-cloud-upload"></span>Upload</a>
 
-<h1> Most Popular </h1>
+          <a href="/about"><span class="glyphicon glyphicon-about"></span>About</a>
+        </nav>
+      </header>
 
-<!--Displaying top images -->
-<div id="app-container">
+  <main>
+    <h1> Most Popular </h1>
+  </main>
   <div class="image-preview-container" >
           <p v-if="imagePreviews.length === 0" >
             loading images...
@@ -63,15 +44,15 @@
 
           <div id="image-previews"
             v-if="imagePreviews.length !== 0" >
-            <div v-for="imagePreview in imagePreviews"
-              class="image-preview" >
+            <div class="image-preview"
+              v-for="imagePreview in imagePreviews" >
               <img v-bind:src="imagePreview.thumbUrl" />
 
-              <a v-bind:href="imagePreview.secureUrl">
+              <a v-bind:href="'/image-pages/image/' + imagePreview.id">
                 {{ imagePreview.title }}
               </a>
               <!-- matt is adding this ------------------------------------------>
-              <a v-bind:href="imagePreview.username">
+              <a v-bind:href="'/account/' + imagePreview.username">
                 {{ imagePreview.username }}
               </a>
               <a v-bind:href="imagePreview.upvotes">
@@ -81,78 +62,6 @@
           </div><!-- image-previews -->
         </div><!-- image-preview-container -->
 </div> <!-- app-container -->
-<script>
-function makeGetRequest(
-    url
-  ) {
-    let promise = new Promise(
-      function(
-        resolve,
-        reject
-      ) {
-        var request = new XMLHttpRequest();
-
-        request.open(
-          "GET",
-          url
-        );
-
-        request.onload = function() {
-          let status = this.status;
-
-          if (
-            status >= 200
-            && status < 300
-          ) {
-            resolve(
-              this.response
-            );
-          }
-          else {
-            reject(
-              this.statusText
-            );
-          }
-        }; // onload callback
-
-        request.send();
-      } // executor
-    ); // promise
-
-    return promise;
-  } // makeGetRequest
-  var imagePreviews = [];
-  makeGetRequest('/fp/').then(
-    ( response ) => {
-      // response might be text (a JSON string)
-      // or it could be an object...
-      // I was getting JSON strings even with
-      // the headers set up to return JSON
-      let fp_images = JSON.parse(response);
-      console.log( 'received response from server' );
-      //console.log(response);
-      //testing
-      //let tiles = document.getElementById('tiles');
-      //tiles.innerHTML = '<hr></br>';
-      for(var i=0; i<fp_images.images.length; i++){
-        let imagePreview = fp_images.images[i];
-        //https://res.cloudinary.com/hws6kskjw/image/upload/v1543265795/qwh3dlfeqygdtitheijg.jpg
-        //https://res.cloudinary.com/hws6kskjw/image/upload/t_media_lib_thumb/v1543265795/qwh3dlfeqygdtitheijg.jpg
-        let urlParts = imagePreview.url.split( 'upload/' );
-        imagePreview.thumbUrl = urlParts.join( 'upload/t_media_lib_thumb/' );
-        //  tiles.innerHTML += fp_images.images[i].url + '<br>';
-        //  tiles.innerHTML += fp_images.images[i].uploaddate + '<br><br>';
-        imagePreviews.push( imagePreview );
-      }
-
-    } // response callback
-  );
-var view = new Vue(
-  {
-    el: '#app-container',
-    data: {
-      imagePreviews: imagePreviews
-    }
-  }
-);
-</script>
+</main>
+</body>
+</html>

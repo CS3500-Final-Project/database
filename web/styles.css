@@ -454,3 +454,39 @@ form label span {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
+
+
+
+.account-card {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+
+  width: 80%;
+  margin: auto;
+  border: thin solid black;
+  padding: 16px;
+}
+
+.image-previews {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  width: 80%;
+  margin: auto;
+  border: thin solid black;
+  padding: 16px;
+}
+
+.image-preview {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+
+  width: 400px;
+  margin: auto;
+  margin-bottom: 8px;
+  border: thin solid black;
+  padding: 8px;
+}

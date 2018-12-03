@@ -1,41 +1,19 @@
 <!doctype html>
 <html>
   <head>
-    <title>Image~In</title>
-
-    <style>
-      .image-previews {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-
-        width: 80%;
-        margin: auto;
-        border: thin solid black;
-        padding: 16px;
-      }
-
-      .image-preview {
-        width: 400px;
-        margin: auto;
-        margin-bottom: 8px;
-        border: thin solid black;
-        padding: 8px;
-      }
-    </style>
-    <!--took out bootstrap and jquery -->
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
-    <script type="text/javascript" src="/vue-dev.js"></script>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />
-
-    <link rel="stylesheet"
-      href="/account-pages/styles.css" />
+    <title>
+      Upload Image
+    </title>
 
     <script type="text/javascript"
-      src="../../common.js" >
+      src="/vue-dev.js">
+    </script>
+
+    <link rel="stylesheet"
+      href="/styles.css" />
+
+    <script type="text/javascript"
+      src="/common.js" >
     </script>
 
     <script type="text/javascript"
@@ -48,33 +26,43 @@
   <body>
     <div id="app-container">
       <header>
-        <nav class="navbar navbar-default navbar-static-top navbar-inverse">
-          <div class="container">
-            <ul class="nav navbar-nav">
-              <li>
-                <a href="/frontpage.html"><span class="glyphicon glyphicon-home"></span> Home</a>
-              </li>
+        <!--<nav-bar></nav-bar>-->
+        <nav>
+          <a href="/frontpage.html"><span class="glyphicon glyphicon-home"></span> Home</a>
 
-              <li>
-                <a href="/db"><span class="glyphicon glyphicon-hdd"></span>Raw Data</a>
-              </li>
-              <li>
-                <a href="/upload"><span class="glyphicon glyphicon-cloud-upload"></span>Upload</a>
-              </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li class="navbar-right">
-                <a href="/account"><span class="glyphicon glyphicon-user"></span>Account</a>
-              </li>
-            </ul>
-          </div>
+          <a href="/upload"><span class="glyphicon glyphicon-cloud-upload"></span>Upload</a>
+
+          <a href="/about"><span class="glyphicon glyphicon-about"></span>About</a>
         </nav>
+
+        <div class="account-widget" >
+          <div v-if="account.accountId === 0" >
+            <a href="/account-pages/account/create.html" >
+              create account
+            </a>
+
+            <a href="/account-pages/account/login.html" >
+              login
+            </a>
+          </div>
+
+          <div v-if="account.accountId !== 0">
+            <a href="/account"><span class="glyphicon glyphicon-user"></span>Account</a>
+
+            <a href="/logout">
+              Logout
+            </a>
+          </div>
+        </div><!-- account-widget -->
       </header>
 
       <main>
+        <div class="account-card" >
         <h1>Account Details For <span id="accountheader">DisplayName</span>
         </h1>
         <h3 id="user-bio"></h3>
+
+        </div><!-- account-card -->
         <div class="image-preview-container" >
           <p v-if="imagePreviews.length === 0" >
             You Haven't Uploaded Any Images Yet
