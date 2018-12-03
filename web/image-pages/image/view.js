@@ -1,6 +1,6 @@
 
 var pageData = {
-  account : {
+  accountData : {
     uid: 0,
     username: '',
     displayName: ''

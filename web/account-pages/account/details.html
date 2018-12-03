@@ -42,22 +42,22 @@
 
         <div class="account-widget" >
           <a href="/account-pages/account/create.html"
-            v-if="account.accountId === 0" >
+            v-if="accountData.accountId === 0" >
             create account
           </a>
 
           <a href="/account-pages/account/login.html"
-            v-if="account.accountId === 0" >
+            v-if="accountData.accountId === 0" >
             login
           </a>
 
             <a href="/account"
-              v-if="account.accountId !== 0" >
+              v-if="accountData.accountId !== 0" >
               Account
             </a>
 
             <a href="/logout"
-              v-if="account.accountId !== 0" >
+              v-if="accountData.accountId !== 0" >
               Logout
             </a>
         </div><!-- account-widget -->
