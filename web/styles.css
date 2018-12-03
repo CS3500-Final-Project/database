@@ -149,6 +149,16 @@ nav a {
   font-size: small;
 }
 
+.action-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  margin: 8px;
+  border: thin solid gray;
+  padding: 8px;
+}
+
 .image-card {
   display: flex;
   flex-direction: column;
@@ -205,16 +215,8 @@ nav a {
 .comment-card-body > img {
   min-width: 300px;
 }
-.image-card-action-bar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-
+.image-card .action-bar {
   min-width: 400px;
-
-  margin: 8px;
-  border: thin solid black;
-  padding: 8px;
 }
 .image-card-comment-section {
   display: flex;
@@ -267,7 +269,7 @@ nav a {
   border: thin solid black;
   padding: 8px;
 }
-.comment-card-action-bar {
+.comment-card .action-bar {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
