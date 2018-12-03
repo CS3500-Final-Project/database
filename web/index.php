@@ -85,7 +85,7 @@ $app->post(
       $imgid = $st->fetch(PDO::FETCH_ASSOC);
       //user automatically gives is one upvote
       $st = $app['pdo']->prepare('INSERT INTO votes (imgid, vote, userid) VALUES (:imgid, :vote, :userid)');
-      $st->bindParam(':imgid',$imgid['imgid']);
+      $st->bindParam(':imgid',$imgid['id']);
       $st->bindParam(':vote',$vote);
       $st->bindParam(':userid',$uid['uid']);
       $vote = 1;
