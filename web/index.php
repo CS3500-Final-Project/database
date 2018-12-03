@@ -323,7 +323,7 @@ $app->post('/vote/', function( Request $request) use ($app){
   }
 
 });
-//---------get image upvotes and downvotes----------
+//------------------------------------------------------------get image upvotes and downvotes---------------------------------------------------------------------------------------
 /*
 $app->post('/getvotes/', function( Request $request ) use ($app){
   return $app->
