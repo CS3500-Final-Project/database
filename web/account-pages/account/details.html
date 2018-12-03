@@ -26,14 +26,12 @@
   <body>
     <div id="app-container">
       <header>
-        <!--<nav-bar></nav-bar>-->
         <nav>
           <a href="/frontpage.html">
             Home
           </a>
 
-          <a href="/upload"
-            v-if="account.accountId !== 0">
+          <a href="/upload" >
             Upload
           </a>
 
@@ -43,23 +41,25 @@
         </nav>
 
         <div class="account-widget" >
-          <div v-if="account.accountId === 0" >
-            <a href="/account-pages/account/create.html" >
-              create account
+          <a href="/account-pages/account/create.html"
+            v-if="pageData.account.accountId === 0" >
+            create account
+          </a>
+
+          <a href="/account-pages/account/login.html"
+            v-if="pageData.account.accountId === 0" >
+            login
+          </a>
+
+            <a href="/account"
+              v-if="pageData.account.accountId !== 0" >
+              Account
             </a>
 
-            <a href="/account-pages/account/login.html" >
-              login
-            </a>
-          </div>
-
-          <div v-if="account.accountId !== 0">
-            <a href="/account"><span class="glyphicon glyphicon-user"></span>Account</a>
-
-            <a href="/logout">
+            <a href="/logout"
+              v-if="pageData.account.accountId !== 0" >
               Logout
             </a>
-          </div>
         </div><!-- account-widget -->
       </header>
 
