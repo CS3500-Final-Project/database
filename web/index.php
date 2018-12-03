@@ -146,13 +146,19 @@ $app->post('/create/', function( Request $request ) use ($app){
     $st->bindParam(':displayname',$requestBody['displayName']);
     $st->execute();
 
+    $st = $app['pdo']->prepare('SELECT * FROM accountinfo WHERE username = :username AND password = :password');
+    $st->bindParam(':username', $requestBody['username']);
+    $st->execute();
+    $result = $st->fetch(PDO::FETCH_ASSOC);
+
     $_SESSION['username'] = $requestBody['username'];
     return $app->json(array(
-        //"uid"=>$userinfo['uid'],
-        "username"=>$requestBody['username'],
-        "bio"=>$requestBody['bio'],
-        "displayname"=>$requestBody['displayName']
-        //"images"=>"No Images Yet, Go Upload Some!"
+      return json_encode(array(
+          "uid"=>$result['uid'],
+          "username"=>$result['username'],
+          "bio"=>$result['bio'],
+          "displayname"=>$result['displayname']
+      ));
     ));
   }
   else{  //otherwise return success or route to account details
