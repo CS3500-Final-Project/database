@@ -75,15 +75,15 @@
 
           <div class="image-card-body" >
             <p>
-              {{ viewedImageData.imageDescription }}
+              {{ pageData.viewedImageData.imageDescription }}
             </p>
 
             <p>
-              {{ viewedImageData.upvotes }}
+              {{ pageData.viewedImageData.upvotes }}
 
-              {{ viewedImageData.downvotes }}
+              {{ pageData.viewedImageData.downvotes }}
 
-              {{ ( viewedImageData.upvotes - viewedImageData.downvotes ) }}
+              {{ ( pageData.viewedImageData.upvotes - pageData.viewedImageData.downvotes ) }}
             </p>
 
             <div class="action-bar" >
