@@ -327,6 +327,10 @@ $app->post('/vote/', function( Request $request) use ($app){
 
 //get image INFO
 $app->get('/image-pages/{id}', function($id) use($app){
+  $st = $app['pdo']->prepare('SELECT * FROM uploadinfo WHERE id = :id');
+  $st->bindParam(':id', $id);
+  $st->execute();
+  $img = $st->fetch(PDO::FETCH_ASSOC)
 
   //upvotes
   $st = $app['pdo']->prepare('SELECT sum(vote) AS upvotes FROM votes WHERE imgid = :id AND vote = 1');
@@ -339,7 +343,17 @@ $app->get('/image-pages/{id}', function($id) use($app){
   $st->execute();
   $down = $st->fetch(PDO::FETCH_ASSOC);
 
+  imageId: 0,
+  uploaderUsername: '',
+  imageDescription: '',
+  upvotes: 0,
+  downvotes: 0,
+  comments: []
+
   return $app->json(array(
+    "imageId"=>$img['id'],
+    "uploaderUsername"=>$img['username'],
+    "imageDescription"=>$img['description'],
     "upvotes"=>$up['upvotes'],
     "downvotes"=>$down['downvotes']
   ));
