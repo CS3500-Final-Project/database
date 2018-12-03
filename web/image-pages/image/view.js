@@ -47,21 +47,21 @@ function favoriteImage() {}
 function deleteComment() {}
 
 
-makeGetRequest('/image-pages/').then(
-  ( response ) => {
-    viewedImageData = JSON.parse(response);
-    console.log(viewedImageData);
-
-    pageData.viewedImageData = viewedImageData;
-  }
-);
-
-
 var vueRoot = new Vue(
   {
     el: '#app-container',
     data: {
       pageData
     }
+  }
+);
+
+
+makeGetRequest('/image-pages/').then(
+  ( response ) => {
+    viewedImageData = JSON.parse(response);
+    console.log(viewedImageData);
+
+    pageData.viewedImageData = viewedImageData;
   }
 );
