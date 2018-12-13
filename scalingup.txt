@@ -1,0 +1,4 @@
+to scale the dyno up use
+	heroku ps::scale web=1
+
+to scale down set web=0
